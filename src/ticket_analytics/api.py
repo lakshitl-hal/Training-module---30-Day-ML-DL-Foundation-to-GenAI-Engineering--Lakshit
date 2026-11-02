@@ -20,7 +20,10 @@ from typing import Any
 import pandas as pd
 from fastapi import FastAPI, File, HTTPException, UploadFile
 
-from ticket_analytics.analytics import build_analytics_report
+from ticket_analytics.analytics import (
+    build_analytics_report,
+    build_data_quality_summary,
+)
 from ticket_analytics.eda import build_eda_report
 from ticket_analytics.processor import TicketDataProcessor, TicketProcessingError
 
@@ -59,6 +62,7 @@ def _process_path(path: Path) -> dict[str, Any]:
 
     return {
         "analytics": report,
+        "data_quality": build_data_quality_summary(processor.validation_report),
         "eda": eda,
         "validation": processor.validation_report,
         "quality_issues": processor.quality_issues.to_dict(orient="records"),

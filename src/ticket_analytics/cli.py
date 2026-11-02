@@ -11,7 +11,10 @@ from typing import Sequence
 
 import pandas as pd
 
-from ticket_analytics.analytics import build_analytics_report
+from ticket_analytics.analytics import (
+    build_analytics_report,
+    build_data_quality_summary,
+)
 from ticket_analytics.eda import build_eda_report
 from ticket_analytics.processor import TicketDataProcessor, TicketProcessingError
 from ticket_analytics.reporting import export_pipeline_outputs, print_report
@@ -40,6 +43,7 @@ def _run_analysis(input_path: Path, output_dir: Path) -> int:
         raise RuntimeError("The processor completed without retaining its raw data.")
 
     report = build_analytics_report(cleaned)
+    report["data_quality"] = build_data_quality_summary(validation)
     written = export_pipeline_outputs(report, processor.quality_issues, output_dir)
     eda_path = output_dir / "eda_report.json"
     eda_path.write_text(

@@ -140,4 +140,14 @@ def print_report(report: dict[str, Any]) -> None:
             print(f"    {column:<30} {count}")
     else:
         print("    None")
+    if "data_quality" in report:
+        quality = report["data_quality"]
+        print("\n  Raw Data Quality:")
+        for column, count in quality["missing_values_raw"].items():
+            if count:
+                print(f"    Missing {column:<22} {count}")
+        for rule, count in quality["invalid_records"].items():
+            print(f"    {rule:<30} {count}")
+        print(f"    Duplicate ticket IDs          {quality['duplicate_ticket_ids']}")
+        print(f"    Missing ticket IDs            {quality['missing_ticket_ids']}")
     print(f"\n{separator}\n")

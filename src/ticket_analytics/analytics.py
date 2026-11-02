@@ -89,6 +89,20 @@ def missing_value_summary(df: pd.DataFrame) -> dict[str, int]:
     }
 
 
+def build_data_quality_summary(validation_report: dict[str, Any]) -> dict[str, Any]:
+    """Summarize raw missing values and invalid or duplicate record counts."""
+    invalid_records = {
+        record["rule"]: len(record["ticket_ids"])
+        for record in validation_report["invalid_records"]
+    }
+    return {
+        "missing_values_raw": validation_report["raw_missing_values_per_column"],
+        "invalid_records": invalid_records,
+        "duplicate_ticket_ids": validation_report["duplicate_ticket_id_count"],
+        "missing_ticket_ids": validation_report["missing_ticket_id_count"],
+    }
+
+
 def build_analytics_report(df: pd.DataFrame) -> dict[str, Any]:
     """Aggregate summary metrics and category, priority, and status distributions."""
     average_resolution = (

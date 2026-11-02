@@ -1,7 +1,34 @@
 import pandas as pd
 
-from ticket_analytics.analytics import build_analytics_report
+from ticket_analytics.analytics import (
+    build_analytics_report,
+    build_data_quality_summary,
+)
 from ticket_analytics.reporting import export_pipeline_outputs
+
+
+def test_data_quality_summary_uses_raw_validation_counts():
+    summary = build_data_quality_summary(
+        {
+            "raw_missing_values_per_column": {"category": 1, "status": 0},
+            "invalid_records": [
+                {"rule": "invalid_resolution_time_hours", "ticket_ids": ["T014"]},
+                {"rule": "invalid_customer_rating", "ticket_ids": ["T021"]},
+            ],
+            "duplicate_ticket_id_count": 1,
+            "missing_ticket_id_count": 0,
+        }
+    )
+
+    assert summary == {
+        "missing_values_raw": {"category": 1, "status": 0},
+        "invalid_records": {
+            "invalid_resolution_time_hours": 1,
+            "invalid_customer_rating": 1,
+        },
+        "duplicate_ticket_ids": 1,
+        "missing_ticket_ids": 0,
+    }
 
 
 def test_pipeline_exports_category_status_summary_and_quality_outputs(tmp_path):

@@ -13,6 +13,7 @@ def test_sample_api_payload_is_strict_json_serializable():
     rendered = json.dumps(encoded, allow_nan=False)
 
     assert '"analytics"' in rendered
+    assert '"data_quality"' in rendered
     assert '"eda"' in rendered
     assert '"quality_issues"' in rendered
     assert '"avg_first_response_time_hours"' in rendered
