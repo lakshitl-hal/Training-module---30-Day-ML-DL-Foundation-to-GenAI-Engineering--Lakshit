@@ -129,6 +129,27 @@ CRM_NUMERIC_COLUMNS = ("first_response_time_hours", "reopen_count")
 CRM_DATETIME_COLUMNS = ("created_at", "updated_at")
 
 
+def _coerce_bounded(
+    series: pd.Series,
+    lo: float,
+    hi: float,
+    *,
+    lo_exclusive: bool = False,
+) -> tuple[pd.Series, pd.Series]:
+    """Return numeric values and an invalid mask; blank values are not invalid."""
+    values = pd.to_numeric(series, errors="coerce")
+    blank = series.astype("string").str.strip().eq("").fillna(True)
+    invalid = (~blank & values.isna()) | (
+        values.notna() & ~np.isfinite(values)
+    )
+    if lo_exclusive:
+        invalid |= values.notna() & (values <= lo)
+    else:
+        invalid |= values.notna() & (values < lo)
+    invalid |= values.notna() & (values > hi)
+    return values.mask(invalid), invalid
+
+
 # ──────────────────────────────────────────────────────────────
 # TicketDataProcessor
 # ──────────────────────────────────────────────────────────────
@@ -414,21 +435,20 @@ class TicketDataProcessor:
                 else values
             )
 
-        for column, rule in (
-            ("resolution_time_hours", "resolution_time_hours"),
-            ("customer_rating", "customer_rating"),
+        invalid_records: list[dict[str, Any]] = []
+        for column, rule, lower, upper, lower_exclusive in (
+            (
+                "resolution_time_hours",
+                "resolution_time_hours",
+                0,
+                MAX_RESOLUTION_HOURS,
+                True,
+            ),
+            ("customer_rating", "customer_rating", RATING_MIN, RATING_MAX, False),
         ):
-            numeric = pd.to_numeric(raw_df[column], errors="coerce")
-            missing = blank_mask(column) | raw_df[column].isna()
-            invalid = ~missing & numeric.isna()
-            if column == "resolution_time_hours":
-                invalid |= numeric.notna() & (
-                    (numeric <= 0) | (numeric > MAX_RESOLUTION_HOURS)
-                )
-            else:
-                invalid |= numeric.notna() & (
-                    (numeric < RATING_MIN) | (numeric > RATING_MAX)
-                )
+            numeric, invalid = _coerce_bounded(
+                raw_df[column], lower, upper, lo_exclusive=lower_exclusive
+            )
             record_issue(
                 invalid,
                 f"invalid_{rule}",
@@ -436,14 +456,28 @@ class TicketDataProcessor:
                 column,
                 "replaced with missing value",
             )
-
-        df, resolution_issues = self._clean_resolution_time(df)
-        df, rating_issues = self._clean_customer_rating(df)
+            if invalid.any():
+                bad_ids = df.loc[invalid, "ticket_id"].tolist()
+                bad_values = raw_df.loc[invalid, column].tolist()
+                logger.warning(
+                    "Invalid %s for ticket(s) %s (values: %s) — set to NaN.",
+                    column,
+                    bad_ids,
+                    bad_values,
+                )
+                invalid_records.append(
+                    {
+                        "rule": f"invalid_{rule}",
+                        "ticket_ids": bad_ids,
+                        "original_values": bad_values,
+                        "action": "replaced with NaN",
+                    }
+                )
+            df[column] = numeric
 
         for column in CRM_NUMERIC_COLUMNS:
             if column not in df.columns:
                 continue
-            values = pd.to_numeric(raw_df[column], errors="coerce")
             missing = blank_mask(column) | raw_df[column].isna()
             record_issue(
                 missing,
@@ -452,11 +486,14 @@ class TicketDataProcessor:
                 column,
                 "retained as missing",
             )
-            invalid = ~missing & values.isna()
-            invalid |= values.notna() & ~np.isfinite(values)
             if column == "first_response_time_hours":
-                invalid |= values.notna() & ((values < 0) | (values > MAX_RESOLUTION_HOURS))
+                values, invalid = _coerce_bounded(
+                    raw_df[column], 0, MAX_RESOLUTION_HOURS
+                )
             else:
+                values = pd.to_numeric(raw_df[column], errors="coerce")
+                invalid = ~missing & values.isna()
+                invalid |= values.notna() & ~np.isfinite(values)
                 invalid |= values.notna() & ((values < 0) | (values % 1 != 0))
             record_issue(
                 invalid,
@@ -528,7 +565,7 @@ class TicketDataProcessor:
                 if issues
                 else {}
             ),
-            "invalid_records": resolution_issues + rating_issues,
+            "invalid_records": invalid_records,
         }
 
         kept = df.loc[~duplicate_mask].copy()
@@ -538,73 +575,3 @@ class TicketDataProcessor:
             len(kept),
         )
         return kept.reset_index(drop=True)
-
-    def _clean_resolution_time(
-        self, df: pd.DataFrame
-    ) -> tuple[pd.DataFrame, list[dict]]:
-        """
-        Coerce resolution_time_hours to float.
-        Set to NaN when value is non-numeric, <= 0, or > MAX_RESOLUTION_HOURS.
-        """
-        invalids: list[dict] = []
-        col = "resolution_time_hours"
-
-        # Coerce; non-numeric → NaN
-        numeric = pd.to_numeric(df[col], errors="coerce")
-
-        missing = df[col].astype(str).str.strip() == ""
-        invalid = (~missing & numeric.isna()) | (
-            numeric.notna()
-            & ((numeric <= 0) | (numeric > MAX_RESOLUTION_HOURS))
-        )
-        if invalid.any():
-            bad_ids = df.loc[invalid, "ticket_id"].tolist()
-            bad_vals = df.loc[invalid, col].tolist()
-            logger.warning(
-                "Invalid %s for ticket(s) %s (values: %s) — set to NaN.",
-                col, bad_ids, bad_vals,
-            )
-            invalids.append({
-                "rule": f"invalid_{col}",
-                "ticket_ids": bad_ids,
-                "original_values": bad_vals,
-                "action": "replaced with NaN",
-            })
-            numeric[invalid] = np.nan
-
-        df[col] = numeric
-        return df, invalids
-
-    def _clean_customer_rating(
-        self, df: pd.DataFrame
-    ) -> tuple[pd.DataFrame, list[dict]]:
-        """
-        Coerce customer_rating to float.
-        Set to NaN when value is non-numeric or outside [RATING_MIN, RATING_MAX].
-        """
-        invalids: list[dict] = []
-        col = "customer_rating"
-
-        numeric = pd.to_numeric(df[col], errors="coerce")
-
-        missing = df[col].astype(str).str.strip() == ""
-        invalid = (~missing & numeric.isna()) | (
-            numeric.notna() & ((numeric < RATING_MIN) | (numeric > RATING_MAX))
-        )
-        if invalid.any():
-            bad_ids = df.loc[invalid, "ticket_id"].tolist()
-            bad_vals = df.loc[invalid, col].tolist()
-            logger.warning(
-                "Invalid %s for ticket(s) %s (values: %s) — set to NaN.",
-                col, bad_ids, bad_vals,
-            )
-            invalids.append({
-                "rule": f"invalid_{col}",
-                "ticket_ids": bad_ids,
-                "original_values": bad_vals,
-                "action": "replaced with NaN",
-            })
-            numeric[invalid] = np.nan
-
-        df[col] = numeric
-        return df, invalids
