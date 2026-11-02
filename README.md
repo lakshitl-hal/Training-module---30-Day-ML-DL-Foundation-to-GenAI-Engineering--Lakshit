@@ -197,7 +197,8 @@ duplicate IDs, data-quality categorization, EDA, API responses, CLI behavior,
 and report exports. The generated synthetic dataset and report files are
 reproducible from the commands above.
 
-Actual output from `python -m pytest -v`:
+Complete output from `python -m pytest -v` is also saved in
+[docs/test_output.txt](./docs/test_output.txt):
 
 ```text
 ============================= test session starts =============================
@@ -207,42 +208,48 @@ rootdir: C:\Users\HALCER\Desktop\Day_1
 configfile: pyproject.toml
 testpaths: tests
 plugins: anyio-4.16.0
-collecting ... collected 34 items
+collecting ... collected 40 items
 
 tests/test_api.py::test_sample_api_payload_is_strict_json_serializable PASSED [  2%]
 tests/test_api.py::test_uploaded_csv_api_payload_is_strict_json_serializable PASSED [  5%]
-tests/test_cli.py::test_analyze_and_eda_default_to_required_dataset PASSED [  8%]
-tests/test_cli.py::test_analyze_command_writes_csv_reports_and_eda_json PASSED [ 11%]
-tests/test_eda.py::test_eda_profiles_missing_duplicates_invalid_values_and_distribution PASSED [ 14%]
-tests/test_eda.py::test_eda_requires_positive_top_n PASSED               [ 17%]
-tests/test_eda.py::test_eda_profiles_mixed_and_invalid_creation_dates PASSED [ 20%]
-tests/test_outputs.py::test_data_quality_summary_uses_raw_validation_counts PASSED [ 23%]
-tests/test_outputs.py::test_pipeline_exports_category_status_summary_and_quality_outputs PASSED [ 26%]
-tests/test_synthetic_data.py::test_synthetic_dataset_generation_is_repeatable_and_adds_duplicate_cases PASSED [ 29%]
-tests/test_synthetic_data.py::test_required_tickets_csv_contains_minimum_dataset_contract PASSED [ 32%]
-tests/test_ticket_processor.py::test_valid_input_processes_with_float_measure_dtypes PASSED [ 35%]
-tests/test_ticket_processor.py::test_duplicate_ids_are_deduplicated PASSED [ 38%]
-tests/test_ticket_processor.py::test_missing_required_columns_raises PASSED [ 41%]
-tests/test_ticket_processor.py::test_processing_does_not_change_raw_file_bytes PASSED [ 44%]
-tests/test_ticket_processor.py::test_resolution_and_rating_boundary_values PASSED [ 47%]
-tests/test_ticket_processor.py::test_header_only_csv_raises_empty_dataset_error PASSED [ 50%]
-tests/test_ticket_processor.py::test_nonexistent_csv_raises_invalid_file_error PASSED [ 52%]
-tests/test_ticket_processor.py::test_unparseable_csv_raises_invalid_file_error PASSED [ 55%]
-tests/test_ticket_processor.py::test_zero_byte_csv_raises_empty_dataset_error PASSED [ 58%]
-tests/test_ticket_processor.py::test_invalid_resolution_time_set_to_nan PASSED [ 61%]
-tests/test_ticket_processor.py::test_invalid_customer_rating_set_to_nan PASSED [ 64%]
-tests/test_ticket_processor.py::test_missing_category_filled PASSED      [ 67%]
-tests/test_ticket_processor.py::test_analytics_report_structure PASSED   [ 70%]
-tests/test_ticket_processor.py::test_count_unresolved_correct PASSED     [ 73%]
-tests/test_ticket_processor.py::test_nonnumeric_measurements_are_flagged_and_cleaned PASSED [ 76%]
-tests/test_ticket_processor.py::test_missing_ticket_id_is_retained_and_row_issue_is_categorized PASSED [ 79%]
-tests/test_ticket_processor.py::test_string_index_and_whitespace_missing_are_handled PASSED [ 82%]
-tests/test_ticket_processor.py::test_unknown_status_is_reported_but_not_counted_as_unresolved PASSED [ 85%]
-tests/test_ticket_processor.py::test_status_synonyms_and_pending_status_follow_crm_lifecycle PASSED [ 88%]
-tests/test_ticket_processor.py::test_optional_crm_fields_are_validated_and_typed PASSED [ 91%]
-tests/test_ticket_processor.py::test_optional_crm_metrics_are_reported_by_channel_and_team PASSED [ 94%]
+tests/test_cli.py::test_analyze_and_eda_default_to_required_dataset PASSED [  7%]
+tests/test_cli.py::test_analyze_command_writes_csv_reports_and_eda_json PASSED [ 10%]
+tests/test_eda.py::test_eda_profiles_missing_duplicates_invalid_values_and_distribution PASSED [ 12%]
+tests/test_eda.py::test_eda_requires_positive_top_n PASSED               [ 15%]
+tests/test_eda.py::test_eda_profiles_mixed_and_invalid_creation_dates PASSED [ 17%]
+tests/test_outputs.py::test_data_quality_summary_uses_raw_validation_counts PASSED [ 20%]
+tests/test_outputs.py::test_pipeline_exports_category_status_summary_and_quality_outputs PASSED [ 22%]
+tests/test_processor_edge_cases.py::test_malformed_csv_raises_invalid_file_error PASSED [ 25%]
+tests/test_processor_edge_cases.py::test_non_finite_resolution_times_are_invalid PASSED [ 27%]
+tests/test_processor_edge_cases.py::test_non_finite_ratings_are_invalid PASSED [ 30%]
+tests/test_processor_edge_cases.py::test_blank_values_stay_missing_not_invalid PASSED [ 32%]
+tests/test_processor_edge_cases.py::test_analytics_with_non_unique_index PASSED [ 35%]
+tests/test_processor_edge_cases.py::test_unknown_status_not_counted_as_unresolved PASSED [ 37%]
+tests/test_synthetic_data.py::test_synthetic_dataset_generation_is_repeatable_and_adds_duplicate_cases PASSED [ 40%]
+tests/test_synthetic_data.py::test_required_tickets_csv_contains_minimum_dataset_contract PASSED [ 42%]
+tests/test_ticket_processor.py::test_valid_input_processes_with_float_measure_dtypes PASSED [ 45%]
+tests/test_ticket_processor.py::test_duplicate_ids_are_deduplicated PASSED [ 47%]
+tests/test_ticket_processor.py::test_missing_required_columns_raises PASSED [ 50%]
+tests/test_ticket_processor.py::test_processing_does_not_change_raw_file_bytes PASSED [ 52%]
+tests/test_ticket_processor.py::test_resolution_and_rating_boundary_values PASSED [ 55%]
+tests/test_ticket_processor.py::test_header_only_csv_raises_empty_dataset_error PASSED [ 57%]
+tests/test_ticket_processor.py::test_nonexistent_csv_raises_invalid_file_error PASSED [ 60%]
+tests/test_ticket_processor.py::test_unparseable_csv_raises_invalid_file_error PASSED [ 62%]
+tests/test_ticket_processor.py::test_zero_byte_csv_raises_empty_dataset_error PASSED [ 65%]
+tests/test_ticket_processor.py::test_invalid_resolution_time_set_to_nan PASSED [ 67%]
+tests/test_ticket_processor.py::test_invalid_customer_rating_set_to_nan PASSED [ 70%]
+tests/test_ticket_processor.py::test_missing_category_filled PASSED      [ 72%]
+tests/test_ticket_processor.py::test_analytics_report_structure PASSED   [ 75%]
+tests/test_ticket_processor.py::test_count_unresolved_correct PASSED     [ 77%]
+tests/test_ticket_processor.py::test_nonnumeric_measurements_are_flagged_and_cleaned PASSED [ 80%]
+tests/test_ticket_processor.py::test_missing_ticket_id_is_retained_and_row_issue_is_categorized PASSED [ 82%]
+tests/test_ticket_processor.py::test_string_index_and_whitespace_missing_are_handled PASSED [ 85%]
+tests/test_ticket_processor.py::test_unknown_status_is_reported_but_not_counted_as_unresolved PASSED [ 87%]
+tests/test_ticket_processor.py::test_status_synonyms_and_pending_status_follow_crm_lifecycle PASSED [ 90%]
+tests/test_ticket_processor.py::test_optional_crm_fields_are_validated_and_typed PASSED [ 92%]
+tests/test_ticket_processor.py::test_optional_crm_metrics_are_reported_by_channel_and_team PASSED [ 95%]
 tests/test_ticket_processor.py::test_missing_numeric_values_are_reported_as_completeness_issues PASSED [ 97%]
 tests/test_ticket_processor.py::test_required_dataset_analytics_match_manual_results PASSED [100%]
 
-============================= 34 passed in 1.04s ==============================
+============================= 40 passed in 1.06s ==============================
 ```
