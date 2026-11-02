@@ -1,27 +1,40 @@
-"""
-processor.py
-====================
-TicketDataProcessor — loads, validates, and cleans a support-ticket CSV.
+"""Load, validate, and clean support-ticket CSV data.
 
-Cleaning rules (documented explicitly so every decision is traceable):
-  1. Missing `ticket_id`       → row retained and flagged for follow-up.
-  2. Duplicate `ticket_id`     → keep the FIRST occurrence, drop subsequent duplicates.
-                                 Rationale: first record is assumed to be the canonical entry;
-                                 later duplicates are likely re-submissions or logging errors.
-                                 All duplicate IDs are logged for audit.
-  3. Missing `category`        → filled with the sentinel string "Unknown".
-                                 Rationale: category is used for grouping; losing the row
-                                 discards valid resolution/rating data unnecessarily.
-  4. Missing `description`     → filled with empty string ""; downstream NLP handles absence.
-  5. `resolution_time_hours`   → coerced to float; values ≤ 0 or implausibly large (> 720 h,
-                                 i.e., > 30 days) are replaced with NaN and flagged as invalid.
-  6. `customer_rating`         → coerced to float; valid range [1.0, 5.0]; out-of-range values
-                                 replaced with NaN and flagged.
-  7. `priority` / `status`     → whitespace-stripped, title-cased for consistency; missing
-                                 values filled with "Unknown".
-  8. Raw input file is NEVER modified; cleaning always returns a new DataFrame.
-  9. Quality findings include rows later dropped as duplicates; `source_row`
-     refers to the row in the raw CSV.
+Cleaning rules:
+
+* Required columns are checked before cleaning. Missing ticket IDs are retained
+  and flagged; duplicate IDs are matched after trimming whitespace, with the
+  first row kept and later rows dropped.
+* Category, priority, status, description, and ticket ID are trimmed. Missing
+  category, priority, and status values become ``"Unknown"``; missing
+  descriptions become an empty string.
+* Category aliases map Account Services to Account, Payments/Payment to Billing,
+  Tech/Tech Support to Technical, and Delivery/Logistics to Shipping. Categories
+  must be in the fixed ``VALID_CATEGORIES`` set (Account, Billing, Product,
+  Shipping, Technical, Unknown). Priority aliases map P1/Urgent to Critical, P2
+  to High, Normal/P3 to Medium, and P4 to Low. Status aliases map New to Open,
+  Working/In Progress to In Progress, Re-opened/Reopened to Reopened, On Hold
+  to On Hold, and Solved/Complete/Completed to Resolved. Other category,
+  priority, and status labels are title-cased, retained, and flagged when not
+  recognized. Channels are title-cased and checked against ``VALID_CHANNELS``
+  (Email, Chat, Phone, Web Form, Social); unrecognized channels are retained
+  and flagged.
+* Resolution time is converted to float and must satisfy 0 < hours <= 720.
+  Ratings are converted to float and must be within [1, 5]. Blank values remain
+  missing; nonnumeric, non-finite, and out-of-range values become missing and
+  are flagged.
+* Optional customer ID, channel, and assigned team fields are trimmed; missing
+  values become ``"Unknown"``. First-response time must be numeric and within
+  [0, 720] hours. Reopen count must be a nonnegative integer. Invalid optional
+  numeric values become missing and are flagged.
+* Optional creation and update timestamps are parsed as UTC. Invalid dates are
+  retained as missing and flagged; an update before creation is flagged but
+  kept.
+* Quality findings include rows later dropped as duplicates. ``source_row``
+  refers to the raw CSV row. The raw input is never overwritten; processing
+  returns a cleaned DataFrame copy. Findings are categorized as identification,
+  duplication, categorization, completeness, numeric validity, temporal
+  validity, or temporal consistency.
 """
 
 from __future__ import annotations
