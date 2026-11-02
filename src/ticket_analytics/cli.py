@@ -5,18 +5,16 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import sys
 from pathlib import Path
 from typing import Sequence
 
 import pandas as pd
 
-from ticket_analytics.analytics import (
-    build_analytics_report,
-    export_pipeline_outputs,
-    print_report,
-)
+from ticket_analytics.analytics import build_analytics_report
 from ticket_analytics.eda import build_eda_report
 from ticket_analytics.processor import TicketDataProcessor, TicketProcessingError
+from ticket_analytics.reporting import export_pipeline_outputs, print_report
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_DATASET = PROJECT_ROOT / "data" / "tickets_synthetic.csv"
@@ -119,6 +117,12 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: Sequence[str] | None = None) -> int:
+    try:
+        if sys.stdout.encoding and sys.stdout.encoding.lower() not in ("utf-8", "utf_8"):
+            sys.stdout.reconfigure(encoding="utf-8")
+    except (AttributeError, OSError):
+        pass
+
     args = build_parser().parse_args(argv)
     if args.command == "eda":
         if args.output_dir != PROJECT_ROOT / "outputs":

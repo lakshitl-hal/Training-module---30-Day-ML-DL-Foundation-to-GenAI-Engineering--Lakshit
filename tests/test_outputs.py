@@ -1,9 +1,7 @@
 import pandas as pd
 
-from ticket_analytics.analytics import (
-    build_analytics_report,
-    export_pipeline_outputs,
-)
+from ticket_analytics.analytics import build_analytics_report
+from ticket_analytics.reporting import export_pipeline_outputs
 
 
 def test_pipeline_exports_category_status_summary_and_quality_outputs(tmp_path):
