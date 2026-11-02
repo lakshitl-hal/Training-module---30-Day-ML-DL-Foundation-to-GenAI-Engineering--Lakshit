@@ -1,4 +1,12 @@
-from ticket_analytics.cli import main
+from ticket_analytics.cli import DEFAULT_DATASET, build_parser, main
+
+
+def test_analyze_and_eda_default_to_required_dataset():
+    parser = build_parser()
+
+    assert parser.parse_args(["analyze"]).input == DEFAULT_DATASET
+    assert parser.parse_args(["eda"]).input == DEFAULT_DATASET
+    assert DEFAULT_DATASET.name == "tickets.csv"
 
 
 def test_analyze_command_writes_csv_reports_and_eda_json(tmp_path, capsys):

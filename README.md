@@ -19,7 +19,8 @@ Day_1/
 │   ├── api.py                      # JSON API; no web UI or static hosting
 │   ├── cli.py                      # analyze and eda commands
 │   ├── eda.py                      # Raw-data profiling and quality checks
-│   └── processor.py                # CSV validation and cleaning
+│   ├── processor.py                # CSV validation and cleaning
+│   └── reporting.py                # Console and CSV output
 ├── tests/                           # Processor, EDA, API, and output tests
 ├── outputs/                         # CSV reports and raw-data EDA JSON
 └── pyproject.toml
@@ -37,19 +38,17 @@ python -m pip install -r requirements.txt
 
 ## Use the pipeline
 
-The default dataset has 1,212 raw rows: 1,200 generated tickets plus intentional
-duplicate records. After duplicate removal, tickets without IDs are retained for
-review, so the cleaned dataset contains 1,200 rows. Run the cleaning pipeline and
-summary metrics:
+The default dataset is the required 24-row hand-built project fixture. Run the
+cleaning pipeline and summary metrics:
 
 ```powershell
 ticket-analytics analyze
 ```
 
-Choose the required small project dataset with `--input`:
+Use the larger CRM-style stress dataset explicitly with `--input`:
 
 ```powershell
-ticket-analytics analyze --input data\tickets.csv
+ticket-analytics analyze --input data\tickets_synthetic.csv
 ticket-analytics analyze --input data\tickets.csv --output-dir reports\sample
 ```
 
@@ -71,6 +70,7 @@ Print the EDA report as JSON or save it:
 
 ```powershell
 ticket-analytics eda
+ticket-analytics eda --input data\tickets_synthetic.csv
 ticket-analytics eda --input data\tickets.csv --output reports\sample_eda.json
 ```
 

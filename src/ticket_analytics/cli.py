@@ -20,7 +20,7 @@ from ticket_analytics.processor import TicketDataProcessor, TicketProcessingErro
 from ticket_analytics.reporting import export_pipeline_outputs, print_report
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_DATASET = PROJECT_ROOT / "data" / "tickets_synthetic.csv"
+DEFAULT_DATASET = PROJECT_ROOT / "data" / "tickets.csv"
 
 logging.basicConfig(
     level=logging.INFO,
