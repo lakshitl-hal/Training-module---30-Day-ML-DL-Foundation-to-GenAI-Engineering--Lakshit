@@ -48,4 +48,4 @@ tests/test_ticket_processor.py::test_optional_crm_metrics_are_reported_by_channe
 tests/test_ticket_processor.py::test_missing_numeric_values_are_reported_as_completeness_issues PASSED [ 97%]
 tests/test_ticket_processor.py::test_required_dataset_analytics_match_manual_results PASSED [100%]
 
-============================= 40 passed in 1.06s ==============================
+============================= 40 passed in 1.08s ==============================

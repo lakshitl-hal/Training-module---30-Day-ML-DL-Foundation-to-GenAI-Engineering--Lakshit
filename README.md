@@ -1,34 +1,24 @@
 # Support Ticket Analytics
 
-A backend-only Python project for cleaning, validating, analyzing, and exploring
-support-ticket CSV data. It includes a command-line interface, a FastAPI service,
-focused automated tests, a small hand-built fixture, and a deterministic synthetic
-dataset with deliberate data-quality defects.
+A beginner-friendly Python project that reads support tickets from CSV, cleans
+data issues, and reports useful metrics. The required project data and the larger
+CRM-style test data are kept in separate files.
 
-## Project layout
+## What is in this project?
 
-```text
-Day_1/
-├── data/
-│   ├── tickets.csv                 # Required 24-row hand-built dataset
-│   └── tickets_synthetic.csv       # Larger CRM-style stress dataset
-├── scripts/
-│   └── generate_synthetic_data.py  # Reproducible dataset generator
-├── src/ticket_analytics/
-│   ├── analytics.py                # Clean-data metrics
-│   ├── api.py                      # JSON API; no web UI or static hosting
-│   ├── cli.py                      # analyze and eda commands
-│   ├── eda.py                      # Raw-data profiling and quality checks
-│   ├── processor.py                # CSV validation and cleaning
-│   └── reporting.py                # Console and CSV output
-├── tests/                           # Processor, EDA, API, and output tests
-├── outputs/                         # CSV reports and raw-data EDA JSON
-└── pyproject.toml
-```
+- `data/tickets.csv` — the required 24-ticket assignment dataset.
+- `data/tickets_synthetic.csv` — a larger dataset for testing additional cases.
+- `src/ticket_analytics/processor.py` — loads and cleans ticket data.
+- `src/ticket_analytics/analytics.py` — calculates ticket metrics.
+- `src/ticket_analytics/reporting.py` — prints and saves reports.
+- `src/ticket_analytics/eda.py` — profiles the original, uncleaned data.
+- `src/ticket_analytics/api.py` — optional FastAPI endpoints.
+- `tests/` — automated checks for the pipeline.
 
-## Setup
+## Set up (Windows PowerShell)
 
-Python 3.10 or newer is required.
+Use Python 3.10 or newer. From the project folder, create and activate a virtual
+environment, then install the project and its test dependencies:
 
 ```powershell
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
@@ -37,154 +27,93 @@ python -m venv .venv
 python -m pip install -r requirements.txt
 ```
 
-## Use the pipeline
+The execution-policy command is only needed if PowerShell blocks activation.
+`requirements.txt` installs the project, its dependencies, and pytest.
 
-The default dataset is the required 24-row hand-built project fixture. Run the
-cleaning pipeline and summary metrics:
+## Run the project
+
+The default input is `data/tickets.csv`. Clean it and print the analysis:
 
 ```powershell
 ticket-analytics analyze
 ```
 
-Use the larger CRM-style stress dataset explicitly with `--input`:
+To use the larger test dataset instead:
 
 ```powershell
 ticket-analytics analyze --input data\tickets_synthetic.csv
-ticket-analytics analyze --input data\tickets.csv --output-dir reports\sample
 ```
 
-`analyze` writes `summary_metrics.csv`, ticket counts by category/priority/status,
-average resolution time by category, row-level `quality_issues.csv`, and
-`eda_report.json`. When CRM fields exist, it also writes channel/team breakdowns
-and response-time summaries. Each quality row includes its source CSV line,
-ticket context, issue category, issue, original value, and cleaning action.
-Quality findings include rows later dropped as duplicates; `source_row` refers
-to the raw CSV line.
+The command saves reports in the ignored `outputs/` folder. These include the
+summary metrics, ticket counts, category averages, quality findings, and EDA.
+Choose another output folder with `--output-dir`.
 
-## Exploratory data analysis
+## Run EDA
 
-EDA profiles the uncleaned input: shape, per-column missingness and cardinality,
-numeric summaries and IQR outlier counts, categorical frequencies, numeric
-correlations, duplicate IDs, invalid values with source-row examples, and monthly
-ticket volume when a `created_at` column is available. IQR outliers are review
-candidates, not automatically treated as bad records.
-
-Print the EDA report as JSON or save it:
+EDA (exploratory data analysis) summarizes the original CSV before cleaning.
+It shows missing and invalid values, category counts, numeric summaries, and
+monthly ticket counts when the file has creation dates.
 
 ```powershell
 ticket-analytics eda
 ticket-analytics eda --input data\tickets_synthetic.csv
-ticket-analytics eda --input data\tickets.csv --output reports\sample_eda.json
 ```
 
-## Regenerate stress data
+Add `--output path\to\report.json` to save the EDA report instead of printing it.
 
-The synthetic data is deterministic and includes all seven required project
-columns plus optional CRM fields: customer ID, channel, assigned team, creation
-and update dates, first-response time, and reopen count. It includes realistic
-variation, date trends, duplicate IDs, blank fields, inconsistent casing,
-non-numeric values, invalid timestamps, and out-of-range metrics.
+## Cleaning rules in plain language
 
-```powershell
-python scripts\generate_synthetic_data.py --rows 1200 --seed 42
-```
+- The input CSV is never overwritten. The processor returns a cleaned copy.
+- Rows with no ticket ID are kept and flagged. For duplicate IDs, the first row
+  is kept and later rows are removed from the cleaned data.
+- Missing category, priority, or status becomes `Unknown`; missing descriptions
+  become empty text.
+- Resolution time must be greater than 0 and at most 720 hours. Ratings must be
+  between 1 and 5; fractional ratings such as 4.5 are valid.
+- Blank numeric values stay missing. Invalid numeric values are reported and
+  changed to missing rather than deleting the whole ticket.
+- Common category, priority, and status aliases are normalized. Unrecognized
+  labels are kept and flagged for review.
+- Optional CRM fields are checked when present. Invalid timestamps and dates
+  where an update precedes creation are reported.
+- Unresolved tickets have status Open, Pending, In Progress, Reopened, or On Hold.
+  Unknown statuses are counted in their own group, not as unresolved.
+- Quality findings can refer to rows later removed as duplicates. `source_row`
+  identifies the row in the raw CSV.
 
-The generated records are synthetic and must not be interpreted as real customer
-data. Use a different seed or row count to exercise the pipeline with other data.
+## Assumptions and limitations
 
-## API
+- The first duplicate is treated as the canonical record.
+- The category list is fixed: Account, Billing, Product, Shipping, Technical,
+  and Unknown. New categories need review.
+- The 720-hour limit is a project assumption, not a rule for every CRM system.
+- Source row numbers match physical CSV lines only when cells do not contain
+  quoted newlines.
+- Synthetic data is only for testing and does not represent real customers.
+- EDA, the CLI, and API are supporting extras; the core assignment is the
+  dataset, processor, analytics, tests, and documentation.
 
-Start the backend API:
+## Optional: API
+
+Start the API from the activated virtual environment:
 
 ```powershell
 uvicorn ticket_analytics.api:app --reload
 ```
 
-Endpoints:
+Open `http://127.0.0.1:8000/docs` to view and try the endpoints.
 
-- `GET /` — health check
-- `GET /sample` — cleaned synthetic tickets, validation findings, EDA, and analytics
-- `GET /eda/sample` — EDA on the raw synthetic dataset
-- `POST /upload` — process an uploaded CSV
+## Manually checked results
 
-Interactive API documentation is available at `/docs`. The API does not serve a
-frontend and does not enable permissive cross-origin access by default.
+These results come from the required `data/tickets.csv` dataset:
 
-## Data cleaning rules
-
-- Rows without a ticket ID are retained and flagged for follow-up; they are
-  excluded from duplicate matching.
-- Duplicate ticket IDs keep their first row and are reported.
-- Missing categories become `Unknown`; missing descriptions become empty strings.
-- Missing priorities and statuses become `Unknown`.
-- Resolution times must be numeric, greater than zero, and no more than 720 hours.
-- Ratings must be numeric and within 1–5.
-- Missing numeric values are preserved as missing; non-numeric and out-of-range
-  values are reported and replaced with missing values.
-- Category, priority, status, description, and ticket ID are trimmed.
-- Category aliases are normalized (`Payments` → `Billing`, `Tech` → `Technical`,
-  and similar mappings). The category vocabulary is fixed to Account, Billing,
-  Product, Shipping, Technical, and Unknown.
-- Priority and status aliases are canonicalized (`P1` → `Critical`, `New` →
-  `Open`, `Solved` → `Resolved`). Other labels are title-cased; unrecognized
-  category, priority, status, and channel values are retained and flagged.
-- Optional CRM response-time and reopen-count fields are converted to numeric
-  types and invalid values are flagged. CRM dates are parsed to UTC timestamps;
-  invalid dates and update-before-create ordering are reported, but not dropped.
-- Unresolved tickets include `Open`, `Pending`, `In Progress`, `Reopened`, and
-  `On Hold`. Unknown statuses remain visible in their own status counts and are
-  not treated as active.
-- Data-quality findings are classified as identification, duplication,
-  categorization, completeness, numeric validity, temporal validity, or temporal
-  consistency.
-- Quality findings include rows later dropped as duplicates; `source_row` refers
-  to the raw CSV line.
-
-The generated `outputs/` directory is ignored by Git and can be recreated with
-`ticket-analytics analyze`; use `--output-dir` to choose another location.
-
-The raw input is never modified. EDA runs against the raw data so cleaning does
-not hide data-quality problems.
-
-## Assumptions
-
-- The first occurrence of a duplicate ticket ID is the canonical row; later
-  occurrences are dropped from the cleaned dataset.
-- A missing status is filled with `Unknown` and is not counted as unresolved.
-- Ratings may be fractional, such as `4.5`, provided they are within 1–5.
-- The 720-hour resolution and first-response limit is a business assumption,
-  not a universal CRM rule.
-- The category vocabulary is fixed; new categories are flagged for review
-  rather than added automatically.
-- `source_row` is calculated as the CSV record index plus the header row. It
-  corresponds to a physical CSV line only when records contain no quoted
-  newlines.
-
-## Limitations
-
-- The fixed category vocabulary may need updating for another organization.
-- Synthetic data is for repeatable testing and does not represent real customer
-  behavior.
-- EDA, the API, and the CLI are supporting extras; the core assignment scope is
-  the required dataset, processor, analytics, tests, and documentation.
-
-## Manual verification
-
-These values were calculated from the cleaned `data/tickets.csv` fixture:
-
-- Priority counts: High = 7, Medium = 7, Critical = 5, Low = 4.
-- Unresolved tickets: 8 (all 8 unresolved rows have status `Open`).
-- Average rating: 77 total rating points / 21 valid ratings = 3.666..., rounded
-  to 3.67. The invalid `-1` rating is excluded.
-- Average resolution time by category:
-  - Technical: (8 + 5.5 + 6 + 12 + 0.5 + 7) / 6 = 39 / 6 = 6.5 hours. The
-    invalid 999-hour value for T014 is excluded.
-  - Billing: 13 / 6 = 2.17 hours.
-  - Account: 11 / 5 = 2.2 hours.
-  - Shipping: 10 / 4 = 2.5 hours.
-  - Unknown: 1 / 1 = 1.0 hour.
-- Data quality: one duplicate ticket ID; two invalid measurements (T014 has
-  999 resolution hours and T021 has a -1 customer rating).
+- Priority counts: High 7, Medium 7, Critical 5, Low 4.
+- Unresolved: 8 tickets.
+- Average rating: 77 points / 21 valid ratings = 3.67.
+- Technical average resolution: (8 + 5.5 + 6 + 12 + 0.5 + 7) / 6 = 6.5 hours.
+- Other category averages: Billing 2.17, Account 2.2, Shipping 2.5, Unknown 1.0.
+- Quality findings: one duplicate ID and two invalid numbers (T014 resolution
+  time 999; T021 rating -1).
 
 ## Tests
 
@@ -251,5 +180,5 @@ tests/test_ticket_processor.py::test_optional_crm_metrics_are_reported_by_channe
 tests/test_ticket_processor.py::test_missing_numeric_values_are_reported_as_completeness_issues PASSED [ 97%]
 tests/test_ticket_processor.py::test_required_dataset_analytics_match_manual_results PASSED [100%]
 
-============================= 40 passed in 1.06s ==============================
+============================= 40 passed in 1.08s ==============================
 ```
