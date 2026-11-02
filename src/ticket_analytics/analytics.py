@@ -9,6 +9,8 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
+from ticket_analytics.processor import ACTIVE_STATUSES
+
 
 def _normalized_labels(df: pd.DataFrame, column: str) -> pd.Series:
     return (
@@ -72,10 +74,8 @@ def average_customer_rating(df: pd.DataFrame) -> float | None:
 
 def count_unresolved_tickets(df: pd.DataFrame) -> int:
     """Count active lifecycle statuses; unrecognized statuses remain separately reported."""
-    statuses = df["status"].astype("string").str.strip().str.casefold()
-    return int(
-        statuses.isin({"open", "pending", "in progress", "reopened", "on hold"}).sum()
-    )
+    statuses = df["status"].astype("string").str.strip().str.title()
+    return int(statuses.isin(ACTIVE_STATUSES).sum())
 
 
 def missing_value_summary(df: pd.DataFrame) -> dict[str, int]:

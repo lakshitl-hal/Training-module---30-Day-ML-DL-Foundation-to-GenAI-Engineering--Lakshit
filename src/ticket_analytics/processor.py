@@ -96,6 +96,7 @@ VALID_STATUSES = {
     "Resolved",
     "Closed",
 }
+ACTIVE_STATUSES = {"Open", "Pending", "In Progress", "Reopened", "On Hold"}
 PRIORITY_ALIASES = {
     "p1": "Critical",
     "urgent": "Critical",
