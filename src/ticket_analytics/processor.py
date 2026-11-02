@@ -208,7 +208,7 @@ class TicketDataProcessor:
         self._raw_df = self._load_csv()
         self._validate_columns(self._raw_df)
         self._validate_not_empty(self._raw_df)
-        self._cleaned_df = self._clean(self._raw_df.copy())
+        self._cleaned_df = self._clean(self._raw_df)
         return self._cleaned_df
 
     @property
@@ -252,212 +252,248 @@ class TicketDataProcessor:
             )
 
     def _clean(self, df: pd.DataFrame) -> pd.DataFrame:
-        """Apply all cleaning rules in sequence and populate validation_report."""
-        raw_df = df.copy(deep=True).reset_index(drop=True)
-        df = df.copy(deep=True)
-        df.index = raw_df.index
-        row_count = len(raw_df)
-        original_ids = raw_df["ticket_id"].copy()
+        """Clean a copy of the input and populate validation reports."""
+        raw_df = df.reset_index(drop=True).copy(deep=True)
+        cleaned = raw_df.copy(deep=True)
         issues: list[dict[str, Any]] = []
+        id_blank, duplicate_mask = self._flag_missing_and_duplicate_ids(
+            raw_df, issues
+        )
+        self._clean_text_fields(cleaned, raw_df, issues)
+        self._normalize_labels(cleaned, raw_df, issues)
+        self._clean_optional_crm_text_fields(cleaned, raw_df, issues)
+        invalid_records = self._clean_numeric_fields(cleaned, raw_df, issues)
+        self._clean_optional_crm_dates(cleaned, raw_df, issues)
+        return self._build_validation_report(
+            raw_df, cleaned, id_blank, duplicate_mask, issues, invalid_records
+        )
 
-        def record_issue(
-            mask: pd.Series,
-            issue: str,
-            issue_category: str,
-            value_column: str,
-            action: str,
-        ) -> None:
-            for position in np.flatnonzero(mask.to_numpy()):
-                row = raw_df.iloc[position]
-                value = row[value_column] if value_column in raw_df.columns else None
-                ticket_id = original_ids.iloc[position]
-                issues.append(
-                    {
-                        "source_row": int(position) + 2,
-                        "ticket_id": None if pd.isna(ticket_id) else str(ticket_id),
-                        "category": (
-                            "Unknown"
-                            if pd.isna(row["category"]) or not str(row["category"]).strip()
-                            else str(row["category"]).strip()
-                        ),
-                        "priority": (
-                            "Unknown"
-                            if pd.isna(row["priority"]) or not str(row["priority"]).strip()
-                            else str(row["priority"]).strip().title()
-                        ),
-                        "status": (
-                            "Unknown"
-                            if pd.isna(row["status"]) or not str(row["status"]).strip()
-                            else str(row["status"]).strip().title()
-                        ),
-                        "issue_category": issue_category,
-                        "issue": issue,
-                        "value": None if pd.isna(value) else str(value),
-                        "action": action,
-                    }
-                )
+    @staticmethod
+    def _blank_mask(df: pd.DataFrame, column: str) -> pd.Series:
+        return df[column].astype("string").str.strip().eq("").fillna(True)
 
-        def blank_mask(column: str) -> pd.Series:
-            return raw_df[column].astype("string").str.strip().eq("").fillna(True)
+    @staticmethod
+    def _record_issue(
+        raw_df: pd.DataFrame,
+        issues: list[dict[str, Any]],
+        mask: pd.Series,
+        issue: str,
+        issue_category: str,
+        value_column: str,
+        action: str,
+    ) -> None:
+        for position in np.flatnonzero(mask.to_numpy()):
+            row = raw_df.iloc[position]
+            value = row[value_column] if value_column in raw_df.columns else None
+            ticket_id = row["ticket_id"]
+            issues.append(
+                {
+                    "source_row": int(position) + 2,
+                    "ticket_id": None if pd.isna(ticket_id) else str(ticket_id),
+                    "category": (
+                        "Unknown"
+                        if pd.isna(row["category"]) or not str(row["category"]).strip()
+                        else str(row["category"]).strip()
+                    ),
+                    "priority": (
+                        "Unknown"
+                        if pd.isna(row["priority"]) or not str(row["priority"]).strip()
+                        else str(row["priority"]).strip().title()
+                    ),
+                    "status": (
+                        "Unknown"
+                        if pd.isna(row["status"]) or not str(row["status"]).strip()
+                        else str(row["status"]).strip().title()
+                    ),
+                    "issue_category": issue_category,
+                    "issue": issue,
+                    "value": None if pd.isna(value) else str(value),
+                    "action": action,
+                }
+            )
 
-        id_blank = blank_mask("ticket_id") | raw_df["ticket_id"].isna()
+    def _flag_missing_and_duplicate_ids(
+        self, raw_df: pd.DataFrame, issues: list[dict[str, Any]]
+    ) -> tuple[pd.Series, pd.Series]:
+        id_blank = self._blank_mask(raw_df, "ticket_id") | raw_df["ticket_id"].isna()
         duplicate_ids = raw_df["ticket_id"].astype("string").str.strip()
-        duplicate_mask = (
-            ~id_blank & duplicate_ids.duplicated(keep="first")
-        ).fillna(False)
-        record_issue(
+        duplicate_mask = (~id_blank & duplicate_ids.duplicated(keep="first")).fillna(
+            False
+        )
+        self._record_issue(
+            raw_df,
+            issues,
             id_blank,
             "missing_ticket_id",
             "identification",
             "ticket_id",
             "retained and flagged for follow-up",
         )
-        record_issue(
+        self._record_issue(
+            raw_df,
+            issues,
             duplicate_mask,
             "duplicate_ticket_id",
             "duplication",
             "ticket_id",
             "dropped; first occurrence retained",
         )
+        return id_blank, duplicate_mask
 
-        df["ticket_id"] = df["ticket_id"].astype("string").str.strip()
+    def _clean_text_fields(
+        self,
+        cleaned: pd.DataFrame,
+        raw_df: pd.DataFrame,
+        issues: list[dict[str, Any]],
+    ) -> None:
+        cleaned["ticket_id"] = cleaned["ticket_id"].astype("string").str.strip()
         for column in ("category", "description", "priority", "status"):
-            df[column] = df[column].astype("string").str.strip()
+            cleaned[column] = cleaned[column].astype("string").str.strip()
+        cleaned["description"] = cleaned["description"].fillna("")
 
-        category_missing = blank_mask("category")
-        description_missing = blank_mask("description")
-        priority_missing = blank_mask("priority")
-        status_missing = blank_mask("status")
-        for column, mask, category in (
-            ("category", category_missing, "categorization"),
-            ("description", description_missing, "completeness"),
-            ("priority", priority_missing, "categorization"),
-            ("status", status_missing, "categorization"),
-            ("resolution_time_hours", blank_mask("resolution_time_hours"), "completeness"),
-            ("customer_rating", blank_mask("customer_rating"), "completeness"),
+        for column, issue_category, action in (
+            ("category", "categorization", "filled with Unknown"),
+            ("description", "completeness", "filled with an empty string"),
+            ("priority", "categorization", "filled with Unknown"),
+            ("status", "categorization", "filled with Unknown"),
+            ("resolution_time_hours", "completeness", "retained as missing"),
+            ("customer_rating", "completeness", "retained as missing"),
         ):
-            record_issue(
-                mask,
+            self._record_issue(
+                raw_df,
+                issues,
+                self._blank_mask(raw_df, column),
                 f"missing_{column}",
-                category,
+                issue_category,
                 column,
-                (
-                    "filled with Unknown"
-                    if column in {"category", "priority", "status"}
-                    else "filled with an empty string"
-                    if column == "description"
-                    else "retained as missing"
-                ),
+                action,
             )
 
-        def normalize_labels(
-            values: pd.Series, aliases: dict[str, str]
-        ) -> pd.Series:
-            stripped = values.astype("string").str.strip()
-            return stripped.map(
-                lambda value: aliases.get(value.casefold(), value.title())
-                if pd.notna(value)
-                else value
-            )
+    @staticmethod
+    def _normalize_label(values: pd.Series, aliases: dict[str, str]) -> pd.Series:
+        stripped = values.astype("string").str.strip()
+        return stripped.map(
+            lambda value: aliases.get(value.casefold(), value.title())
+            if pd.notna(value)
+            else value
+        )
 
-        normalized_category = normalize_labels(
+    def _normalize_labels(
+        self,
+        cleaned: pd.DataFrame,
+        raw_df: pd.DataFrame,
+        issues: list[dict[str, Any]],
+    ) -> None:
+        normalized_category = self._normalize_label(
             raw_df["category"], CATEGORY_ALIASES
         )
-        normalized_priority = normalize_labels(
-            raw_df["priority"], PRIORITY_ALIASES
+        unrecognized_category = (
+            ~self._blank_mask(raw_df, "category")
+            & ~normalized_category.isin(VALID_CATEGORIES)
+        ).fillna(False)
+        self._record_issue(
+            raw_df,
+            issues,
+            unrecognized_category,
+            "unrecognized_category",
+            "categorization",
+            "category",
+            "retained and flagged for review",
         )
-        normalized_status = normalize_labels(raw_df["status"], STATUS_ALIASES)
-        categorical_values = [
-            ("category", normalized_category, VALID_CATEGORIES)
-        ]
+        cleaned["category"] = normalized_category.replace("", "Unknown").fillna(
+            "Unknown"
+        )
+
         if "channel" in raw_df.columns:
-            categorical_values.append(
-                (
-                    "channel",
-                    raw_df["channel"].astype("string").str.strip().str.title(),
-                    VALID_CHANNELS,
-                )
+            normalized_channel = (
+                raw_df["channel"].astype("string").str.strip().str.title()
             )
-        for column, normalized, allowed_values in categorical_values:
-            unrecognized = (
-                ~blank_mask(column)
-                & ~normalized.isin(allowed_values)
+            unrecognized_channel = (
+                ~self._blank_mask(raw_df, "channel")
+                & ~normalized_channel.isin(VALID_CHANNELS)
             ).fillna(False)
-            record_issue(
-                unrecognized,
-                f"unrecognized_{column}",
+            self._record_issue(
+                raw_df,
+                issues,
+                unrecognized_channel,
+                "unrecognized_channel",
                 "categorization",
-                column,
+                "channel",
                 "retained and flagged for review",
             )
 
-        for column, normalized, allowed_values in (
-            ("priority", normalized_priority, VALID_PRIORITIES),
-            ("status", normalized_status, VALID_STATUSES),
+        for column, aliases, allowed_values in (
+            ("priority", PRIORITY_ALIASES, VALID_PRIORITIES),
+            ("status", STATUS_ALIASES, VALID_STATUSES),
         ):
+            normalized = self._normalize_label(raw_df[column], aliases)
             unrecognized = (
-                ~blank_mask(column)
+                ~self._blank_mask(raw_df, column)
                 & ~normalized.isin(allowed_values)
             ).fillna(False)
-            record_issue(
+            self._record_issue(
+                raw_df,
+                issues,
                 unrecognized,
                 f"unrecognized_{column}",
                 "categorization",
                 column,
                 "retained and flagged for review",
             )
+            cleaned[column] = normalized.replace("", "Unknown").fillna("Unknown")
 
-        df["category"] = normalized_category.replace("", "Unknown").fillna("Unknown")
-        df["description"] = df["description"].replace("", "").fillna("")
-        df["priority"] = normalized_priority.replace("", "Unknown").fillna("Unknown")
-        df["status"] = normalized_status.replace("", "Unknown").fillna("Unknown")
-
+    def _clean_optional_crm_text_fields(
+        self,
+        cleaned: pd.DataFrame,
+        raw_df: pd.DataFrame,
+        issues: list[dict[str, Any]],
+    ) -> None:
         for column in CRM_TEXT_COLUMNS:
-            if column not in df.columns:
+            if column not in raw_df.columns:
                 continue
-            missing = blank_mask(column) | raw_df[column].isna()
-            record_issue(
+            missing = self._blank_mask(raw_df, column) | raw_df[column].isna()
+            self._record_issue(
+                raw_df,
+                issues,
                 missing,
                 f"missing_{column}",
                 "completeness",
                 column,
                 "filled with Unknown",
             )
-            values = (
-                df[column].astype("string").str.strip()
-                .replace("", "Unknown")
-                .fillna("Unknown")
-            )
-            df[column] = (
-                raw_df[column].astype("string").str.strip().str.title()
-                .replace("", "Unknown").fillna("Unknown")
+            values = raw_df[column].astype("string").str.strip()
+            cleaned[column] = (
+                values.str.title().replace("", "Unknown").fillna("Unknown")
                 if column == "channel"
-                else values
+                else values.replace("", "Unknown").fillna("Unknown")
             )
 
+    def _clean_numeric_fields(
+        self,
+        cleaned: pd.DataFrame,
+        raw_df: pd.DataFrame,
+        issues: list[dict[str, Any]],
+    ) -> list[dict[str, Any]]:
         invalid_records: list[dict[str, Any]] = []
-        for column, rule, lower, upper, lower_exclusive in (
-            (
-                "resolution_time_hours",
-                "resolution_time_hours",
-                0,
-                MAX_RESOLUTION_HOURS,
-                True,
-            ),
-            ("customer_rating", "customer_rating", RATING_MIN, RATING_MAX, False),
-        ):
-            numeric, invalid = _coerce_bounded(
+        core_fields = (
+            ("resolution_time_hours", 0, MAX_RESOLUTION_HOURS, True),
+            ("customer_rating", RATING_MIN, RATING_MAX, False),
+        )
+        for column, lower, upper, lower_exclusive in core_fields:
+            values, invalid = _coerce_bounded(
                 raw_df[column], lower, upper, lo_exclusive=lower_exclusive
             )
-            record_issue(
+            self._record_issue(
+                raw_df,
+                issues,
                 invalid,
-                f"invalid_{rule}",
+                f"invalid_{column}",
                 "numeric_validity",
                 column,
                 "replaced with missing value",
             )
             if invalid.any():
-                bad_ids = df.loc[invalid, "ticket_id"].tolist()
+                bad_ids = cleaned.loc[invalid, "ticket_id"].tolist()
                 bad_values = raw_df.loc[invalid, column].tolist()
                 logger.warning(
                     "Invalid %s for ticket(s) %s (values: %s) — set to NaN.",
@@ -467,19 +503,21 @@ class TicketDataProcessor:
                 )
                 invalid_records.append(
                     {
-                        "rule": f"invalid_{rule}",
+                        "rule": f"invalid_{column}",
                         "ticket_ids": bad_ids,
                         "original_values": bad_values,
                         "action": "replaced with NaN",
                     }
                 )
-            df[column] = numeric
+            cleaned[column] = values
 
         for column in CRM_NUMERIC_COLUMNS:
-            if column not in df.columns:
+            if column not in raw_df.columns:
                 continue
-            missing = blank_mask(column) | raw_df[column].isna()
-            record_issue(
+            missing = self._blank_mask(raw_df, column) | raw_df[column].isna()
+            self._record_issue(
+                raw_df,
+                issues,
                 missing,
                 f"missing_{column}",
                 "completeness",
@@ -495,7 +533,9 @@ class TicketDataProcessor:
                 invalid = ~missing & values.isna()
                 invalid |= values.notna() & ~np.isfinite(values)
                 invalid |= values.notna() & ((values < 0) | (values % 1 != 0))
-            record_issue(
+            self._record_issue(
+                raw_df,
+                issues,
                 invalid,
                 f"invalid_{column}",
                 "numeric_validity",
@@ -503,17 +543,27 @@ class TicketDataProcessor:
                 "replaced with missing value",
             )
             values = values.mask(invalid)
-            df[column] = (
+            cleaned[column] = (
                 values.astype("Int64")
                 if column == "reopen_count"
                 else values.astype(float)
             )
 
+        return invalid_records
+
+    def _clean_optional_crm_dates(
+        self,
+        cleaned: pd.DataFrame,
+        raw_df: pd.DataFrame,
+        issues: list[dict[str, Any]],
+    ) -> None:
         for column in CRM_DATETIME_COLUMNS:
-            if column not in df.columns:
+            if column not in raw_df.columns:
                 continue
-            missing = blank_mask(column) | raw_df[column].isna()
-            record_issue(
+            missing = self._blank_mask(raw_df, column) | raw_df[column].isna()
+            self._record_issue(
+                raw_df,
+                issues,
                 missing,
                 f"missing_{column}",
                 "completeness",
@@ -523,23 +573,26 @@ class TicketDataProcessor:
             parsed = pd.to_datetime(
                 raw_df[column], errors="coerce", utc=True, format="mixed"
             )
-            invalid = ~missing & parsed.isna()
-            record_issue(
-                invalid,
+            self._record_issue(
+                raw_df,
+                issues,
+                ~missing & parsed.isna(),
                 f"invalid_{column}",
                 "temporal_validity",
                 column,
                 "retained as missing",
             )
-            df[column] = parsed
+            cleaned[column] = parsed
 
-        if {"created_at", "updated_at"} <= set(df.columns):
+        if {"created_at", "updated_at"} <= set(cleaned.columns):
             invalid_order = (
-                df["created_at"].notna()
-                & df["updated_at"].notna()
-                & (df["updated_at"] < df["created_at"])
+                cleaned["created_at"].notna()
+                & cleaned["updated_at"].notna()
+                & (cleaned["updated_at"] < cleaned["created_at"])
             )
-            record_issue(
+            self._record_issue(
+                raw_df,
+                issues,
                 invalid_order,
                 "updated_before_created",
                 "temporal_consistency",
@@ -547,14 +600,24 @@ class TicketDataProcessor:
                 "retained and flagged for review",
             )
 
-        missing_after_cleaning = df.isna().sum().astype(int).to_dict()
+    def _build_validation_report(
+        self,
+        raw_df: pd.DataFrame,
+        cleaned: pd.DataFrame,
+        id_blank: pd.Series,
+        duplicate_mask: pd.Series,
+        issues: list[dict[str, Any]],
+        invalid_records: list[dict[str, Any]],
+    ) -> pd.DataFrame:
         self.quality_issues = pd.DataFrame(issues, columns=self.quality_issues.columns)
         self.validation_report = {
-            "rows_in_raw": row_count,
-            "rows_after_cleaning": int(len(df) - duplicate_mask.sum()),
-            "missing_values_per_column": missing_after_cleaning,
+            "rows_in_raw": len(raw_df),
+            "rows_after_cleaning": int(len(cleaned) - duplicate_mask.sum()),
+            "missing_values_per_column": cleaned.isna().sum().astype(int).to_dict(),
             "raw_missing_values_per_column": {
-                column: int((blank_mask(column) | raw_df[column].isna()).sum())
+                column: int(
+                    (self._blank_mask(raw_df, column) | raw_df[column].isna()).sum()
+                )
                 for column in raw_df.columns
             },
             "missing_ticket_id_count": int(id_blank.sum()),
@@ -567,11 +630,6 @@ class TicketDataProcessor:
             ),
             "invalid_records": invalid_records,
         }
-
-        kept = df.loc[~duplicate_mask].copy()
-        logger.info(
-            "Cleaning complete. %d → %d row(s).",
-            row_count,
-            len(kept),
-        )
+        kept = cleaned.loc[~duplicate_mask].copy()
+        logger.info("Cleaning complete. %d → %d row(s).", len(raw_df), len(kept))
         return kept.reset_index(drop=True)
