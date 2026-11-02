@@ -57,6 +57,8 @@ average resolution time by category, row-level `quality_issues.csv`, and
 `eda_report.json`. When CRM fields exist, it also writes channel/team breakdowns
 and response-time summaries. Each quality row includes its source CSV line,
 ticket context, issue category, issue, original value, and cleaning action.
+Quality findings include rows later dropped as duplicates; `source_row` refers
+to the raw CSV line.
 
 ## Exploratory data analysis
 

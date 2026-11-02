@@ -20,6 +20,8 @@ Cleaning rules (documented explicitly so every decision is traceable):
   7. `priority` / `status`     → whitespace-stripped, title-cased for consistency; missing
                                  values filled with "Unknown".
   8. Raw input file is NEVER modified; cleaning always returns a new DataFrame.
+  9. Quality findings include rows later dropped as duplicates; `source_row`
+     refers to the row in the raw CSV.
 """
 
 from __future__ import annotations
