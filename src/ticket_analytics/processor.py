@@ -231,8 +231,16 @@ class TicketDataProcessor:
             df = pd.read_csv(self.filepath, dtype=str, keep_default_na=False)
         except pd.errors.EmptyDataError as exc:
             raise EmptyDatasetError("The CSV file is completely empty.") from exc
-        except Exception as exc:
-            raise InvalidFileError(f"Cannot parse CSV: {exc}") from exc
+        except pd.errors.ParserError as exc:
+            raise InvalidFileError(f"Cannot parse CSV '{self.filepath}': {exc}") from exc
+        except UnicodeDecodeError as exc:
+            raise InvalidFileError(
+                f"CSV '{self.filepath}' is not valid UTF-8 text: {exc}"
+            ) from exc
+        except OSError as exc:
+            raise InvalidFileError(
+                f"Could not read CSV '{self.filepath}': {exc}"
+            ) from exc
 
         logger.info("Loaded %d row(s) from '%s'.", len(df), self.filepath)
         return df
