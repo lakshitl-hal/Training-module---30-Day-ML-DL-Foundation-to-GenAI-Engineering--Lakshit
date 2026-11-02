@@ -81,7 +81,7 @@ Add `--output path\to\report.json` to save the EDA report instead of printing it
 - Quality findings can refer to rows later removed as duplicates. `source_row`
   identifies the row in the raw CSV.
 
-## Assumptions and limitations
+## Assumptions and known limitations
 
 - The first duplicate is treated as the canonical record.
 - The category list is fixed: Account, Billing, Product, Shipping, Technical,

@@ -3,48 +3,44 @@
 - **Developer:** Lakshit Likhar
 - **Assignment:** Day 01 — Python Engineering & Ticket Data Pipeline
 - **Date:** 2026-11-02
-- **Repository URL:** https://github.com/lakshitl-hal/DAY-1-HALCER-TRAINING-ASSIGNMENT
+- **Repository:** https://github.com/lakshitl-hal/DAY-1-HALCER-TRAINING-ASSIGNMENT
 - **Branch:** `main`
-- **Latest commit hash:** `da240d3`
-- **Pull Request:** N/A — the refactor branch was fast-forwarded into `main`; no pull request was created.
+- **Commit:** `402d2b7`
+- **Pull Request:** None; the refactor branch was fast-forwarded into `main`.
 
 ## Objective
 
-Build a reliable support-ticket CSV pipeline that validates and cleans data, calculates required metrics, reports data-quality findings, and verifies behavior with automated tests.
+Build a reliable CSV pipeline that validates and cleans support-ticket data, calculates the required metrics, reports data-quality findings, and verifies behavior with automated tests.
 
-## Work completed
+## What I completed
 
-- Kept the required `tickets.csv` dataset and the larger synthetic CRM dataset.
-- Refactored the processor into focused cleaning methods and consolidated bounded numeric validation.
-- Improved CSV loading errors and shared the active ticket-status definition.
-- Separated analytics calculations from console and CSV report output.
-- Added raw missing-value, invalid-value, duplicate-ID, and missing-ID summaries to CLI and API results.
-- Made the required dataset the default for CLI analysis and EDA.
-- Added regression tests for malformed CSV, non-finite numeric values, blank values, non-unique indexes, and unknown statuses.
-- Documented cleaning rules, assumptions, limitations, and manually checked fixture metrics.
+I organized the code into separate processor, analytics, reporting, CLI, API, and EDA modules. I added explicit handling and tests for missing, duplicate, invalid, non-finite, and malformed input data. The command-line analysis uses the required dataset by default, and the README documents setup, cleaning rules, assumptions, limitations, and manually checked results.
 
-## Verification
+## What I can explain without notes
 
-- **Test command:** `python -m pytest -v`
-- **Test result:** 40 tests passed.
-- **Test evidence:** [docs/test_output.txt](./docs/test_output.txt)
-- **Manual metric checks:** The required fixture reports 8 unresolved tickets, an average rating of 3.67, and a Technical average resolution time of 6.5 hours. Additional category calculations and arithmetic are documented in [README.md](./README.md).
-- **Git status:** `main` is at `da240d3`, matching `origin/main`; this review refreshed the test log and leaves documentation edits uncommitted.
+FILL IN: Write the parts of the project I can explain in my own words without looking at the code.
 
-## What I learned
+## One bug or challenge and its root cause
 
-FILL IN: (write what I learned in my own words).
+Numeric conversion can turn text such as `inf` into a floating-point infinity rather than a missing value. The processor now checks numeric values for finiteness, flags non-finite values as invalid, and replaces them with missing values; regression tests cover `inf`, `-inf`, `nan`, and a valid number.
 
-## Resubmission status
+## One design decision and why
 
-- The refactor and follow-up documentation/test commits are on `main`.
-- The raw `data/tickets.csv` rows were not modified.
-- The complete verbose test output is saved in `docs/test_output.txt`.
-- No `outputs/`, virtual-environment, or Python cache directories are tracked.
+For duplicate ticket IDs, the first row is kept as the canonical record and later rows are dropped from the cleaned dataset. Invalid numeric fields are changed to missing and reported instead of dropping the entire ticket, preserving valid information in the rest of that row.
 
-## Final checks before submission
+## Blocker and what I tried
 
-- Review [README.md](./README.md) for setup, cleaning rules, assumptions, limitations, and manual calculations.
-- Review [docs/test_output.txt](./docs/test_output.txt) for the actual verbose test result.
-- Fill in the personal learning notes in this report and the answers in [docs/day01_study_answers.md](./docs/day01_study_answers.md).
-- Confirm the GitHub repository still contains the latest `main` branch.
+The documented run and test commands work using the project virtual environment. On this machine, the system `python` command was unavailable, so I ran the tests with `venv\Scripts\python.exe`; all 40 tests passed. The closed-book answers still need to be written by me from my own understanding, so I have not filled them in for submission.
+
+## Tomorrow's plan
+
+FILL IN: Add my own study answers, review the feedback against this repository, and rerun the documented tests before resubmitting.
+
+## Evidence
+
+- **Repository:** https://github.com/lakshitl-hal/DAY-1-HALCER-TRAINING-ASSIGNMENT
+- **Branch:** `main`
+- **Commit:** `402d2b7`
+- **Tests:** 40 passed; complete output is in [docs/test_output.txt](./docs/test_output.txt).
+- **Manual metric checks:** 8 unresolved tickets, average customer rating 3.67, and Technical average resolution time 6.5 hours; calculations are in [README.md](./README.md).
+- **Identity check:** The review text supplied for comparison names Abhay Gour and a different GitHub repository. Confirm that the reviewer evaluates this Lakshit Likhar repository and commit.
