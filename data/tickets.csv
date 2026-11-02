@@ -1,0 +1,25 @@
+ticket_id,category,priority,description,resolution_time_hours,customer_rating,status
+T001,Billing,High,Customer was charged twice for the same subscription.,2.5,4.5,Resolved
+T002,Technical,Critical,Application crashes on startup after latest update.,8.0,2.0,Resolved
+T003,Account,Medium,Unable to reset password via email link.,3.0,3.5,Resolved
+T004,Billing,Low,Request for invoice copy for last month.,1.0,5.0,Resolved
+T005,Technical,High,API rate limit exceeded causing downstream failures.,5.5,3.0,Open
+T006,Account,Critical,Account locked after multiple failed login attempts.,1.5,4.0,Resolved
+T007,Shipping,Medium,Package not delivered within the promised timeframe.,4.0,2.5,Open
+T008,Technical,Low,Minor UI bug: button misaligned on mobile view.,6.0,4.0,Resolved
+T009,Billing,High,Incorrect discount applied at checkout.,2.0,3.0,Open
+T010,Account,Medium,Request to change registered email address.,1.0,5.0,Resolved
+T001,Billing,High,Customer was charged twice — duplicate entry for testing.,2.5,4.5,Resolved
+T011,Technical,Critical,Database connection timeout under peak load.,12.0,1.5,Open
+T012,Shipping,High,Wrong item delivered to customer.,3.5,,Resolved
+T013,Billing,Medium,Subscription auto-renewed without notification.,2.0,4.0,Resolved
+T014,Technical,Low,Feature request: dark mode support.,999,5.0,Open
+T015,Account,High,User profile picture fails to upload.,2.5,3.5,Open
+T016,,Medium,General enquiry about product roadmap.,1.0,4.5,Resolved
+T017,Technical,Critical,Security vulnerability reported in authentication module.,0.5,5.0,Resolved
+T018,Billing,High,Refund not processed after 10 business days.,4.5,1.0,Open
+T019,Shipping,Low,Customer requests gift wrapping for order.,0.5,5.0,Resolved
+T020,Account,Medium,Two-factor authentication not sending SMS code.,3.0,3.0,Open
+T021,Technical,High,Memory leak detected in background worker process.,7.0,-1,Resolved
+T022,Billing,Critical,Fraudulent charge detected on customer account.,1.0,4.5,Resolved
+T023,Shipping,Medium,,2.0,3.5,Resolved
