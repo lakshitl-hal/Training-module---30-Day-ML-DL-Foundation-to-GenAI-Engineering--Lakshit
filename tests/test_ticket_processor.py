@@ -19,7 +19,7 @@ Test inventory
 
 from __future__ import annotations
 
-import io
+import hashlib
 import textwrap
 from pathlib import Path
 
@@ -37,6 +37,7 @@ from ticket_analytics.analytics import (
     average_customer_rating,
     average_resolution_time_by_category,
     build_analytics_report,
+    build_data_quality_summary,
     count_tickets_by_priority,
     count_unresolved_tickets,
     missing_value_summary,
@@ -97,7 +98,7 @@ def _make_processor_from_string(csv_content: str, tmp_path: Path) -> TicketDataP
 # Test 1: valid CSV processes correctly
 # ──────────────────────────────────────────────────────────────
 
-def test_valid_csv_loads_and_cleans(tmp_path):
+def test_valid_input_processes_with_float_measure_dtypes(tmp_path):
     """
     A well-formed CSV with no data-quality issues should load, validate,
     and return a DataFrame with the correct number of rows and all required columns.
@@ -107,6 +108,8 @@ def test_valid_csv_loads_and_cleans(tmp_path):
 
     assert isinstance(cleaned, pd.DataFrame), "process() must return a DataFrame"
     assert len(cleaned) == 5, "All 5 valid rows should be retained"
+    assert pd.api.types.is_float_dtype(cleaned["resolution_time_hours"])
+    assert pd.api.types.is_float_dtype(cleaned["customer_rating"])
     for col in ["ticket_id", "category", "priority", "description",
                 "resolution_time_hours", "customer_rating", "status"]:
         assert col in cleaned.columns, f"Column '{col}' missing from cleaned output"
@@ -129,6 +132,12 @@ def test_duplicate_ids_are_deduplicated(tmp_path):
     # Confirm the first occurrence was kept (description = 'First entry.')
     t001_row = cleaned[cleaned["ticket_id"] == "T001"]
     assert "First entry" in t001_row["description"].values[0]
+    assert processor.validation_report["duplicate_ticket_id_count"] == 1
+    duplicate_issue = processor.quality_issues.loc[
+        processor.quality_issues["issue"] == "duplicate_ticket_id"
+    ]
+    assert len(duplicate_issue) == 1
+    assert duplicate_issue.iloc[0]["ticket_id"] == "T001"
 
 
 # ──────────────────────────────────────────────────────────────
@@ -147,13 +156,46 @@ def test_missing_required_columns_raises(tmp_path):
     assert "customer_rating" in exc_info.value.missing, (
         "MissingColumnsError.missing should list 'customer_rating'"
     )
+    assert "customer_rating" in str(exc_info.value)
+
+
+def test_processing_does_not_change_raw_file_bytes(tmp_path):
+    csv_file = tmp_path / "immutable.csv"
+    csv_file.write_text(VALID_CSV_CONTENT, encoding="utf-8")
+    before = hashlib.sha256(csv_file.read_bytes()).digest()
+
+    TicketDataProcessor(csv_file).process()
+
+    after = hashlib.sha256(csv_file.read_bytes()).digest()
+    assert after == before
+
+
+def test_resolution_and_rating_boundary_values(tmp_path):
+    csv_content = textwrap.dedent("""\
+        ticket_id,category,priority,description,resolution_time_hours,customer_rating,status
+        T001,Billing,High,Zero resolution,0,4,Open
+        T002,Billing,High,Maximum resolution,720,5,Open
+        T003,Billing,High,Too long,720.01,1,Open
+        T004,Billing,High,Low rating,1,0.9,Open
+        T005,Billing,High,Upper rating,1,5.1,Open
+    """)
+    processor = _make_processor_from_string(csv_content, tmp_path)
+    cleaned = processor.process().set_index("ticket_id")
+
+    assert pd.isna(cleaned.loc["T001", "resolution_time_hours"])
+    assert cleaned.loc["T002", "resolution_time_hours"] == 720
+    assert pd.isna(cleaned.loc["T003", "resolution_time_hours"])
+    assert pd.isna(cleaned.loc["T004", "customer_rating"])
+    assert cleaned.loc["T002", "customer_rating"] == 5
+    assert cleaned.loc["T003", "customer_rating"] == 1
+    assert pd.isna(cleaned.loc["T005", "customer_rating"])
 
 
 # ──────────────────────────────────────────────────────────────
 # Test 4: empty dataset raises EmptyDatasetError
 # ──────────────────────────────────────────────────────────────
 
-def test_empty_dataset_raises(tmp_path):
+def test_header_only_csv_raises_empty_dataset_error(tmp_path):
     """
     A CSV with only a header row (zero data rows) must raise EmptyDatasetError.
     """
@@ -166,7 +208,7 @@ def test_empty_dataset_raises(tmp_path):
 # Test 5: non-existent file raises InvalidFileError
 # ──────────────────────────────────────────────────────────────
 
-def test_invalid_csv_raises(tmp_path):
+def test_nonexistent_csv_raises_invalid_file_error(tmp_path):
     """
     Pointing the processor at a file that does not exist must raise
     InvalidFileError, not a bare FileNotFoundError.
@@ -174,6 +216,22 @@ def test_invalid_csv_raises(tmp_path):
     processor = TicketDataProcessor(tmp_path / "does_not_exist.csv")
     with pytest.raises(InvalidFileError):
         processor.process()
+
+
+def test_unparseable_csv_raises_invalid_file_error(tmp_path):
+    csv_file = tmp_path / "malformed.csv"
+    csv_file.write_text('ticket_id,category\n"T001,Billing\n', encoding="utf-8")
+
+    with pytest.raises(InvalidFileError, match="Cannot parse CSV"):
+        TicketDataProcessor(csv_file).process()
+
+
+def test_zero_byte_csv_raises_empty_dataset_error(tmp_path):
+    csv_file = tmp_path / "empty.csv"
+    csv_file.write_bytes(b"")
+
+    with pytest.raises(EmptyDatasetError):
+        TicketDataProcessor(csv_file).process()
 
 
 # ──────────────────────────────────────────────────────────────
@@ -459,3 +517,48 @@ def test_missing_numeric_values_are_reported_as_completeness_issues(tmp_path):
         "missing_resolution_time_hours",
         "missing_customer_rating",
     }
+
+
+def test_required_dataset_analytics_match_manual_results():
+    dataset = Path(__file__).resolve().parents[1] / "data" / "tickets.csv"
+    processor = TicketDataProcessor(dataset)
+    cleaned = processor.process()
+    report = build_analytics_report(cleaned)
+    data_quality = build_data_quality_summary(processor.validation_report)
+
+    assert report["tickets_by_priority"] == {
+        "High": 7,
+        "Medium": 7,
+        "Critical": 5,
+        "Low": 4,
+    }
+    assert report["unresolved_count"] == 8
+    assert report["avg_customer_rating"] == 3.67
+    assert report["avg_resolution_by_category"] == {
+        "Technical": 6.5,
+        "Billing": 2.17,
+        "Account": 2.2,
+        "Shipping": 2.5,
+        "Unknown": 1.0,
+    }
+    assert data_quality["duplicate_ticket_ids"] == 1
+    assert data_quality["invalid_records"] == {
+        "invalid_resolution_time_hours": 1,
+        "invalid_customer_rating": 1,
+    }
+    assert sum(data_quality["invalid_records"].values()) == 2
+    assert data_quality["missing_values_raw"]["category"] == 1
+    assert processor.validation_report["invalid_records"] == [
+        {
+            "rule": "invalid_resolution_time_hours",
+            "ticket_ids": ["T014"],
+            "original_values": ["999"],
+            "action": "replaced with NaN",
+        },
+        {
+            "rule": "invalid_customer_rating",
+            "ticket_ids": ["T021"],
+            "original_values": ["-1"],
+            "action": "replaced with NaN",
+        },
+    ]
