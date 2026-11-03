@@ -288,7 +288,7 @@ Loaded 10 raw rows from tickets.csv
 Validation: 7 valid, 3 invalid
   Row 3: INVALID — missing or empty 'customer'
   Row 6: INVALID — missing or empty 'description'
-  Row 8: INVALID — missing or empty 'category'; missing or empty 'customer'
+  Row 8: INVALID — missing or empty 'customer'; missing or empty 'category'
 
 Constructed 7 SupportTicket objects
 
@@ -322,6 +322,9 @@ High-priority open tickets needing attention:
   [T001] Alice Johnson | HIGH | open | Cannot access invoice for last month...
   [T004] Carol White | URGENT | pending | Cannot login to account...
   [T009] Grace Lee | HIGH | open | Data not syncing across devices...
+
+Average resolution time: 3.80 h
+Average customer rating: 3.83 / 5
 
 Daily ticket volume:
   2024-01-15: # (1)
