@@ -117,3 +117,23 @@ class TestImmutabilityAndClassState:
     def test_overlong_description_raises(self):
         with pytest.raises(ValueError, match="exceeds"):
             _make_ticket(description="x" * 501)
+
+
+class TestFieldTypesAreEnforced:
+    """Regression: wrong-typed values must not create an invalid ticket."""
+
+    @pytest.mark.parametrize("field_name, bad", [
+        ("priority", "high"),     # plain str, not a Priority member
+        ("priority", "zzz"),
+        ("status", None),
+        ("status", "open"),
+        ("category", 3),
+    ])
+    def test_non_enum_values_raise(self, field_name, bad):
+        with pytest.raises(ValueError, match=field_name):
+            _make_ticket(**{field_name: bad})
+
+    @pytest.mark.parametrize("field_name", ["ticket_id", "customer", "description"])
+    def test_non_string_text_fields_raise_value_error(self, field_name):
+        with pytest.raises(ValueError):
+            _make_ticket(**{field_name: 123})

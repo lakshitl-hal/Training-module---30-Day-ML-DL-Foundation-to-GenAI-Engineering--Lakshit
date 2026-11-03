@@ -1,286 +1,243 @@
 # Support Ticket Processing Pipeline
 
-**Programme:** 30-Day ML/DL Foundation to GenAI Engineering
-**Module:** Day 02 — Object-Oriented Python & Reusable Modules
-**Version:** 1.0.0
-**Status:** Complete
-**Author:** Lakshit (HALCER)
-**Date:** 03 November 2026
-
----
-
-## Table of Contents
-
-1. [Overview](#1-overview)
-2. [Architecture](#2-architecture)
-3. [Module Specifications](#3-module-specifications)
-4. [Data Contract](#4-data-contract)
-5. [Installation & Setup](#5-installation--setup)
-6. [Usage](#6-usage)
-7. [Test Suite](#7-test-suite)
-8. [Design Rationale](#8-design-rationale)
-9. [OOP Concepts Reference](#9-oop-concepts-reference)
-
----
-
-## 1. Overview
-
-### 1.1 Purpose
-
-This module implements a fully object-oriented **Support Ticket Processing Pipeline** in Python. It demonstrates core software engineering principles — Single Responsibility, encapsulation, composition, and defensive validation — applied to a realistic data-processing domain.
-
-### 1.2 Scope
-
-The pipeline accepts raw CSV data containing support ticket records, processes it through a series of isolated, testable components, and produces structured analytics output. Each stage of processing is implemented as an independent class with a clearly defined interface and a single reason to change.
-
-### 1.3 Learning Objectives
-
-| Objective | Requirement |
+| Field | Value |
 |---|---|
-| Component responsibility | Each class has exactly one clearly defined concern |
-| State management | Class-level and instance-level state are used appropriately and never conflated |
-| Defensive construction | An object in an invalid state cannot be constructed |
-| Test coverage | Every module is covered by tests for both valid and invalid inputs |
+| **Programme** | 30-Day ML/DL Foundation to GenAI Engineering |
+| **Module** | Day 02 — Object-Oriented Python & Reusable Modules |
+| **Author** | Lakshit (HALCER) |
+| **Date** | 03 November 2026 |
+| **Status** | Submitted for code review (resubmission-ready) |
+| **Test result** | 140 passed, 0 failed — see [`logs/test_results.txt`](logs/test_results.txt) |
 
 ---
 
-## 2. Architecture
+## Contents
 
-### 2.1 Pipeline Flow
+1. [Purpose](#1-purpose)
+2. [Acceptance Criteria Mapping](#2-acceptance-criteria-mapping)
+3. [Architecture](#3-architecture)
+4. [Component Specifications](#4-component-specifications)
+5. [Data Contract](#5-data-contract)
+6. [Setup](#6-setup)
+7. [Usage](#7-usage)
+8. [Testing](#8-testing)
+9. [Design Rationale](#9-design-rationale)
+10. [Assumptions](#10-assumptions)
+11. [Limitations](#11-limitations)
+12. [Execution Evidence](#12-execution-evidence)
+
+---
+
+## 1. Purpose
+
+This project refactors support-ticket processing into small, reusable, independently testable components. Raw CSV data is loaded, validated, cleaned, converted into typed domain objects and analysed. Each stage is a separate class with one responsibility, so a change to one concern (for example, the file format) does not require changes to the others.
+
+The implementation uses the Python standard library only.
+
+---
+
+## 2. Acceptance Criteria Mapping
+
+| # | Acceptance criterion (Day 02) | How it is met | Evidence |
+|---|---|---|---|
+| 1 | Each component has one clear responsibility | Five classes, one concern each: `CSVLoader` (read), `TicketValidator` (decide), `DataCleaner` (normalise), `SupportTicket` (represent), `AnalyticsEngine` (analyse). `main.py` only composes them. | §3, §4 |
+| 2 | Class vs instance state is used correctly | Shared rules are class-level (`SupportTicket.MAX_DESCRIPTION_LENGTH`, `MIN_RATING`, `MAX_RATING` as `ClassVar`; `CSVLoader.SUPPORTED_EXTENSIONS` as an immutable `frozenset`). Per-object data is instance state (`ticket_id`, `_path`, `_tickets`). No mutable class attributes exist. | `test_constants_are_class_level_not_fields` |
+| 3 | Invalid object state is prevented or explicitly represented | `SupportTicket` is a frozen dataclass validated in `__post_init__`: wrong types, empty text, non-enum values, `inf`/`nan`/negative durations and non-integer or out-of-range ratings raise `ValueError`. Missing optional values are represented explicitly as `None`; unrecognised categories as `Category.UNKNOWN`. Invalid CSV rows are reported in `ValidationResult`, never silently dropped. | `tests/test_ticket.py`, `tests/test_validator.py` |
+| 4 | Tests cover normal and invalid behaviour | 140 tests across six files, including end-to-end malformed-input tests through loader → validator → cleaner → model. | §8, `logs/test_results.txt` |
+| 5 | Developer can explain why the design is maintainable | Two designs compared and justified in §9. | §9 |
+
+**Task coverage:** Task A — `src/models/ticket.py`; Task B — `src/io`, `src/validation`, `src/processing`, `src/analytics`; Task C — `top_customers()`, `daily_volume()`, `average_resolution_time()`, `average_rating()` added without changing existing methods; Task D — `tests/`, this README, `DAILY_REPORT.md`.
+
+---
+
+## 3. Architecture
+
+### 3.1 Pipeline flow
 
 ```
-CSV File on Disk
+data/tickets.csv
       │
       ▼
-┌─────────────┐
-│  CSVLoader  │  Reads raw rows as plain dictionaries.
-│  (src/io)   │  Rejects any row where field count exceeds header count.
-└──────┬──────┘
-       │  list[dict[str, str]]
-       ▼
-┌──────────────────┐
-│ TicketValidator  │  Applies business rules to each row.
-│ (src/validation) │  Returns ValidationResult per row; separates valid from invalid.
-└────────┬─────────┘
-         │  list[dict[str, str]]  (valid rows only)
-         ▼
-┌──────────────┐
-│ DataCleaner  │  Normalises casing, maps values to canonical Enum strings.
-│ (src/process)│  Never mutates the input; always returns a new list.
-└──────┬───────┘
-       │  list[dict[str, str]]  (cleaned rows)
-       ▼
-┌────────────────┐
-│ SupportTicket  │  Typed domain object. Built from cleaned rows.
-│ (src/models)   │  __post_init__ enforces invariants at construction time.
-└──────┬─────────┘
-       │  Sequence[SupportTicket]
-       ▼
-┌──────────────────┐
-│ AnalyticsEngine  │  Computes metrics over the ticket collection.
-│ (src/analytics)  │  Pure methods — no side effects, no mutation.
-└──────────────────┘
+CSVLoader ─────────── reads rows as dict[str, str]; rejects surplus fields;
+      │               pads truncated rows with ""; removes Excel BOM
+      ▼
+TicketValidator ───── per-row business rules + duplicate-ID check;
+      │               returns one ValidationResult per row
+      ▼  (valid rows only)
+DataCleaner ───────── strips whitespace, normalises case, maps to enum values;
+      │               never mutates its input
+      ▼
+SupportTicket ─────── frozen, typed domain object; invariants enforced
+      │               in __post_init__
+      ▼
+AnalyticsEngine ───── pure read-only analytics over an immutable tuple
 ```
 
-### 2.2 Repository Structure
+### 3.2 Dependency direction
+
+`models` is the innermost layer and imports nothing from the project. `validation`, `processing` and `analytics` import from `models` only. `io` imports nothing from the project. `main.py` is the only module that knows about all of them. This prevents circular imports and keeps each layer testable on its own.
+
+### 3.3 Repository structure
 
 ```
 DAY_2_OOPS/
-│
-├── data/
-│   └── tickets.csv                  Sample dataset — 10 rows, 3 intentionally invalid
-│
+├── data/tickets.csv              Sample dataset — 10 rows, 3 intentionally invalid
 ├── src/
-│   ├── __init__.py
-│   ├── models/
-│   │   ├── __init__.py
-│   │   └── ticket.py                Domain model: SupportTicket, Priority, Status, Category
-│   ├── io/
-│   │   ├── __init__.py
-│   │   └── loader.py                CSVLoader — file reading and field-count integrity
-│   ├── validation/
-│   │   ├── __init__.py
-│   │   └── validator.py             TicketValidator — business rule enforcement
-│   ├── processing/
-│   │   ├── __init__.py
-│   │   └── cleaner.py               DataCleaner — normalisation and canonicalisation
-│   └── analytics/
-│       ├── __init__.py
-│       └── engine.py                AnalyticsEngine — metrics and reporting
-│
+│   ├── models/ticket.py          SupportTicket, Priority, Status, Category
+│   ├── io/loader.py              CSVLoader
+│   ├── validation/validator.py   TicketValidator, ValidationResult
+│   ├── processing/cleaner.py     DataCleaner
+│   └── analytics/engine.py       AnalyticsEngine
 ├── tests/
-│   ├── __init__.py
-│   ├── test_ticket.py               12 tests — model construction and properties
-│   ├── test_loader.py               9 tests  — file loading and field-count integrity
-│   ├── test_validator.py            16 tests — validation rules and edge cases
-│   ├── test_cleaner.py              13 tests — normalisation and immutability
-│   └── test_analytics.py           20 tests — metrics, filters, and edge cases
-│
-├── main.py                          End-to-end pipeline demonstration
-├── README.md                        This document
-└── DAILY_REPORT.md                  Daily learning and implementation report
+│   ├── test_ticket.py            41 tests — model invariants, types, immutability
+│   ├── test_loader.py            13 tests — file, encoding, header, field-count integrity
+│   ├── test_validator.py         46 tests — row rules, numeric rules, duplicates
+│   ├── test_cleaner.py           14 tests — normalisation, no input mutation
+│   ├── test_analytics.py         20 tests — counts, filters, averages, empty input
+│   └── test_pipeline.py           6 tests — end-to-end and CLI behaviour
+├── logs/
+│   ├── test_results.txt          Actual pytest -v output
+│   └── pipeline_output.txt       Actual python main.py output
+├── main.py                       Composition root / command-line entry point
+├── README.md                     This document
+└── DAILY_REPORT.md               Day 02 daily report
 ```
 
 ---
 
-## 3. Module Specifications
+## 4. Component Specifications
 
-### 3.1 `SupportTicket` — Domain Model (`src/models/ticket.py`)
+### 4.1 `SupportTicket` — domain model (`src/models/ticket.py`)
 
-**Responsibility:** Define the canonical representation of a single support ticket. Enforce all field invariants at construction time so that no invalid ticket object can exist.
+**Responsibility:** represent one valid support ticket. A `SupportTicket` that exists is always valid.
 
-| Attribute | Type | Constraint |
+| Field | Type | Rule (violations raise `ValueError`) |
 |---|---|---|
-| `ticket_id` | `str` | Must be non-empty and non-whitespace |
-| `customer` | `str` | Must be non-empty and non-whitespace |
-| `priority` | `Priority` | Enum: `low`, `medium`, `high`, `urgent` |
-| `category` | `Category` | Enum: `billing`, `technical`, `account`, `general`, `unknown` |
-| `status` | `Status` | Enum: `open`, `pending`, `resolved`, `closed` |
-| `description` | `str` | Must be non-empty; max 500 characters |
-| `created_at` | `datetime` | Standard Python datetime |
+| `ticket_id` | `str` | Non-empty, non-whitespace string |
+| `customer` | `str` | Non-empty, non-whitespace string |
+| `priority` | `Priority` | Must be a `Priority` member (a plain `"high"` string is rejected) |
+| `category` | `Category` | Must be a `Category` member |
+| `status` | `Status` | Must be a `Status` member |
+| `description` | `str` | Non-empty; at most `MAX_DESCRIPTION_LENGTH` (500) characters |
+| `created_at` | `datetime` | Must be a `datetime` instance |
+| `resolution_time_hours` | `float \| None` | `None`, or a finite number ≥ 0 (`inf`, `-inf`, `nan`, `bool` rejected) |
+| `customer_rating` | `int \| None` | `None`, or an integer from 1 to 5 (`3.5`, `4.0`, `True` rejected) |
 
-**Derived properties:**
+Class-level constants (`ClassVar`): `MAX_DESCRIPTION_LENGTH = 500`, `MIN_RATING = 1`, `MAX_RATING = 5`.
+Derived properties: `is_open` (status is OPEN or PENDING), `is_high_priority` (HIGH or URGENT).
+The class is `@dataclass(frozen=True)`: fields cannot be reassigned after construction.
 
-| Property | Returns | Logic |
-|---|---|---|
-| `is_open` | `bool` | `True` when status is `OPEN` or `PENDING` |
-| `is_high_priority` | `bool` | `True` when priority is `HIGH` or `URGENT` |
+### 4.2 `CSVLoader` — file input (`src/io/loader.py`)
 
----
+**Responsibility:** read a CSV file into a list of string dictionaries. It does not interpret values.
 
-### 3.2 `CSVLoader` — File I/O (`src/io/loader.py`)
-
-**Responsibility:** Read rows from a CSV file on disk and return them as plain string-valued dictionaries. Enforce file existence, file type, and field-count integrity. Perform no interpretation or validation of field values.
-
-**Class attribute:** `SUPPORTED_EXTENSIONS: frozenset[str]` — currently `{".csv"}`
-
-**Error conditions:**
-
-| Condition | Exception Raised |
+| Condition | Behaviour |
 |---|---|
 | File does not exist | `FileNotFoundError` |
-| File extension not in supported set | `ValueError` |
-| Any data row contains more fields than the header | `ValueError` with row number and surplus values |
+| Extension is not `.csv` | `ValueError` |
+| File is not valid UTF-8 | `ValueError` with a clear message (no raw `UnicodeDecodeError`) |
+| File starts with a UTF-8 byte-order mark (Excel) | BOM removed; first column read correctly |
+| Header names with spaces or capitals (` ID `) | Normalised to lower case, stripped (`id`) |
+| Row has **more** fields than the header | `ValueError` naming the row and surplus values (prevents silent column shift) |
+| Row has **fewer** fields than the header | Missing cells become `""`; the validator then reports them |
 
-> **Design note:** When `csv.DictReader` receives a row with surplus fields, it stores the extra values under the dictionary key `None`. This silently shifts all column values, causing ticket IDs to become category names and corrupting the entire row. The loader detects this condition and raises immediately, ensuring corrupted data never reaches downstream components.
+### 4.3 `TicketValidator` — validation (`src/validation/validator.py`)
 
----
+**Responsibility:** decide whether each raw row is usable and explain why not. It does not modify rows.
 
-### 3.3 `TicketValidator` — Validation (`src/validation/validator.py`)
+1. `id`, `customer`, `priority`, `category`, `status`, `description`, `created_at` are present and non-empty.
+2. `priority` and `status` (case-insensitive) are valid enum values. The allowed sets are derived from the model enums — one source of truth.
+3. `created_at` is a valid ISO 8601 date or date-time.
+4. `description` is at most 500 characters.
+5. `resolution_time_hours`, if present, is a plain number, finite and ≥ 0.
+6. `customer_rating`, if present, is a whole number from 1 to 5.
+7. `id` is unique in the batch; the first occurrence is kept and later duplicates are rejected.
 
-**Responsibility:** Apply business rules to raw string-valued rows and report the outcome. The validator does not clean, transform, or persist data.
+Each row produces a `ValidationResult(row_index, is_valid, errors)`, so every rejection is visible in the output.
 
-**Validation rules applied per row:**
+### 4.4 `DataCleaner` — normalisation (`src/processing/cleaner.py`)
 
-1. All seven required fields (`id`, `customer`, `priority`, `category`, `status`, `description`, `created_at`) must be present and non-empty after stripping whitespace.
-2. `priority` value, after lowercasing, must be one of `{low, medium, high, urgent}`.
-3. `status` value, after lowercasing, must be one of `{open, pending, resolved, closed}`.
-
-**Return type:** `ValidationResult` dataclass carrying `row_index`, `is_valid`, and `errors: list[str]`.
-
----
-
-### 3.4 `DataCleaner` — Normalisation (`src/processing/cleaner.py`)
-
-**Responsibility:** Transform validated raw rows into normalised, canonicalised dictionaries ready for domain-object construction. The input sequence is never mutated.
-
-**Normalisation rules applied per row:**
+**Responsibility:** turn validated rows into canonical values ready for the model. It always returns new dictionaries and never mutates its input.
 
 | Field | Transformation |
 |---|---|
-| All fields | Leading and trailing whitespace stripped |
-| `priority` | Lowercased; mapped to canonical Enum value; unknown values default to `low` |
-| `status` | Lowercased; mapped to canonical Enum value; unknown values default to `open` |
-| `category` | Lowercased; mapped to canonical Enum value; unknown values default to `unknown` |
-| `customer` | Title-cased (e.g. `alice johnson` → `Alice Johnson`) |
+| All fields | Whitespace stripped (`None`-safe) |
+| `priority`, `status` | Lower-cased and mapped to enum values |
+| `category` | Lower-cased; unrecognised values map to `unknown` (explicit representation) |
+| `customer` | Title-cased |
+
+### 4.5 `AnalyticsEngine` — analytics (`src/analytics/engine.py`)
+
+**Responsibility:** compute read-only statistics. The engine stores tickets as a tuple, so callers cannot change its data after construction.
+
+| Method | Returns |
+|---|---|
+| `total_count()` | `int` |
+| `count_by_priority()` / `count_by_status()` / `count_by_category()` | `dict[str, int]` |
+| `open_tickets()` / `high_priority_open()` | `list[SupportTicket]` |
+| `top_customers(n=3)` *(Task C)* | `list[tuple[str, int]]` |
+| `daily_volume()` *(Task C)* | `dict[str, int]` sorted by date |
+| `average_resolution_time()` *(Task C)* | `float`, or `None` if no ticket has a value |
+| `average_rating()` *(Task C)* | `float`, or `None` if no ticket is rated |
+| `summary_report()` | Formatted text report |
 
 ---
 
-### 3.5 `AnalyticsEngine` — Analytics (`src/analytics/engine.py`)
+## 5. Data Contract
 
-**Responsibility:** Compute metrics and generate reports over an immutable collection of `SupportTicket` objects. All methods are pure — they read data and return new structures without mutation.
+### 5.1 Input columns
 
-**Available operations:**
+| Column | Required | Type | Valid values |
+|---|---|---|---|
+| `id` | Yes | text | Non-empty, unique in the file |
+| `customer` | Yes | text | Non-empty |
+| `priority` | Yes | text | `low`, `medium`, `high`, `urgent` (any case) |
+| `category` | Yes | text | `billing`, `technical`, `account`, `general`; anything else becomes `unknown` |
+| `status` | Yes | text | `open`, `pending`, `resolved`, `closed` (any case) |
+| `description` | Yes | text | Non-empty, at most 500 characters |
+| `resolution_time_hours` | No | number | Empty, or finite and ≥ 0 |
+| `customer_rating` | No | integer | Empty, or 1–5 |
+| `created_at` | Yes | date | ISO 8601, e.g. `2024-01-15` or `2024-01-15T10:30:00` |
 
-| Method | Returns | Description |
-|---|---|---|
-| `total_count()` | `int` | Total number of tickets in the collection |
-| `count_by_priority()` | `dict[str, int]` | Frequency map per priority level |
-| `count_by_status()` | `dict[str, int]` | Frequency map per status |
-| `count_by_category()` | `dict[str, int]` | Frequency map per category |
-| `open_tickets()` | `list[SupportTicket]` | Tickets with status OPEN or PENDING |
-| `high_priority_open()` | `list[SupportTicket]` | Open tickets with priority HIGH or URGENT |
-| `top_customers(n)` | `list[tuple[str, int]]` | Top n customers by ticket volume |
-| `daily_volume()` | `dict[str, int]` | Ticket count grouped by calendar date |
-| `summary_report()` | `str` | Formatted human-readable summary |
-
----
-
-## 4. Data Contract
-
-### 4.1 Input CSV Format
-
-The CSV file must conform to the following schema. The first seven columns are required; `resolution_time_hours` and `customer_rating` are optional (empty = not provided).
-
-| Column | Type | Valid Values |
-|---|---|---|
-| `id` | string | Non-empty unique identifier (e.g. `T001`) |
-| `customer` | string | Non-empty customer name |
-| `priority` | string | `low`, `medium`, `high`, `urgent` (case-insensitive) |
-| `category` | string | `billing`, `technical`, `account`, `general` (case-insensitive) |
-| `status` | string | `open`, `pending`, `resolved`, `closed` (case-insensitive) |
-| `description` | string | Non-empty; max 500 characters |
-| `resolution_time_hours` | float (optional) | Finite and ≥ 0; `inf`, `-inf`, `nan` are rejected |
-| `customer_rating` | integer (optional) | Whole number 1–5; `3.5`, `nan`, `0`, `6` are rejected |
-| `created_at` | ISO 8601 date | e.g. `2024-01-15` (invalid dates are reported, not crashed on) |
-
-### 4.2 Sample Data
+### 5.2 Sample data
 
 ```csv
 id,customer,priority,category,status,description,resolution_time_hours,customer_rating,created_at
-T001,Alice Johnson,high,billing,open,Cannot access invoice for last month,,,2024-01-15
+T001,Alice Johnson,high,billing,open,Cannot access invoice for last month,,, 2024-01-15
 T002,Bob Smith,low,technical,closed,App crashes on startup,4.5,4,2024-01-16
 T003,,medium,billing,open,Duplicate charge on account,2,5,2024-01-17
 ```
 
-Rows 3, 6, and 8 of the sample dataset are intentionally invalid to demonstrate validation and rejection behaviour.
+Rows 3, 6 and 8 of `data/tickets.csv` are intentionally invalid (missing customer, description or category) to demonstrate rejection and reporting.
 
 ---
 
-## 5. Installation & Setup
+## 6. Setup
 
-### 5.1 Prerequisites
-
-| Requirement | Version |
-|---|---|
-| Python | 3.10 or higher |
-| pytest | Any recent version |
-
-### 5.2 Environment Setup
-
-No third-party packages are required. All modules use the Python standard library only (`csv`, `dataclasses`, `enum`, `pathlib`, `collections`, `datetime`).
+**Prerequisites:** Python 3.10 or later (developed and tested on Python 3.12.10); `pytest` for the tests (tested with pytest 9.2.0). No other packages are needed.
 
 ```bash
-# Verify Python version
-python --version
-
-# Verify pytest is available
-python -m pytest --version
+git clone <repository-url>
+cd DAY_2_OOPS
+python -m venv .venv
+# Windows: .venv\Scripts\activate     macOS/Linux: source .venv/bin/activate
+pip install pytest
 ```
 
 ---
 
-## 6. Usage
+## 7. Usage
 
-### 6.1 Run the Full Pipeline
+Run all commands from the project root.
 
 ```bash
-python main.py
+python main.py                         # process data/tickets.csv
+python main.py path/to/other.csv       # process another file
 ```
 
-This executes all five pipeline stages against the sample dataset and prints a formatted analytics report to stdout.
+**Exit codes:** `0` when the run succeeds; `1` when the file cannot be used (missing, wrong extension, not UTF-8, or a row with surplus fields). File-level errors are printed to standard error as `ERROR: ...`. Row-level problems do not stop the run; they are listed in the output.
 
-### 6.2 Expected Output
+Excerpt of actual output (full output in `logs/pipeline_output.txt`):
 
 ```
 Loaded 10 raw rows from tickets.csv
@@ -291,159 +248,71 @@ Validation: 7 valid, 3 invalid
   Row 8: INVALID — missing or empty 'customer'; missing or empty 'category'
 
 Constructed 7 SupportTicket objects
-
-==================================================
-       SUPPORT TICKET ANALYTICS REPORT
-==================================================
-  Total tickets      : 7
-  Open / Pending     : 4
-  High-priority open : 3
-
-  By Priority:
-    high       : 2
-    low        : 2
-    medium     : 2
-    urgent     : 1
-
-  By Status:
-    closed     : 2
-    open       : 2
-    pending    : 2
-    resolved   : 1
-
-  By Category:
-    account    : 1
-    billing    : 2
-    technical  : 3
-    unknown    : 1
-==================================================
-
-High-priority open tickets needing attention:
-  [T001] Alice Johnson | HIGH | open | Cannot access invoice for last month...
-  [T004] Carol White | URGENT | pending | Cannot login to account...
-  [T009] Grace Lee | HIGH | open | Data not syncing across devices...
-
+...
 Average resolution time: 3.80 h
 Average customer rating: 3.83 / 5
-
-Daily ticket volume:
-  2024-01-15: # (1)
-  2024-01-16: # (1)
-  ...
-```
-
-### 6.3 Using Individual Modules
-
-Each module can be imported and used independently:
-
-```python
-from src.io.loader import CSVLoader
-from src.validation.validator import TicketValidator
-from src.processing.cleaner import DataCleaner
-from src.analytics.engine import AnalyticsEngine
-
-# Load
-rows = CSVLoader("data/tickets.csv").load()
-
-# Validate
-validator = TicketValidator()
-valid_rows = validator.filter_valid(rows)
-
-# Clean
-cleaned = DataCleaner().clean_all(valid_rows)
 ```
 
 ---
 
-## 7. Test Suite
-
-### 7.1 Running Tests
+## 8. Testing
 
 ```bash
-# Run the full suite with verbose output
-python -m pytest tests/ -v
-
-# Run a specific module's tests
-python -m pytest tests/test_ticket.py -v
-python -m pytest tests/test_loader.py -v
-python -m pytest tests/test_validator.py -v
-python -m pytest tests/test_cleaner.py -v
-python -m pytest tests/test_analytics.py -v
+python -m pytest -v
 ```
 
-### 7.2 Test Coverage Summary
+| File | Tests | Normal behaviour | Invalid / edge behaviour |
+|---|---|---|---|
+| `test_ticket.py` | 41 | Valid construction, properties, `__str__` | Empty and whitespace text; non-string text; non-enum priority/status/category; `inf`, `-inf`, `nan`, negative, non-numeric durations; `3.5`, `4.0`, `True`, `0`, `6` ratings; frozen fields; 501-character description |
+| `test_loader.py` | 13 | Rows returned as dictionaries | Missing file; wrong extension; surplus fields; Excel BOM; messy headers; non-UTF-8 file; header-only file |
+| `test_validator.py` | 46 | Valid rows; any-case priority | Missing fields; unknown values; invalid dates; `inf`/`nan`/`1e400`/`2_0` durations; fractional ratings; `None` values; missing keys; duplicate IDs |
+| `test_cleaner.py` | 14 | Stripping, normalisation, title case | Unknown values; `None` values; input not mutated |
+| `test_analytics.py` | 20 | Counts, filters, top customers, daily volume, averages | Empty collection; tickets without optional values |
+| `test_pipeline.py` | 6 | Sample file end-to-end; Excel-saved file | Truncated rows; non-finite and fractional values; unusable file → exit code 1 |
+| **Total** | **140** | | **140 passed, 0 failed** |
 
-| Test File | Tests | Scenarios Covered |
-|---|---|---|
-| `test_ticket.py` | 33 | Valid construction, empty-field rejection, frozen/immutable state, ClassVar constants, **non-finite (inf/-inf/nan) and negative resolution times, non-integer/out-of-range ratings** |
-| `test_loader.py` | 9 | File not found, wrong extension, extra-field integrity, correct field count, empty CSV |
-| `test_validator.py` | 43 | Required fields, unknown priority/status, bad dates, **inf/nan/negative durations, fractional/out-of-range ratings, None/missing keys**, shared rule source |
-| `test_cleaner.py` | 14 | Whitespace stripping, priority/status/category normalisation, title-casing, immutability, empty input |
-| `test_analytics.py` | 20 | Count methods, filtering, top customers, daily volume, **average resolution time / rating**, empty collection |
-| `test_pipeline.py` | 3 | **End-to-end loader → validator → cleaner → model with truncated rows and inf/nan/fractional values** |
-| **Total** | **122** | **122 passed, 0 failed** |
-
-### 7.3 Key Regression Test
-
-The loader test suite includes a regression test for the exact malformed-CSV scenario where a surplus field causes `csv.DictReader` to shift column values silently:
-
-```
-id,category,priority,description,resolution_time_hours,customer_rating,status
-T-101,Billing,High,Valid,2,5,Closed,UNEXPECTED
-```
-
-**Expected behaviour:** `ValueError` raised immediately with row number and surplus values.
-**Prohibited behaviour:** Returning rows where `id == "Billing"`.
+Tests that need a file create a temporary one with pytest's `tmp_path` fixture, so they do not depend on the real data file or on each other.
 
 ---
 
-## 8. Design Rationale
+## 9. Design Rationale
 
-### 8.1 Single Responsibility Over God Object
+### 9.1 Two designs compared
 
-A monolithic `TicketProcessor` class that performs loading, validation, cleaning, and analytics simultaneously would violate the Single Responsibility Principle. Any change to one concern — for example, switching from CSV to JSON input — would require modifying and retesting the entire class.
-
-The pipeline is instead decomposed into five classes. Each class has exactly one reason to change, can be tested in complete isolation, and can be replaced independently.
-
-### 8.2 Composition Over Inheritance
-
-`AnalyticsEngine` accepts tickets as a constructor argument (composition). It does not inherit from a base class. There is no genuine "is-a" relationship between an analytics engine and a ticket — composition is therefore the correct model. This also makes it straightforward to add new analytics methods without modifying or subclassing existing code.
-
-### 8.3 Invariant Enforcement at Construction
-
-`SupportTicket.__post_init__` validates all fields immediately upon construction. An invalid ticket object cannot be created. Downstream code — `DataCleaner`, `AnalyticsEngine`, `main.py` — can therefore operate without defensive null-checks or guard clauses on ticket fields.
-
-### 8.4 Immutability of Input Data
-
-`DataCleaner._clean_row` always begins by creating a copy of the input dictionary (`dict(row)`). The original rows passed by the caller are never modified. This eliminates a class of bugs where later pipeline stages receive unexpectedly mutated data.
-
----
-
-## 9. OOP Concepts Reference
-
-| Concept | Implementation Location | Notes |
+| Concern | Design 1: one `TicketProcessor` class | Design 2 (chosen): composed components |
 |---|---|---|
-| `@dataclass` with `__post_init__` | `src/models/ticket.py` | Auto-generates `__init__`, `__repr__`, `__eq__`; `__post_init__` enforces invariants |
-| `Enum` with `str` mixin | `src/models/ticket.py` | `Priority(str, Enum)` allows direct string comparison and JSON serialisation |
-| Class attribute vs instance attribute | `src/io/loader.py` | `SUPPORTED_EXTENSIONS` is class-level (shared); `self._path` is instance-level (per-object) |
-| Encapsulation via naming convention | All `src/` modules | Methods prefixed with `_` are implementation details, not public API |
-| `@property` for derived state | `src/models/ticket.py` | `is_open`, `is_high_priority` computed from existing fields; no redundant stored state |
-| `__repr__` and `__str__` | All classes | `__repr__` for unambiguous developer output; `__str__` for human-readable display |
-| Composition | `src/analytics/engine.py` | Engine receives tickets; does not inherit from any ticket-related base |
-| Type annotations | All modules | Full PEP 484 annotations; `from __future__ import annotations` for forward references |
+| Responsibilities | Loads, validates, cleans and analyses in one class | One class per concern |
+| Reasons to change | Four (file format, rules, cleaning, metrics) | One per class |
+| Testing | Every test needs a real file and runs the whole flow | Each class is tested alone with in-memory data |
+| Adding an analysis | Edit the large class; risk breaking other steps | Add a method to `AnalyticsEngine` only |
+| Changing the source (e.g. JSON) | Rewrite part of the class | Add a new loader; other classes unchanged |
+
+**Decision:** Design 2. It has low coupling (components communicate through plain dictionaries and `SupportTicket` objects), high cohesion (each class's methods serve one concern), and it is easy to test. That is why Task C could add four analytics methods without changing any existing behaviour.
+
+### 9.2 Composition over inheritance
+
+No component *is a* kind of another: an analytics engine is not a ticket, and a validator is not a loader. Inheritance would add coupling without benefit, so `main.py` composes independent objects instead. The only inheritance used is `class Priority(str, Enum)`, where the members genuinely are strings.
+
+### 9.3 Invariants at the model boundary, rules at the input boundary
+
+Validation exists in two places on purpose. `TicketValidator` checks raw text and explains every problem so the data owner can fix the file. `SupportTicket` checks typed values so no other code path can create an invalid ticket, even code that does not use the validator. Both read their rules from the same source (the enums and the `ClassVar` constants), so they cannot drift apart.
+
+### 9.4 Explicit failure instead of silent corruption
+
+A row with too many fields would shift every column (`id` would receive the category). The loader stops with a clear error instead of returning wrong data. Row-level problems are reported per row, so nothing is dropped without a reason.
 
 ---
 
 ## 10. Assumptions
 
-| # | Assumption | Rationale |
-|---|---|---|
-| 1 | The input CSV file is UTF-8 encoded | Standard encoding for data interchange; the loader opens files with `encoding="utf-8"` |
-| 2 | The CSV header row contains the seven required columns (plus the two optional numeric columns) | The pipeline validates field presence per row; header column names must match the expected schema |
-| 3 | `created_at` values conform to ISO 8601 date format (YYYY-MM-DD) | `datetime.fromisoformat()` is used for parsing; non-ISO formats will raise `ValueError` |
-| 4 | Ticket IDs are unique within the dataset | The pipeline does not perform deduplication; duplicate IDs will be processed as separate tickets |
-| 5 | The dataset fits in memory | All rows are loaded into a list; no streaming or chunked processing is implemented |
-| 6 | No third-party packages are required | The entire project uses the Python standard library only |
+| # | Assumption |
+|---|---|
+| 1 | Input files are UTF-8 (with or without a byte-order mark). |
+| 2 | The header row contains the column names in §5.1; names are matched case-insensitively. |
+| 3 | `created_at` uses ISO 8601 format. |
+| 4 | Ticket IDs should be unique within one file; the first occurrence is treated as authoritative. |
+| 5 | An empty optional cell means "not recorded", represented as `None`. |
+| 6 | The whole file fits in memory. |
 
 ---
 
@@ -451,27 +320,21 @@ The pipeline is instead decomposed into five classes. Each class has exactly one
 
 | # | Limitation | Impact |
 |---|---|---|
-| 1 | No persistent storage or database integration | Output is printed to stdout; the pipeline does not write cleaned data to disk |
-| 2 | No duplicate ticket detection | If the same ticket ID appears twice, both records are processed independently |
-| 3 | Validation is row-level only | Cross-row constraints (e.g., unique IDs, referential integrity) are not enforced |
-| 4 | Single file format supported | Only `.csv` files are accepted; JSON, Excel, or API sources require a new loader class |
-| 5 | No concurrency or parallel processing | The pipeline runs sequentially; performance is not optimised for large datasets |
-| 6 | Analytics output is text only | No graphical visualisation, no export to HTML/PDF; output is formatted for terminal display |
-| 8 | Truncated rows are not fatal | The loader pads missing cells with `""`; the validator then reports any missing required field. Surplus fields remain a hard `ValueError` |
-| 9 | Missing optional numbers mean "unknown" | A truncated row that only loses optional columns is accepted with `None` values |
-| 7 | Description length cap is fixed at 500 characters | The `MAX_DESCRIPTION_LENGTH` constant is set at class level and is not configurable at runtime |
+| 1 | Only CSV input is supported | Other formats need a new loader class |
+| 2 | Output is printed text only | No file export or charts |
+| 3 | Duplicate detection is within one file only | Duplicates across separate runs are not detected |
+| 4 | No check between status and resolution time | An open ticket with a resolution time is accepted |
+| 5 | A truncated row that loses only optional columns is accepted | Those values become `None` (unknown) |
+| 6 | Unrecognised categories are mapped to `unknown`, not rejected | Deliberate explicit representation; visible in the category counts |
+| 7 | Files are processed sequentially in memory | Not designed for very large datasets |
 
 ---
 
 ## 12. Execution Evidence
 
-Test results and pipeline output logs are captured in the `logs/` directory for submission verification:
+| File | Content | Command |
+|---|---|---|
+| [`logs/test_results.txt`](logs/test_results.txt) | Full test output — 140 passed, 0 failed | `python -m pytest -v -p no:cacheprovider` |
+| [`logs/pipeline_output.txt`](logs/pipeline_output.txt) | Full pipeline output on the sample data | `python main.py` |
 
-| Log File | Content |
-|---|---|
-| `logs/test_results.txt` | Full `pytest -v` output — 122 passed, 0 failed |
-| `logs/pipeline_output.txt` | Full `main.py` execution output — load, validate, clean, analyse |
-
----
-
-*End of Document*
+Environment: Windows 11, Python 3.12.10, pytest 9.2.0.

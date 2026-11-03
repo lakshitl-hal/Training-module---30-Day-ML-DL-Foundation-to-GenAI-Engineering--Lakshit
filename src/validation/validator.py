@@ -63,8 +63,25 @@ class TicketValidator:
     def validate_all(
         self, rows: Sequence[dict[str, str]]
     ) -> list[ValidationResult]:
-        """Validate every row and return a result for each."""
-        return [self._validate_row(i, row) for i, row in enumerate(rows, start=1)]
+        """Validate every row and return a result for each.
+
+        Besides per-row rules, ticket IDs must be unique within the batch:
+        the first occurrence is kept and later duplicates are rejected.
+        """
+        results = [self._validate_row(i, row) for i, row in enumerate(rows, start=1)]
+        first_seen: dict[str, int] = {}
+        for row, result in zip(rows, results):
+            ticket_id = _text(row, "id")
+            if not ticket_id:
+                continue
+            if ticket_id in first_seen:
+                result.errors.append(
+                    f"duplicate id '{ticket_id}' (first seen in row {first_seen[ticket_id]})"
+                )
+                result.is_valid = False
+            else:
+                first_seen[ticket_id] = result.row_index
+        return results
 
     def filter_valid(
         self, rows: Sequence[dict[str, str]]

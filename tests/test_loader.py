@@ -118,3 +118,26 @@ class TestCSVLoader:
         csv_file.write_text("id,name\n")
         loader = CSVLoader(csv_file)
         assert loader.load() == []
+
+
+class TestEncodingAndHeaders:
+    def test_excel_bom_is_removed(self, tmp_path):
+        f = tmp_path / "bom.csv"
+        f.write_bytes("id,name\n1,Alice\n".encode("utf-8-sig"))
+        assert CSVLoader(f).load() == [{"id": "1", "name": "Alice"}]
+
+    def test_header_names_are_stripped_and_lowercased(self, tmp_path):
+        f = tmp_path / "h.csv"
+        f.write_text(" ID , Name \n1,Alice\n")
+        assert CSVLoader(f).load() == [{"id": "1", "name": "Alice"}]
+
+    def test_non_utf8_file_raises_clear_value_error(self, tmp_path):
+        f = tmp_path / "latin.csv"
+        f.write_bytes("id,name\n1,José\n".encode("cp1252"))
+        with pytest.raises(ValueError, match="not valid UTF-8"):
+            CSVLoader(f).load()
+
+    def test_header_only_file_returns_no_rows(self, tmp_path):
+        f = tmp_path / "empty.csv"
+        f.write_text("id,name\n")
+        assert CSVLoader(f).load() == []

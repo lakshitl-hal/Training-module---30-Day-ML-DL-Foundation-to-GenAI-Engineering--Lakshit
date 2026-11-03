@@ -6,6 +6,7 @@ Entry point — demonstrates the full pipeline:
 
 from __future__ import annotations
 
+import sys
 from datetime import datetime
 from pathlib import Path
 
@@ -37,12 +38,23 @@ def build_ticket(row: dict[str, str]) -> SupportTicket:
     )
 
 
-def main() -> None:
-    data_path = Path(__file__).parent / "data" / "tickets.csv"
+DEFAULT_DATA_PATH = Path(__file__).parent / "data" / "tickets.csv"
 
-    # Step 1 — Load raw rows
-    loader = CSVLoader(data_path)
-    raw_rows = loader.load()
+
+def main(argv: list[str] | None = None) -> int:
+    """Run the pipeline. Usage: python main.py [path/to/tickets.csv]
+
+    Returns a process exit code: 0 on success, 1 if the file is unusable.
+    """
+    args = sys.argv[1:] if argv is None else argv
+    data_path = Path(args[0]) if args else DEFAULT_DATA_PATH
+
+    # Step 1 — Load raw rows (file-level problems stop the run cleanly)
+    try:
+        raw_rows = CSVLoader(data_path).load()
+    except (FileNotFoundError, ValueError) as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 1
     print(f"Loaded {len(raw_rows)} raw rows from {data_path.name}")
 
     # Step 2 — Validate
@@ -92,7 +104,8 @@ def main() -> None:
     print("\nDaily ticket volume:")
     for day, count in engine.daily_volume().items():
         print(f"  {day}: {'#' * count} ({count})")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

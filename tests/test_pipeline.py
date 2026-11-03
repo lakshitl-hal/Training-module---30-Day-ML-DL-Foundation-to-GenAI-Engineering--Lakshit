@@ -47,3 +47,24 @@ def test_loader_normalises_missing_cells_to_empty_string(tmp_path):
     f = tmp_path / "t.csv"
     f.write_text("a,b,c\n1,2\n")
     assert CSVLoader(f).load() == [{"a": "1", "b": "2", "c": ""}]
+
+
+def test_excel_saved_file_with_bom_is_processed(tmp_path):
+    f = tmp_path / "t.csv"
+    f.write_bytes((HEADER + "T1,A,low,billing,open,d,,,2024-01-15\n").encode("utf-8-sig"))
+    rows = CSVLoader(f).load()
+    assert TicketValidator().validate_all(rows)[0].is_valid
+
+
+def test_main_returns_error_code_for_unusable_file(tmp_path, capsys):
+    from main import main
+    assert main([str(tmp_path / "missing.csv")]) == 1
+    assert "ERROR" in capsys.readouterr().err
+
+
+def test_main_runs_on_sample_data(capsys):
+    from main import main
+    assert main([]) == 0
+    out = capsys.readouterr().out
+    assert "Validation: 7 valid, 3 invalid" in out
+    assert "Constructed 7 SupportTicket objects" in out

@@ -89,7 +89,7 @@ class TestTicketValidator:
         assert len(result.errors) >= 2
 
     def test_validate_all_returns_result_per_row(self):
-        rows = [_make_row(), _make_row(customer=""), _make_row()]
+        rows = [_make_row(id="T1"), _make_row(id="T2", customer=""), _make_row(id="T3")]
         results = self.validator.validate_all(rows)
         assert len(results) == 3
         assert results[0].is_valid is True
@@ -153,3 +153,23 @@ class TestNumericAndStructuralValidation:
         from src.models.ticket import Priority
         from src.validation.validator import VALID_PRIORITIES
         assert VALID_PRIORITIES == {p.value for p in Priority}
+
+
+class TestDuplicateIds:
+    def setup_method(self):
+        self.validator = TicketValidator()
+
+    def test_later_duplicate_is_rejected_first_kept(self):
+        results = self.validator.validate_all([_make_row(), _make_row()])
+        assert results[0].is_valid is True
+        assert results[1].is_valid is False
+        assert "duplicate id 'T001'" in results[1].errors[0]
+        assert "row 1" in results[1].errors[0]
+
+    def test_duplicate_detection_ignores_surrounding_whitespace(self):
+        results = self.validator.validate_all([_make_row(id="T1"), _make_row(id=" T1 ")])
+        assert results[1].is_valid is False
+
+    def test_filter_valid_drops_duplicates(self):
+        rows = [_make_row(id="A"), _make_row(id="B"), _make_row(id="A")]
+        assert [r["id"] for r in self.validator.filter_valid(rows)] == ["A", "B"]

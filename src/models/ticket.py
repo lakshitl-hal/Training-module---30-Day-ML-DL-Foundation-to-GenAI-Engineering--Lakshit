@@ -71,12 +71,16 @@ class SupportTicket:
 
     def __post_init__(self) -> None:
         """Validate all fields immediately after construction."""
-        if not self.ticket_id or not self.ticket_id.strip():
-            raise ValueError("ticket_id must not be empty")
-        if not self.customer or not self.customer.strip():
-            raise ValueError("customer name must not be empty")
-        if not self.description or not self.description.strip():
-            raise ValueError("description must not be empty")
+        self._require_text("ticket_id", "ticket_id must not be empty")
+        self._require_text("customer", "customer name must not be empty")
+        self._require_text("description", "description must not be empty")
+        # Enum fields must be real enum members. Priority is a str subclass,
+        # so a plain "high" or "zzz" would otherwise slip through unnoticed.
+        for name, enum_type in (
+            ("priority", Priority), ("category", Category), ("status", Status)
+        ):
+            if not isinstance(getattr(self, name), enum_type):
+                raise ValueError(f"{name} must be a {enum_type.__name__} member")
         if len(self.description) > self.MAX_DESCRIPTION_LENGTH:
             raise ValueError(
                 f"description exceeds {self.MAX_DESCRIPTION_LENGTH} characters"
@@ -85,6 +89,11 @@ class SupportTicket:
             raise ValueError("created_at must be a datetime")
         self._validate_resolution_time()
         self._validate_rating()
+
+    def _require_text(self, name: str, message: str) -> None:
+        value = getattr(self, name)
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError(message)
 
     def _validate_resolution_time(self) -> None:
         value = self.resolution_time_hours
