@@ -86,11 +86,12 @@ The session examined a deliberately problematic monolithic class and identified 
 | `src/validation/validator.py` | Business rule enforcement per row | ~96 |
 | `src/processing/cleaner.py` | Value normalisation and canonicalisation | ~75 |
 | `src/analytics/engine.py` | Metrics, filters, and reporting | ~95 |
-| `tests/test_ticket.py` | 12 tests for domain model | — |
+| `tests/test_ticket.py` | 33 tests for domain model, numeric invariants, immutability | — |
 | `tests/test_loader.py` | 9 tests for CSV loading and integrity | — |
-| `tests/test_validator.py` | 16 tests for validation rules | — |
-| `tests/test_cleaner.py` | 13 tests for normalisation | — |
-| `tests/test_analytics.py` | 17 tests for analytics operations | — |
+| `tests/test_validator.py` | 43 tests for validation rules incl. inf/nan/fractional values | — |
+| `tests/test_cleaner.py` | 14 tests for normalisation | — |
+| `tests/test_analytics.py` | 20 tests for analytics operations | — |
+| `tests/test_pipeline.py` | 3 end-to-end malformed-CSV tests | — |
 | `main.py` | End-to-end pipeline demonstration | ~55 |
 | `data/tickets.csv` | Sample dataset (10 rows, 3 invalid) | — |
 
