@@ -377,11 +377,11 @@ python -m pytest tests/test_analytics.py -v
 |---|---|---|
 | `test_ticket.py` | 33 | Valid construction, empty-field rejection, frozen/immutable state, ClassVar constants, **non-finite (inf/-inf/nan) and negative resolution times, non-integer/out-of-range ratings** |
 | `test_loader.py` | 9 | File not found, wrong extension, extra-field integrity, correct field count, empty CSV |
-| `test_validator.py` | 39 | Required fields, unknown priority/status, bad dates, **inf/nan/negative durations, fractional/out-of-range ratings, None/missing keys**, shared rule source |
+| `test_validator.py` | 43 | Required fields, unknown priority/status, bad dates, **inf/nan/negative durations, fractional/out-of-range ratings, None/missing keys**, shared rule source |
 | `test_cleaner.py` | 14 | Whitespace stripping, priority/status/category normalisation, title-casing, immutability, empty input |
 | `test_analytics.py` | 20 | Count methods, filtering, top customers, daily volume, **average resolution time / rating**, empty collection |
 | `test_pipeline.py` | 3 | **End-to-end loader → validator → cleaner → model with truncated rows and inf/nan/fractional values** |
-| **Total** | **118** | **118 passed, 0 failed** |
+| **Total** | **122** | **122 passed, 0 failed** |
 
 ### 7.3 Key Regression Test
 
@@ -469,7 +469,7 @@ Test results and pipeline output logs are captured in the `logs/` directory for 
 
 | Log File | Content |
 |---|---|
-| `logs/test_results.txt` | Full `pytest -v` output — 118 passed, 0 failed |
+| `logs/test_results.txt` | Full `pytest -v` output — 122 passed, 0 failed |
 | `logs/pipeline_output.txt` | Full `main.py` execution output — load, validate, clean, analyse |
 
 ---

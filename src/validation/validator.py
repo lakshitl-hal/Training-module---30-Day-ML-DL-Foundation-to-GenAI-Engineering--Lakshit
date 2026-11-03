@@ -124,6 +124,9 @@ class TicketValidator:
         raw = _text(row, "resolution_time_hours")
         if not raw:
             return  # optional column
+        if "_" in raw:  # float() would silently read '2_0' as 20.0
+            errors.append(f"resolution_time_hours '{raw}' is not a number")
+            return
         try:
             value = float(raw)
         except ValueError:
@@ -140,6 +143,8 @@ class TicketValidator:
         if not raw:
             return  # optional column
         try:
+            if "_" in raw:  # int() would silently accept '1_0'
+                raise ValueError(raw)
             value = int(raw)  # rejects '3.5', 'nan', 'inf'
         except ValueError:
             errors.append(f"customer_rating '{raw}' must be an integer")

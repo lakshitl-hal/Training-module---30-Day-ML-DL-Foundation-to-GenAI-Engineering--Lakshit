@@ -8,7 +8,7 @@
 | **Date** | 03 November 2026 |
 | **Duration** | 8 hours (4 hours study + 4 hours implementation) |
 | **Status** | Complete |
-| **Test Result** | 118 passed, 0 failed |
+| **Test Result** | 122 passed, 0 failed |
 
 ---
 
@@ -75,7 +75,7 @@ The session examined a deliberately problematic monolithic class and identified 
 | **Task A — Domain Model** | `SupportTicket` dataclass with `Priority`, `Status`, `Category` Enums; `__post_init__` invariant enforcement | Complete |
 | **Task B — Separated Responsibilities** | `CSVLoader`, `TicketValidator`, `DataCleaner` in isolated modules; no shared mutable state | Complete |
 | **Task C — Extended Analytics** | `AnalyticsEngine.top_customers()` and `daily_volume()` added without modifying any existing method | Complete |
-| **Task D — Tests and Documentation** | 118 automated tests across 6 files; `README.md`; `DAILY_REPORT.md` | Complete |
+| **Task D — Tests and Documentation** | 122 automated tests across 6 files; `README.md`; `DAILY_REPORT.md` | Complete |
 
 ### 2.2 Artefact Inventory
 
@@ -167,7 +167,7 @@ The session examined a deliberately problematic monolithic class and identified 
 
 ```
 $ python -m pytest -q
-118 passed
+122 passed
 ```
 
 Full verbose output: `logs/test_results.txt`. Pipeline output: `logs/pipeline_output.txt`.
@@ -183,7 +183,7 @@ Full verbose output: `logs/test_results.txt`. Pipeline output: `logs/pipeline_ou
 | Prefer composition when no is-a relationship exists | `AnalyticsEngine` receives tickets; it does not extend a ticket-related class |
 | Input must never be mutated by a processing stage | `DataCleaner` copies the input dictionary before modifying it |
 | Silent data corruption is worse than an explicit failure | `CSVLoader` raises immediately on malformed rows rather than returning shifted column values |
-| Tests are easiest to write when each class does exactly one thing | Nearly all of the 118 tests exercise a single class; only `test_pipeline.py` deliberately checks the stages together |
+| Tests are easiest to write when each class does exactly one thing | Nearly all of the 122 tests exercise a single class; only `test_pipeline.py` deliberately checks the stages together |
 
 ---
 

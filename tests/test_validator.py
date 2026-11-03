@@ -118,7 +118,7 @@ class TestNumericAndStructuralValidation:
     def _one(self, **kw):
         return self.validator.validate_all([_make_row(**kw)])[0]
 
-    @pytest.mark.parametrize("bad", ["inf", "-inf", "nan", "Infinity", "abc", "-2"])
+    @pytest.mark.parametrize("bad", ["inf", "-inf", "nan", "Infinity", "1e400", "abc", "-2", "2_0"])
     def test_bad_resolution_time_rejected(self, bad):
         r = self._one(resolution_time_hours=bad)
         assert not r.is_valid
@@ -128,7 +128,7 @@ class TestNumericAndStructuralValidation:
     def test_good_resolution_time_accepted(self, good):
         assert self._one(resolution_time_hours=good).is_valid
 
-    @pytest.mark.parametrize("bad", ["3.5", "nan", "inf", "0", "6", "x"])
+    @pytest.mark.parametrize("bad", ["3.5", "4.0", "nan", "inf", "0", "6", "x", "1_0"])
     def test_bad_rating_rejected(self, bad):
         r = self._one(customer_rating=bad)
         assert not r.is_valid
