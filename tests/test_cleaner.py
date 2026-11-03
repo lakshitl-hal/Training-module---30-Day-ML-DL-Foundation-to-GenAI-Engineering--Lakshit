@@ -78,3 +78,9 @@ class TestDataCleaner:
 
     def test_repr(self):
         assert repr(self.cleaner) == "DataCleaner()"
+
+
+def test_cleaner_handles_none_values_without_crashing():
+    rows = DataCleaner().clean_all([_make_row(customer=None, category=None)])
+    assert rows[0]["customer"] == ""
+    assert rows[0]["category"] == "unknown"

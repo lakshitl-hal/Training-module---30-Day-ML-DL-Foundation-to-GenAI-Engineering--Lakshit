@@ -8,7 +8,7 @@
 | **Date** | 03 November 2026 |
 | **Duration** | 8 hours (4 hours study + 4 hours implementation) |
 | **Status** | Complete |
-| **Test Result** | 67 passed, 0 failed |
+| **Test Result** | 118 passed, 0 failed |
 
 ---
 
@@ -75,7 +75,7 @@ The session examined a deliberately problematic monolithic class and identified 
 | **Task A — Domain Model** | `SupportTicket` dataclass with `Priority`, `Status`, `Category` Enums; `__post_init__` invariant enforcement | Complete |
 | **Task B — Separated Responsibilities** | `CSVLoader`, `TicketValidator`, `DataCleaner` in isolated modules; no shared mutable state | Complete |
 | **Task C — Extended Analytics** | `AnalyticsEngine.top_customers()` and `daily_volume()` added without modifying any existing method | Complete |
-| **Task D — Tests and Documentation** | 67 automated tests across 5 files; `README.md`; `DAILY_REPORT.md` | Complete |
+| **Task D — Tests and Documentation** | 118 automated tests across 6 files; `README.md`; `DAILY_REPORT.md` | Complete |
 
 ### 2.2 Artefact Inventory
 
@@ -157,88 +157,20 @@ The session examined a deliberately problematic monolithic class and identified 
 | 3 | Medium | `SupportTicket` accepted whitespace-only strings (e.g., `"   "`) for required fields | Validation checked `if not value` — an empty-after-strip string is truthy before stripping | Changed to `if not value.strip()` throughout `__post_init__` |
 | 4 | Low | `AnalyticsEngine.open_tickets()` undercounted — `PENDING` tickets were excluded | `is_open` property only checked `Status.OPEN` | Updated `is_open` to return `True` for both `Status.OPEN` and `Status.PENDING` |
 | 5 | Critical | Malformed CSV rows silently corrupted ticket identifiers and field values | `csv.DictReader` places surplus fields under key `None`, shifting all column assignments | Added `None`-key detection in `CSVLoader._iter_rows` with an immediate `ValueError` |
+| 6 | Critical | `inf`/`nan` durations and fractional ratings were accepted; they poisoned averages (code review B1) | `float('inf')` parses successfully and `nan` fails every comparison, so range checks never fired; the model did not validate numeric fields at all | Added `math.isfinite`, type and range checks in `SupportTicket` and `TicketValidator`; regression tests for +inf, -inf, nan, 3.5, bool |
+| 7 | High | Truncated CSV rows crashed the pipeline with `AttributeError` | `csv.DictReader` fills missing cells with `None`, and `None.strip()` fails | Loader pads with `""`, cleaner/validator are None-safe; `test_pipeline.py` covers loader → model |
+| 8 | Low | `MAX_DESCRIPTION_LENGTH` was a per-instance dataclass field; model claimed immutability but was not frozen | Misuse of `field(init=False)` for a constant | Now `ClassVar`, and `@dataclass(frozen=True)` |
 
 ---
 
 ## 5. Test Execution Evidence
 
 ```
-$ python -m pytest tests/ -v
-
-============================= test session starts =============================
-platform win32 -- Python 3.12.10, pytest-9.2.0
-collected 67 items
-
-tests/test_analytics.py::TestAnalyticsEngine::test_total_count              PASSED
-tests/test_analytics.py::TestAnalyticsEngine::test_count_by_priority        PASSED
-tests/test_analytics.py::TestAnalyticsEngine::test_count_by_status          PASSED
-tests/test_analytics.py::TestAnalyticsEngine::test_count_by_category        PASSED
-tests/test_analytics.py::TestAnalyticsEngine::test_open_tickets              PASSED
-tests/test_analytics.py::TestAnalyticsEngine::test_open_tickets_excludes_resolved PASSED
-tests/test_analytics.py::TestAnalyticsEngine::test_open_tickets_excludes_closed   PASSED
-tests/test_analytics.py::TestAnalyticsEngine::test_high_priority_open        PASSED
-tests/test_analytics.py::TestAnalyticsEngine::test_high_priority_open_excludes_closed_high PASSED
-tests/test_analytics.py::TestAnalyticsEngine::test_top_customers             PASSED
-tests/test_analytics.py::TestAnalyticsEngine::test_top_customers_default_n   PASSED
-tests/test_analytics.py::TestAnalyticsEngine::test_daily_volume_correct_dates PASSED
-tests/test_analytics.py::TestAnalyticsEngine::test_daily_volume_sorted        PASSED
-tests/test_analytics.py::TestAnalyticsEngine::test_summary_report_contains_total PASSED
-tests/test_analytics.py::TestAnalyticsEngine::test_summary_report_is_string   PASSED
-tests/test_analytics.py::TestAnalyticsEngine::test_repr_contains_ticket_count PASSED
-tests/test_analytics.py::TestAnalyticsEngine::test_empty_engine              PASSED
-tests/test_analytics.py::TestAnalyticsEngine::test_engine_does_not_mutate_input_list PASSED
-tests/test_cleaner.py::TestDataCleaner::test_strips_whitespace               PASSED
-tests/test_cleaner.py::TestDataCleaner::test_normalises_priority_to_lowercase PASSED
-tests/test_cleaner.py::TestDataCleaner::test_normalises_urgent_priority       PASSED
-tests/test_cleaner.py::TestDataCleaner::test_unknown_category_becomes_unknown PASSED
-tests/test_cleaner.py::TestDataCleaner::test_known_category_is_preserved      PASSED
-tests/test_cleaner.py::TestDataCleaner::test_does_not_mutate_original         PASSED
-tests/test_cleaner.py::TestDataCleaner::test_customer_name_is_title_cased     PASSED
-tests/test_cleaner.py::TestDataCleaner::test_all_statuses_normalised           PASSED
-tests/test_cleaner.py::TestDataCleaner::test_unknown_status_defaults_to_open  PASSED
-tests/test_cleaner.py::TestDataCleaner::test_unknown_priority_defaults_to_low PASSED
-tests/test_cleaner.py::TestDataCleaner::test_clean_all_returns_same_count     PASSED
-tests/test_cleaner.py::TestDataCleaner::test_empty_list_returns_empty_list    PASSED
-tests/test_cleaner.py::TestDataCleaner::test_repr                             PASSED
-tests/test_loader.py::TestCSVLoader::test_load_returns_list_of_dicts          PASSED
-tests/test_loader.py::TestCSVLoader::test_missing_file_raises                 PASSED
-tests/test_loader.py::TestCSVLoader::test_wrong_extension_raises              PASSED
-tests/test_loader.py::TestCSVLoader::test_repr                                PASSED
-tests/test_loader.py::TestCSVLoader::test_extra_field_row_raises_value_error  PASSED
-tests/test_loader.py::TestCSVLoader::test_extra_field_error_message_includes_row_number PASSED
-tests/test_loader.py::TestCSVLoader::test_extra_field_error_does_not_corrupt_ticket_id  PASSED
-tests/test_loader.py::TestCSVLoader::test_normal_rows_with_exact_field_count_pass       PASSED
-tests/test_loader.py::TestCSVLoader::test_empty_csv_loads_zero_rows            PASSED
-tests/test_ticket.py::TestSupportTicketCreation::test_valid_ticket_is_created  PASSED
-tests/test_ticket.py::TestSupportTicketCreation::test_empty_ticket_id_raises   PASSED
-tests/test_ticket.py::TestSupportTicketCreation::test_empty_customer_raises    PASSED
-tests/test_ticket.py::TestSupportTicketCreation::test_empty_description_raises PASSED
-tests/test_ticket.py::TestSupportTicketCreation::test_whitespace_only_customer_raises PASSED
-tests/test_ticket.py::TestSupportTicketProperties::test_open_ticket_is_open    PASSED
-tests/test_ticket.py::TestSupportTicketProperties::test_closed_ticket_is_not_open PASSED
-tests/test_ticket.py::TestSupportTicketProperties::test_high_priority_flag     PASSED
-tests/test_ticket.py::TestSupportTicketProperties::test_urgent_priority_flag   PASSED
-tests/test_ticket.py::TestSupportTicketProperties::test_low_priority_not_high  PASSED
-tests/test_ticket.py::TestSupportTicketProperties::test_str_contains_ticket_id PASSED
-tests/test_validator.py::TestTicketValidator::test_valid_row_passes            PASSED
-tests/test_validator.py::TestTicketValidator::test_missing_customer_fails      PASSED
-tests/test_validator.py::TestTicketValidator::test_invalid_priority_fails      PASSED
-tests/test_validator.py::TestTicketValidator::test_uppercase_priority_is_accepted PASSED
-tests/test_validator.py::TestTicketValidator::test_invalid_status_fails        PASSED
-tests/test_validator.py::TestTicketValidator::test_filter_valid_removes_bad_rows PASSED
-tests/test_validator.py::TestTicketValidator::test_validation_result_str_ok    PASSED
-tests/test_validator.py::TestTicketValidator::test_validation_result_str_invalid PASSED
-tests/test_validator.py::TestTicketValidator::test_missing_id_fails            PASSED
-tests/test_validator.py::TestTicketValidator::test_missing_description_fails   PASSED
-tests/test_validator.py::TestTicketValidator::test_whitespace_only_field_counts_as_missing PASSED
-tests/test_validator.py::TestTicketValidator::test_multiple_errors_reported_together PASSED
-tests/test_validator.py::TestTicketValidator::test_validate_all_returns_result_per_row PASSED
-tests/test_validator.py::TestTicketValidator::test_row_index_matches_position  PASSED
-tests/test_validator.py::TestTicketValidator::test_all_valid_rows_kept_by_filter PASSED
-tests/test_validator.py::TestTicketValidator::test_all_invalid_rows_removed_by_filter PASSED
-
-============================== 67 passed in 0.14s ==============================
+$ python -m pytest -q
+118 passed
 ```
+
+Full verbose output: `logs/test_results.txt`. Pipeline output: `logs/pipeline_output.txt`.
 
 ---
 
@@ -251,7 +183,7 @@ tests/test_validator.py::TestTicketValidator::test_all_invalid_rows_removed_by_f
 | Prefer composition when no is-a relationship exists | `AnalyticsEngine` receives tickets; it does not extend a ticket-related class |
 | Input must never be mutated by a processing stage | `DataCleaner` copies the input dictionary before modifying it |
 | Silent data corruption is worse than an explicit failure | `CSVLoader` raises immediately on malformed rows rather than returning shifted column values |
-| Tests are easiest to write when each class does exactly one thing | All 67 tests operate on a single class at a time with no cross-module dependencies |
+| Tests are easiest to write when each class does exactly one thing | Nearly all of the 118 tests exercise a single class; only `test_pipeline.py` deliberately checks the stages together |
 
 ---
 

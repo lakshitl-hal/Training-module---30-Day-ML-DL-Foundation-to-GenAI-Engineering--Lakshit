@@ -114,3 +114,22 @@ class TestAnalyticsEngine:
         engine = AnalyticsEngine(tickets)
         engine.open_tickets()
         assert len(tickets) == original_len
+
+
+class TestNumericAnalytics:
+    def _t(self, tid, hours=None, rating=None):
+        return SupportTicket(
+            ticket_id=tid, customer="A", priority=Priority.LOW, category=Category.BILLING,
+            status=Status.CLOSED, description="desc", created_at=datetime(2024, 1, 1),
+            resolution_time_hours=hours, customer_rating=rating,
+        )
+
+    def test_averages_ignore_missing_values(self):
+        e = AnalyticsEngine([self._t("1", 2, 4), self._t("2", 4, 5), self._t("3")])
+        assert e.average_resolution_time() == 3.0
+        assert e.average_rating() == 4.5
+
+    def test_averages_none_when_no_data(self):
+        e = AnalyticsEngine([self._t("1")])
+        assert e.average_resolution_time() is None
+        assert e.average_rating() is None

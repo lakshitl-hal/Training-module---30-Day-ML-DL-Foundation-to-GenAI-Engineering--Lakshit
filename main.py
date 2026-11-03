@@ -16,6 +16,12 @@ from src.models.ticket import SupportTicket, Priority, Status, Category
 from src.analytics.engine import AnalyticsEngine
 
 
+def _optional(raw: str | None, cast):
+    """Convert an optional CSV cell; empty means 'not provided' (None)."""
+    raw = (raw or "").strip()
+    return cast(raw) if raw else None
+
+
 def build_ticket(row: dict[str, str]) -> SupportTicket:
     """Convert a cleaned string-dict into a SupportTicket."""
     return SupportTicket(
@@ -26,6 +32,8 @@ def build_ticket(row: dict[str, str]) -> SupportTicket:
         status=Status(row["status"]),
         description=row["description"],
         created_at=datetime.fromisoformat(row["created_at"]),
+        resolution_time_hours=_optional(row.get("resolution_time_hours"), float),
+        customer_rating=_optional(row.get("customer_rating"), int),
     )
 
 
@@ -71,6 +79,14 @@ def main() -> None:
         print("\nHigh-priority open tickets needing attention:")
         for t in urgent:
             print(f"  {t}")
+
+    # Extended analytics — resolution time and satisfaction
+    avg_time = engine.average_resolution_time()
+    avg_rating = engine.average_rating()
+    print("\nAverage resolution time:",
+          "n/a" if avg_time is None else f"{avg_time:.2f} h")
+    print("Average customer rating:",
+          "n/a" if avg_rating is None else f"{avg_rating:.2f} / 5")
 
     # Extended analytics — daily volume
     print("\nDaily ticket volume:")

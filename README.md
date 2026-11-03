@@ -114,7 +114,7 @@ DAY_2_OOPS/
 │   ├── test_loader.py               9 tests  — file loading and field-count integrity
 │   ├── test_validator.py            16 tests — validation rules and edge cases
 │   ├── test_cleaner.py              13 tests — normalisation and immutability
-│   └── test_analytics.py           17 tests — metrics, filters, and edge cases
+│   └── test_analytics.py           20 tests — metrics, filters, and edge cases
 │
 ├── main.py                          End-to-end pipeline demonstration
 ├── README.md                        This document
@@ -220,7 +220,7 @@ DAY_2_OOPS/
 
 ### 4.1 Input CSV Format
 
-The CSV file must conform to the following schema. All fields are required.
+The CSV file must conform to the following schema. The first seven columns are required; `resolution_time_hours` and `customer_rating` are optional (empty = not provided).
 
 | Column | Type | Valid Values |
 |---|---|---|
@@ -230,15 +230,17 @@ The CSV file must conform to the following schema. All fields are required.
 | `category` | string | `billing`, `technical`, `account`, `general` (case-insensitive) |
 | `status` | string | `open`, `pending`, `resolved`, `closed` (case-insensitive) |
 | `description` | string | Non-empty; max 500 characters |
-| `created_at` | ISO 8601 date | e.g. `2024-01-15` |
+| `resolution_time_hours` | float (optional) | Finite and ≥ 0; `inf`, `-inf`, `nan` are rejected |
+| `customer_rating` | integer (optional) | Whole number 1–5; `3.5`, `nan`, `0`, `6` are rejected |
+| `created_at` | ISO 8601 date | e.g. `2024-01-15` (invalid dates are reported, not crashed on) |
 
 ### 4.2 Sample Data
 
 ```csv
-id,customer,priority,category,status,description,created_at
-T001,Alice Johnson,high,billing,open,Cannot access invoice for last month,2024-01-15
-T002,Bob Smith,low,technical,closed,App crashes on startup,2024-01-16
-T003,,medium,billing,open,Duplicate charge on account,2024-01-17
+id,customer,priority,category,status,description,resolution_time_hours,customer_rating,created_at
+T001,Alice Johnson,high,billing,open,Cannot access invoice for last month,,,2024-01-15
+T002,Bob Smith,low,technical,closed,App crashes on startup,4.5,4,2024-01-16
+T003,,medium,billing,open,Duplicate charge on account,2,5,2024-01-17
 ```
 
 Rows 3, 6, and 8 of the sample dataset are intentionally invalid to demonstrate validation and rejection behaviour.
@@ -370,12 +372,13 @@ python -m pytest tests/test_analytics.py -v
 
 | Test File | Tests | Scenarios Covered |
 |---|---|---|
-| `test_ticket.py` | 12 | Valid construction, empty-field rejection, whitespace-only rejection, property logic |
+| `test_ticket.py` | 33 | Valid construction, empty-field rejection, frozen/immutable state, ClassVar constants, **non-finite (inf/-inf/nan) and negative resolution times, non-integer/out-of-range ratings** |
 | `test_loader.py` | 9 | File not found, wrong extension, extra-field integrity, correct field count, empty CSV |
-| `test_validator.py` | 16 | All required fields, unknown priority/status, whitespace fields, multiple errors, filter logic |
-| `test_cleaner.py` | 13 | Whitespace stripping, priority/status/category normalisation, title-casing, immutability, empty input |
-| `test_analytics.py` | 17 | Count methods, open/closed filtering, high-priority logic, top customers, daily volume, empty collection |
-| **Total** | **67** | **67 passed, 0 failed** |
+| `test_validator.py` | 39 | Required fields, unknown priority/status, bad dates, **inf/nan/negative durations, fractional/out-of-range ratings, None/missing keys**, shared rule source |
+| `test_cleaner.py` | 14 | Whitespace stripping, priority/status/category normalisation, title-casing, immutability, empty input |
+| `test_analytics.py` | 20 | Count methods, filtering, top customers, daily volume, **average resolution time / rating**, empty collection |
+| `test_pipeline.py` | 3 | **End-to-end loader → validator → cleaner → model with truncated rows and inf/nan/fractional values** |
+| **Total** | **118** | **118 passed, 0 failed** |
 
 ### 7.3 Key Regression Test
 
@@ -433,7 +436,7 @@ The pipeline is instead decomposed into five classes. Each class has exactly one
 | # | Assumption | Rationale |
 |---|---|---|
 | 1 | The input CSV file is UTF-8 encoded | Standard encoding for data interchange; the loader opens files with `encoding="utf-8"` |
-| 2 | The CSV header row contains exactly the seven required columns | The pipeline validates field presence per row; header column names must match the expected schema |
+| 2 | The CSV header row contains the seven required columns (plus the two optional numeric columns) | The pipeline validates field presence per row; header column names must match the expected schema |
 | 3 | `created_at` values conform to ISO 8601 date format (YYYY-MM-DD) | `datetime.fromisoformat()` is used for parsing; non-ISO formats will raise `ValueError` |
 | 4 | Ticket IDs are unique within the dataset | The pipeline does not perform deduplication; duplicate IDs will be processed as separate tickets |
 | 5 | The dataset fits in memory | All rows are loaded into a list; no streaming or chunked processing is implemented |
@@ -451,6 +454,8 @@ The pipeline is instead decomposed into five classes. Each class has exactly one
 | 4 | Single file format supported | Only `.csv` files are accepted; JSON, Excel, or API sources require a new loader class |
 | 5 | No concurrency or parallel processing | The pipeline runs sequentially; performance is not optimised for large datasets |
 | 6 | Analytics output is text only | No graphical visualisation, no export to HTML/PDF; output is formatted for terminal display |
+| 8 | Truncated rows are not fatal | The loader pads missing cells with `""`; the validator then reports any missing required field. Surplus fields remain a hard `ValueError` |
+| 9 | Missing optional numbers mean "unknown" | A truncated row that only loses optional columns is accepted with `None` values |
 | 7 | Description length cap is fixed at 500 characters | The `MAX_DESCRIPTION_LENGTH` constant is set at class level and is not configurable at runtime |
 
 ---
@@ -461,7 +466,7 @@ Test results and pipeline output logs are captured in the `logs/` directory for 
 
 | Log File | Content |
 |---|---|
-| `logs/test_results.txt` | Full `pytest -v` output — 67 passed, 0 failed |
+| `logs/test_results.txt` | Full `pytest -v` output — 118 passed, 0 failed |
 | `logs/pipeline_output.txt` | Full `main.py` execution output — load, validate, clean, analyse |
 
 ---

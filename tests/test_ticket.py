@@ -66,3 +66,54 @@ class TestSupportTicketProperties:
     def test_str_contains_ticket_id(self):
         t = _make_ticket()
         assert "T001" in str(t)
+
+
+class TestOptionalNumericFields:
+    """Regression: non-finite / non-integer values must never be accepted."""
+
+    @pytest.mark.parametrize("bad", [float("inf"), float("-inf"), float("nan")])
+    def test_non_finite_resolution_time_raises(self, bad):
+        with pytest.raises(ValueError, match="resolution_time_hours"):
+            _make_ticket(resolution_time_hours=bad)
+
+    def test_negative_resolution_time_raises(self):
+        with pytest.raises(ValueError, match="resolution_time_hours"):
+            _make_ticket(resolution_time_hours=-1.0)
+
+    def test_non_numeric_resolution_time_raises(self):
+        with pytest.raises(ValueError, match="resolution_time_hours"):
+            _make_ticket(resolution_time_hours="4.5")
+
+    @pytest.mark.parametrize("good", [0, 2, 4.5])
+    def test_finite_resolution_time_accepted(self, good):
+        assert _make_ticket(resolution_time_hours=good).resolution_time_hours == good
+
+    @pytest.mark.parametrize("bad", [3.5, 4.0, "3", True, 0, 6, -1])
+    def test_invalid_rating_raises(self, bad):
+        with pytest.raises(ValueError, match="customer_rating"):
+            _make_ticket(customer_rating=bad)
+
+    @pytest.mark.parametrize("good", [1, 3, 5])
+    def test_valid_rating_accepted(self, good):
+        assert _make_ticket(customer_rating=good).customer_rating == good
+
+    def test_optional_fields_default_to_none(self):
+        t = _make_ticket()
+        assert t.resolution_time_hours is None and t.customer_rating is None
+
+
+class TestImmutabilityAndClassState:
+    def test_ticket_is_frozen(self):
+        t = _make_ticket()
+        with pytest.raises(Exception):
+            t.customer = "Mallory"
+
+    def test_constants_are_class_level_not_fields(self):
+        from dataclasses import fields
+        names = {f.name for f in fields(SupportTicket)}
+        assert "MAX_DESCRIPTION_LENGTH" not in names
+        assert SupportTicket.MAX_DESCRIPTION_LENGTH == 500
+
+    def test_overlong_description_raises(self):
+        with pytest.raises(ValueError, match="exceeds"):
+            _make_ticket(description="x" * 501)

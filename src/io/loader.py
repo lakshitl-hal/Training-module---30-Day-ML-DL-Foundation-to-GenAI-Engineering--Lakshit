@@ -78,4 +78,7 @@ class CSVLoader:
                         f"Extra values: {surplus!r}. "
                         f"Malformed rows must be fixed before loading."
                     )
-                yield dict(row)
+                # Truncated rows: DictReader fills missing columns with None.
+                # Normalise to "" so downstream stages never hit
+                # AttributeError on None; the validator reports the gap.
+                yield {k: ("" if v is None else v) for k, v in row.items()}

@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from collections import Counter
 from datetime import datetime
-from typing import Sequence
+from typing import Optional, Sequence
 
 from src.models.ticket import SupportTicket, Priority, Status
 
@@ -71,6 +71,22 @@ class AnalyticsEngine:
             day = ticket.created_at.strftime("%Y-%m-%d")
             counter[day] += 1
         return dict(sorted(counter.items()))
+
+    def average_resolution_time(self) -> Optional[float]:
+        """Mean resolution time (hours) over tickets that have one, else None."""
+        values = [
+            t.resolution_time_hours
+            for t in self._tickets
+            if t.resolution_time_hours is not None
+        ]
+        return sum(values) / len(values) if values else None
+
+    def average_rating(self) -> Optional[float]:
+        """Mean customer rating over rated tickets, else None."""
+        values = [
+            t.customer_rating for t in self._tickets if t.customer_rating is not None
+        ]
+        return sum(values) / len(values) if values else None
 
     def summary_report(self) -> str:
         """Return a human-readable summary of the current ticket set."""

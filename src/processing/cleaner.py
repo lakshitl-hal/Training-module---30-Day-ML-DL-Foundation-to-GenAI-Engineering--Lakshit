@@ -54,7 +54,7 @@ class DataCleaner:
     # --- private helpers -----------------------------------------------------
 
     def _clean_row(self, row: dict[str, str]) -> dict[str, str]:
-        row = {k: v.strip() for k, v in row.items()}          # strip whitespace
+        row = {k: (v or "").strip() for k, v in row.items()}  # None-safe strip
 
         # Normalise priority
         priority_raw = row.get("priority", "").lower()

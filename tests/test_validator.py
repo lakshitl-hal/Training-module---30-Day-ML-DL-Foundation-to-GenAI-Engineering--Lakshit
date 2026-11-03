@@ -109,3 +109,47 @@ class TestTicketValidator:
     def test_all_invalid_rows_removed_by_filter(self):
         rows = [_make_row(customer=""), _make_row(description="")]
         assert self.validator.filter_valid(rows) == []
+
+
+class TestNumericAndStructuralValidation:
+    def setup_method(self):
+        self.validator = TicketValidator()
+
+    def _one(self, **kw):
+        return self.validator.validate_all([_make_row(**kw)])[0]
+
+    @pytest.mark.parametrize("bad", ["inf", "-inf", "nan", "Infinity", "abc", "-2"])
+    def test_bad_resolution_time_rejected(self, bad):
+        r = self._one(resolution_time_hours=bad)
+        assert not r.is_valid
+        assert any("resolution_time_hours" in e for e in r.errors)
+
+    @pytest.mark.parametrize("good", ["", "0", "2", "4.5"])
+    def test_good_resolution_time_accepted(self, good):
+        assert self._one(resolution_time_hours=good).is_valid
+
+    @pytest.mark.parametrize("bad", ["3.5", "nan", "inf", "0", "6", "x"])
+    def test_bad_rating_rejected(self, bad):
+        r = self._one(customer_rating=bad)
+        assert not r.is_valid
+        assert any("customer_rating" in e for e in r.errors)
+
+    @pytest.mark.parametrize("good", ["", "1", "5"])
+    def test_good_rating_accepted(self, good):
+        assert self._one(customer_rating=good).is_valid
+
+    def test_invalid_date_rejected(self):
+        assert not self._one(created_at="not-a-date").is_valid
+
+    def test_none_values_do_not_crash(self):
+        row = _make_row(customer=None, description=None)
+        r = self.validator.validate_all([row])[0]
+        assert not r.is_valid
+
+    def test_missing_keys_do_not_crash(self):
+        assert not self.validator.validate_all([{"id": "T1"}])[0].is_valid
+
+    def test_rules_share_source_with_model(self):
+        from src.models.ticket import Priority
+        from src.validation.validator import VALID_PRIORITIES
+        assert VALID_PRIORITIES == {p.value for p in Priority}
