@@ -1,0 +1,11 @@
+id,customer,priority,category,status,description,created_at
+T001,Alice Johnson,high,billing,open,Cannot access invoice for last month,2024-01-15
+T002,Bob Smith,low,technical,closed,App crashes on startup,2024-01-16
+T003,,medium,billing,open,Duplicate charge on account,2024-01-17
+T004,Carol White,URGENT,unknown,pending,Cannot login to account,2024-01-18
+T005,Dave Brown,low,technical,resolved,Feature request: dark mode,2024-01-19
+T006,Eve Davis,high,account,open,,2024-01-20
+T007,Frank Miller,medium,billing,closed,Wrong amount billed,2024-01-21
+T008,,low,,open,General inquiry about pricing,2024-01-22
+T009,Grace Lee,high,technical,open,Data not syncing across devices,2024-01-23
+T010,Henry Wilson,medium,account,pending,Password reset not working,2024-01-24
