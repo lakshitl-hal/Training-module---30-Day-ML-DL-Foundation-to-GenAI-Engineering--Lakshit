@@ -32,6 +32,49 @@ def test_malformed_csv_raises_invalid_file_error(tmp_path):
         TicketDataProcessor(path).process()
 
 
+def test_extra_csv_field_raises_invalid_file_error(tmp_path):
+    path = tmp_path / "extra_field.csv"
+    path.write_text(
+        CSV_HEADER
+        + "T-101,Billing,High,Valid,2,5,Closed,UNEXPECTED\n"
+        + "T-102,Technical,Low,Valid,4,4,Open\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(InvalidFileError, match="has 8 fields; expected 7"):
+        TicketDataProcessor(path).process()
+
+
+def test_missing_value_summary_excludes_discarded_duplicate(tmp_path):
+    path = tmp_path / "duplicate_missing.csv"
+    path.write_text(
+        CSV_HEADER
+        + "T-101,Billing,High,First,2,5,Closed\n"
+        + "T-101,Billing,High,Duplicate,,,Closed\n"
+        + "T-102,Technical,Low,Normal,4,4,Open\n",
+        encoding="utf-8",
+    )
+    processor = TicketDataProcessor(path)
+
+    cleaned = processor.process()
+
+    assert processor.validation_report["missing_values_per_column"] == (
+        cleaned.isna().sum().astype(int).to_dict()
+    )
+    assert processor.validation_report["missing_values_per_column"][
+        "resolution_time_hours"
+    ] == 0
+    assert processor.validation_report["missing_values_per_column"][
+        "customer_rating"
+    ] == 0
+    assert processor.validation_report["raw_missing_values_per_column"][
+        "resolution_time_hours"
+    ] == 1
+    assert processor.validation_report["raw_missing_values_per_column"][
+        "customer_rating"
+    ] == 1
+
+
 def test_non_finite_resolution_times_are_invalid(tmp_path):
     processor = _write_tickets(
         tmp_path / "resolution.csv",

@@ -39,6 +39,7 @@ Cleaning rules:
 
 from __future__ import annotations
 
+import csv
 import logging
 from pathlib import Path
 from typing import Any
@@ -244,11 +245,30 @@ class TicketDataProcessor:
         if not self.filepath.exists():
             raise InvalidFileError(f"File not found: {self.filepath}")
         try:
+            with self.filepath.open(
+                "r", encoding="utf-8-sig", newline=""
+            ) as csv_file:
+                reader = csv.reader(csv_file, strict=True)
+                header = next(reader, None)
+                if header is not None:
+                    for row in reader:
+                        if not row:
+                            continue
+                        if len(row) != len(header):
+                            raise InvalidFileError(
+                                f"Malformed CSV '{self.filepath}': record ending "
+                                f"at line {reader.line_num} has {len(row)} fields; "
+                                f"expected {len(header)}."
+                            )
             df = pd.read_csv(self.filepath, dtype=str, keep_default_na=False)
         except pd.errors.EmptyDataError as exc:
             raise EmptyDatasetError("The CSV file is completely empty.") from exc
         except pd.errors.ParserError as exc:
             raise InvalidFileError(f"Cannot parse CSV '{self.filepath}': {exc}") from exc
+        except csv.Error as exc:
+            raise InvalidFileError(
+                f"Cannot parse CSV '{self.filepath}': {exc}"
+            ) from exc
         except UnicodeDecodeError as exc:
             raise InvalidFileError(
                 f"CSV '{self.filepath}' is not valid UTF-8 text: {exc}"
@@ -634,10 +654,11 @@ class TicketDataProcessor:
         invalid_records: list[dict[str, Any]],
     ) -> pd.DataFrame:
         self.quality_issues = pd.DataFrame(issues, columns=self.quality_issues.columns)
+        kept = cleaned.loc[~duplicate_mask].copy()
         self.validation_report = {
             "rows_in_raw": len(raw_df),
-            "rows_after_cleaning": int(len(cleaned) - duplicate_mask.sum()),
-            "missing_values_per_column": cleaned.isna().sum().astype(int).to_dict(),
+            "rows_after_cleaning": len(kept),
+            "missing_values_per_column": kept.isna().sum().astype(int).to_dict(),
             "raw_missing_values_per_column": {
                 column: int(
                     (self._blank_mask(raw_df, column) | raw_df[column].isna()).sum()
@@ -654,6 +675,5 @@ class TicketDataProcessor:
             ),
             "invalid_records": invalid_records,
         }
-        kept = cleaned.loc[~duplicate_mask].copy()
         logger.info("Cleaning complete. %d → %d row(s).", len(raw_df), len(kept))
         return kept.reset_index(drop=True)
