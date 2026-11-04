@@ -1,0 +1,49 @@
+# Error scenarios: each failure type, its message and its exit code
+# Run from a demo folder holding prepared bad files; tickets.csv is a copy of data/tickets.csv.
+
+$ python -m ticket_pipeline --input missing.csv
+2026-11-04 12:38:25,071 ERROR   ticket_pipeline.cli | status=failed error=InputPathError exit_code=3
+ERROR: Input file not found: 'missing.csv'. Check the path, or pass --input with the correct location.
+[exit code: 3]
+
+$ python -m ticket_pipeline --input tickets.txt
+2026-11-04 12:38:25,236 ERROR   ticket_pipeline.cli | status=failed error=InputPathError exit_code=3
+ERROR: Unsupported file type '.txt': 'tickets.txt'. Provide a file ending in .csv.
+[exit code: 3]
+
+$ python -m ticket_pipeline --input empty.csv
+2026-11-04 12:38:25,393 INFO    ticket_pipeline.pipeline | stage=load status=started file=empty.csv
+2026-11-04 12:38:25,393 ERROR   ticket_pipeline.cli | status=failed error=MalformedFileError exit_code=4
+ERROR: File is empty (empty.csv). Add a header row: the first line must list the column names.
+[exit code: 4]
+
+$ python -m ticket_pipeline --input surplus.csv
+2026-11-04 12:38:25,561 INFO    ticket_pipeline.pipeline | stage=load status=started file=surplus.csv
+2026-11-04 12:38:25,561 ERROR   ticket_pipeline.cli | status=failed error=MalformedFileError exit_code=4
+ERROR: Row has 8 fields but the header defines 7 (surplus.csv, line 2). Remove the extra field(s) or quote values that contain commas.
+[exit code: 4]
+
+$ python -m ticket_pipeline --input old_format.csv
+2026-11-04 12:38:25,728 INFO    ticket_pipeline.pipeline | stage=load status=started file=old_format.csv
+2026-11-04 12:38:25,728 ERROR   ticket_pipeline.cli | status=failed error=SchemaMismatchError exit_code=5
+ERROR: old_format.csv is missing required column(s): category, created_at, customer_email, status. Found columns: ticket_id, priority. Add the missing column(s) to the header row.
+[exit code: 5]
+
+$ python -m ticket_pipeline --log-level LOUD
+usage: ticket_pipeline [-h] [--input INPUT]
+                       [--log-level {DEBUG,INFO,WARNING,ERROR}] [--strict]
+ticket_pipeline: error: argument --log-level: invalid choice: 'LOUD' (choose from DEBUG, INFO, WARNING, ERROR)
+[exit code: 2]
+
+$ python -m ticket_pipeline --input tickets.csv --strict --log-level ERROR
+2026-11-04 12:38:26,048 ERROR   ticket_pipeline.cli | status=failed error=RejectedRowsError exit_code=6
+ERROR: 6 of 12 row(s) were rejected and strict mode is on:
+  - line 6, column 'customer_email': is not a valid e-mail address
+  - line 7, column 'priority': 'critical' is not one of: low, medium, high, urgent
+  - line 9, column 'resolution_hours': is only allowed for resolved or closed tickets
+  - line 10, column 'ticket_id': duplicate of line 3
+  - line 11, column 'created_at': '2026-13-01' is not an ISO 8601 date such as 2026-01-31
+  - line 12, column 'resolution_hours': must be a finite number >= 0
+Fix these rows, or run without --strict to skip them.
+[exit code: 6]
+

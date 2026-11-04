@@ -1,0 +1,38 @@
+$ python -m ticket_pipeline
+2026-11-04 12:38:24,905 INFO    ticket_pipeline.pipeline | stage=load status=started file=tickets.csv
+2026-11-04 12:38:24,905 WARNING ticket_pipeline.pipeline | stage=parse status=rejected line=6 column=customer_email
+2026-11-04 12:38:24,905 WARNING ticket_pipeline.pipeline | stage=parse status=rejected line=7 column=priority
+2026-11-04 12:38:24,905 WARNING ticket_pipeline.pipeline | stage=parse status=rejected line=9 column=resolution_hours
+2026-11-04 12:38:24,905 WARNING ticket_pipeline.pipeline | stage=parse status=rejected line=10 column=ticket_id
+2026-11-04 12:38:24,905 WARNING ticket_pipeline.pipeline | stage=parse status=rejected line=11 column=created_at
+2026-11-04 12:38:24,905 WARNING ticket_pipeline.pipeline | stage=parse status=rejected line=12 column=resolution_hours
+2026-11-04 12:38:24,905 INFO    ticket_pipeline.pipeline | stage=parse status=completed file=tickets.csv rows=12 valid=6 rejected=6
+Source: tickets.csv
+Rows read: 12 | valid: 6 | rejected: 6
+Rejected rows:
+  - line 6, column 'customer_email': is not a valid e-mail address
+  - line 7, column 'priority': 'critical' is not one of: low, medium, high, urgent
+  - line 9, column 'resolution_hours': is only allowed for resolved or closed tickets
+  - line 10, column 'ticket_id': duplicate of line 3
+  - line 11, column 'created_at': '2026-13-01' is not an ISO 8601 date such as 2026-01-31
+  - line 12, column 'resolution_hours': must be a finite number >= 0
+
+TICKET SUMMARY
+  Valid tickets          : 6
+  Mean resolution time   : 6.25 h
+  Open high/urgent       : TKT-0001, TKT-0003, TKT-0011
+  By priority:
+    high         2
+    low          1
+    medium       1
+    urgent       2
+  By status:
+    closed       1
+    in_progress  1
+    open         2
+    resolved     2
+  By category:
+    account      2
+    billing      2
+    technical    2
+[exit code: 0]

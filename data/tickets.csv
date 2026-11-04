@@ -1,0 +1,13 @@
+ticket_id,customer_email,priority,status,category,created_at,resolution_hours
+TKT-0001,asha.rao@example.com,high,open,billing,2026-10-01,
+TKT-0002,ben.k@example.com,low,resolved,technical,2026-10-01,4.5
+TKT-0003,chen.li@example.com,urgent,in_progress,account,2026-10-02,
+TKT-0004,dana@example.com,medium,closed,billing,2026-10-02,12
+TKT-0005,not-an-email,low,open,general,2026-10-03,
+TKT-0006,eli@example.com,critical,open,technical,2026-10-03,
+TKT-0007,fatima@example.com,High,Resolved,Technical,2026-10-04,2.25
+TKT-0008,gus@example.com,medium,open,billing,2026-10-04,3
+TKT-0002,hana@example.com,low,open,account,2026-10-05,
+TKT-0009,ivan@example.com,urgent,open,technical,2026-13-01,
+TKT-0010,jo@example.com,low,closed,general,2026-10-06,inf
+TKT-0011,kai@example.com,urgent,open,account,2026-10-06,
