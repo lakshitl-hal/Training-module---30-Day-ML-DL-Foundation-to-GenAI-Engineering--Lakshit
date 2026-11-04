@@ -1,0 +1,47 @@
+$ python -m ticket_pipeline
+2026-11-04 13:00:58,037 INFO    ticket_pipeline.pipeline | stage=load status=started file=tickets.csv
+2026-11-04 13:00:58,037 WARNING ticket_pipeline.pipeline | stage=parse status=rejected line=4 columns=customer
+2026-11-04 13:00:58,037 WARNING ticket_pipeline.pipeline | stage=parse status=rejected line=7 columns=description
+2026-11-04 13:00:58,037 WARNING ticket_pipeline.pipeline | stage=parse status=rejected line=9 columns=customer,category
+2026-11-04 13:00:58,037 INFO    ticket_pipeline.pipeline | stage=parse status=completed file=tickets.csv rows=10 valid=7 rejected=3
+Source: tickets.csv
+Rows read: 10 | valid: 7 | rejected: 3
+Rejected rows:
+  - line 4: 'customer' is required but empty
+  - line 7: 'description' is required but empty
+  - line 9: 'customer' is required but empty; 'category' is required but empty
+
+TICKET SUMMARY
+  Valid tickets            : 7
+  Open / pending           : 4
+  High-priority open       : T001, T004, T009
+  Average resolution time  : 3.80 h
+  Average customer rating  : 3.83 / 5
+  By priority:
+    high    2
+    low     2
+    medium  2
+    urgent  1
+  By status:
+    closed    2
+    open      2
+    pending   2
+    resolved  1
+  By category:
+    account    1
+    billing    2
+    technical  3
+    unknown    1
+  Top customers:
+    Alice Johnson  1
+    Bob Smith      1
+    Carol White    1
+  Daily volume:
+    2024-01-15  1
+    2024-01-16  1
+    2024-01-18  1
+    2024-01-19  1
+    2024-01-21  1
+    2024-01-23  1
+    2024-01-24  1
+[exit code: 0]

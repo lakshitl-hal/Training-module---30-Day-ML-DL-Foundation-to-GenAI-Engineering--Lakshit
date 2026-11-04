@@ -1,0 +1,21 @@
+$ python -m pytest --cov --cov-report=term-missing   (branch coverage, settings in pyproject.toml)
+______________ coverage: platform win32, python 3.12.10-final-0 _______________
+
+Name                                         Stmts   Miss Branch BrPart  Cover   Missing
+----------------------------------------------------------------------------------------
+src\ticket_pipeline\__init__.py                  0      0      0      0   100%
+src\ticket_pipeline\analytics\__init__.py        0      0      0      0   100%
+src\ticket_pipeline\analytics\summary.py        36      0      2      0   100%
+src\ticket_pipeline\cli.py                      36      0      2      0   100%
+src\ticket_pipeline\config.py                   31      0      2      0   100%
+src\ticket_pipeline\errors.py                   50      0      2      0   100%
+src\ticket_pipeline\logging_config.py           33      0      0      0   100%
+src\ticket_pipeline\models\__init__.py           0      0      0      0   100%
+src\ticket_pipeline\models\ticket.py            83      0     26      0   100%
+src\ticket_pipeline\pipeline.py                 57      0     14      0   100%
+src\ticket_pipeline\processing\__init__.py       0      0      0      0   100%
+src\ticket_pipeline\processing\loader.py        82      0     24      0   100%
+src\ticket_pipeline\processing\parser.py        90      0     26      0   100%
+----------------------------------------------------------------------------------------
+TOTAL                                          498      0     98      0   100%
+127 passed in 0.54s
