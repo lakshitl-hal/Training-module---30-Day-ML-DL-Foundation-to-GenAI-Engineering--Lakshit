@@ -1,0 +1,1213 @@
+ticket_id,customer_id,channel,assigned_team,created_at,updated_at,category,priority,description,first_response_time_hours,resolution_time_hours,customer_rating,reopen_count,status
+,C000001,fax,,not-a-date,2025-02-17,, CRITICAL ,,-1,,,-1, OPEN 
+T000002,C000001,Phone,Technical Support,2025-06-22,2025-06-23,Technical,Medium,Login endpoint returns an error.,0.60,25.50,1.5,0,In Progress
+T000003,C000002,Phone,Billing Operations,2025-01-24,2025-01-26,Billing,Medium,Refund has not arrived.,0.57,90.26,1.3,0,Pending
+T000004,C000001,Phone,Customer Success,2025-11-24,2025-11-25,Product,Medium,Mobile layout is hard to use.,4.91,16.68,2.5,0,In Progress
+T000005,C000002,Web Form,Payments,2025-05-16,2025-05-16,Billing,High,Invoice total is incorrect.,1.82,10.48,4.8,0,Resolved
+T000006,C000003,Social,Technical Support,2025-02-26,2025-03-02,Technical,Low,Application crashes during startup.,,18.67,2.6,0,Open
+T000007,C000005,Chat,Product Support,2025-05-15,2025-05-18,Product,Low,Mobile layout is hard to use.,0.81,71.74,3.5,0,Resolved
+T000008,C000003,Email,Technical Support,2025-06-15,2025-06-18,Technical,Medium,Application crashes during startup.,0.31,65.25,3.6,2,Resolved
+T000009,C000004,Social,Payments,2025-09-28,2025-09-30,Billing,Medium,Discount did not apply.,2.85,33.47,4.3,0,Resolved
+T000010,C000003,Phone,Product Support,2025-10-11,2025-10-12,Product,Medium,Documentation is difficult to follow.,0.27,23.16,3.8,0,Resolved
+T000011,C000002,Email,Customer Success,2025-07-01,2025-07-02,Product,Medium,Customer requests a missing feature.,0.66,17.82,4.9,0,Resolved
+T000012,C000001,Phone,Technical Support,2025-08-25,2025-08-26,Technical,High,Application crashes during startup.,0.42,21.04,4.6,0,Resolved
+T000013,C000009,Phone,Engineering,2025-07-19,2025-07-20,Technical,High,Request times out under load.,0.27,19.57,4.7,0,Resolved
+T000014,C000002,Chat,Technical Support,2025-10-27,2025-10-28,Technical,High,Login endpoint returns an error.,0.20,24.45,4.2,0,Resolved
+T000015,C000004,Email,Billing Operations,2025-10-17,2025-10-19,Billing,Low,Invoice total is incorrect.,1.86,53.67,4.6,0,Resolved
+T000016,C000006,Web Form,Fulfillment,2025-10-16,2025-10-17,Shipping,High,Tracking status has not changed.,0.90,27.71,4.5,0,Resolved
+T000017,C000012,Chat,Identity Support,2025-01-05,2025-01-09,Account,High,Verification code was not delivered.,1.77,77.30,4.5,1,Resolved
+T000018,C000011,Social,Product Support,2025-09-16,2025-09-19,Product,High,Customer asks about product availability.,0.27,10.93,3.0,0,Pending
+T000019,C000001,Web Form,Product Support,2025-01-19,2025-01-23,Product,Medium,Documentation is difficult to follow.,0.71,34.75,2.7,0,In Progress
+T000020,C000014,Phone,Billing Operations,2025-03-21,2025-03-24,Billing,Medium,Invoice total is incorrect.,1.38,56.81,2.2,1,In Progress
+T000021,C000006,Chat,Engineering,2025-04-27,2025-04-30,Technical,Low,Background worker uses excessive memory.,1.21,76.55,1.8,0,Open
+T000022,C000011,Phone,Billing Operations,2025-08-11,2025-08-13,Billing,High,Invoice total is incorrect.,0.65,42.60,3.9,0,Resolved
+T000023,C000005,Email,Logistics,2025-06-03,2025-06-04,Shipping,Critical,Wrong item was delivered.,1.17,16.11,4.7,0,Resolved
+T000024,C000016,Phone,Product Support,2025-04-18,2025-04-19,Product,Medium,Customer requests a missing feature.,0.73,16.24,3.1,0,Resolved
+T000025,C000007,Phone,Identity Support,2025-04-26,2025-04-28,Account,Medium,Profile details cannot be updated.,,40.69,2.8,0,Open
+T000026,C000018,Email,Fulfillment,2025-08-06,2025-08-09,Shipping,High,Package arrived damaged.,3.75,74.17,2.3,0,Resolved
+T000027,C000017,Chat,Technical Support,2025-09-16,2025-09-19,Technical,Low,Background worker uses excessive memory.,0.76,436.38,1.0,0,Pending
+T000028,C000007,Email,Logistics,2025-10-04,2025-10-04,Shipping,Critical,Tracking status has not changed.,0.33,8.43,3.3,0,Resolved
+T000029,C000014,Chat,Product Support,2025-10-22,2025-10-25,Product,Medium,Customer asks about product availability.,0.25,17.98,4.6,0,In Progress
+T000030,C000003,Chat,Technical Support,2025-07-27,2025-07-28,Technical,High,Login endpoint returns an error.,3.73,19.44,4.2,0,Resolved
+T000031,C000012,Email,Technical Support,2025-08-04,2025-08-04,Technical,Critical,Application crashes during startup.,0.67,9.98,4.2,0,Resolved
+T000032,C000020,Web Form,Billing Operations,2025-10-16,2025-10-17,Billing,Low,Refund has not arrived.,3.00,27.29,3.2,0,Resolved
+T000033,C000019,Phone,Identity Support,2025-04-12,2025-04-12,Account,High,Profile details cannot be updated.,3.10,8.74,4.8,0,Resolved
+T000034,C000021,Email,Identity Support,2025-07-05,2025-07-06,Account,Critical,Profile details cannot be updated.,1.41,9.94,3.9,0,Resolved
+T000035,C000016,Web Form,Fulfillment,2025-08-19,2025-08-21,Shipping,Low,Package arrived damaged.,1.11,51.83,4.2,0,Resolved
+T000036,C000014,Chat,Technical Support,2025-05-22,2025-05-23,Technical,Medium,Login endpoint returns an error.,0.83,21.39,3.7,0,Resolved
+T000037,C000023,Chat,Logistics,2025-07-08,2025-07-09,Shipping,Medium,Tracking status has not changed.,0.51,14.07,4.1,0,Resolved
+T000038,C000025,Chat,Engineering,2025-12-20,2025-12-20,Technical,High,Application crashes during startup.,0.34,13.15,5.0,0,Resolved
+T000039,C000019,Email,Engineering,2025-01-28,2025-02-01,Technical,High,Login endpoint returns an error.,1.13,15.74,3.2,0,Open
+T000040,C000020,Phone,Account Services,2025-02-07,2025-02-08,Account,High,Profile details cannot be updated.,0.33,17.21,4.2,0,Resolved
+T000041,C000018,Email,Fulfillment,2025-02-20,2025-02-21,Shipping,Low,Package arrived damaged.,0.54,24.36,3.7,0,Resolved
+T000042,C000026,Chat,Fulfillment,2025-05-25,2025-05-27,Shipping,Medium,Package arrived damaged.,0.34,30.83,3.8,0,Resolved
+T000043,C000018,Chat,Billing Operations,2025-06-07,2025-06-08,Billing,Medium,Charged twice for subscription.,0.67,221.73,2.1,0,Open
+T000044,C000030,Email,Logistics,2025-12-12,2025-12-14,Shipping,Medium,Package arrived damaged.,1.69,36.36,4.0,0,Resolved
+T000045,C000011,Email,Billing Operations,2025-09-11,2025-09-12,Billing,Medium,Discount did not apply.,2.35,27.21,4.3,0,Resolved
+T000046,C000019,Chat,Customer Success,2025-11-15,2025-11-17,Product,Low,Customer requests a missing feature.,1.32,41.93,4.4,0,Resolved
+T000047,C000032,Web Form,Payments,2025-02-17,2025-02-19,Billing,Low,Invoice total is incorrect.,0.75,52.25,2.8,0,Resolved
+T000048,C000033,Email,Fulfillment,2025-09-18,2025-09-22,Shipping,Low,Tracking status has not changed.,1.74,48.62,2.4,0,Pending
+T000049,C000015,Web Form,Identity Support,2025-06-20,2025-06-23,Account,Low,Password reset link has expired.,0.72,58.35,1.8,0,Pending
+T000050,C000022,Web Form,Identity Support,2025-12-06,2025-12-13,Account,Low,Password reset link has expired.,0.79,162.55,3.0,0,Resolved
+T000051,C000005,Email,Customer Success,2025-12-12,2025-12-13,Product,Low,Documentation is difficult to follow.,2.57,20.81,4.6,0,Resolved
+T000052,C000012,Email,Billing Operations,2025-08-16,2025-08-18,Billing,Medium,Discount did not apply.,1.53,8.58,3.4,0,Pending
+T000053,C000020,Chat,Customer Success,2025-12-08,2025-12-09,Product,Medium,Mobile layout is hard to use.,0.31,31.79,3.3,0,Resolved
+T000054,C000004,Web Form,Logistics,2025-05-02,2025-05-03,,Low,Tracking status has not changed.,1.12,24.46,3.3,0,Resolved
+T000055,C000020,Phone,Technical Support,2025-12-04,2025-12-05,Technical,Medium,Background worker uses excessive memory.,6.21,19.64,3.5,0,Resolved
+T000056,C000017,Web Form,Engineering,2025-03-09,2025-03-10,Technical,High,Background worker uses excessive memory.,1.39,7.55,3.0,0,Resolved
+T000057,C000017,Chat,Identity Support,2025-12-12,2025-12-13,Account,Low,Password reset link has expired.,0.28,42.23,2.9,0,Open
+T000058,C000003,Email,Engineering,2025-11-22,2025-11-23,Technical,Medium,Application crashes during startup.,1.04,18.84,5.0,0,Resolved
+T000059,C000040,Chat,Payments,2025-10-04,2025-10-05,Billing,High,Charged twice for subscription.,4.49,21.53,5.0,0,Resolved
+T000060,C000030,Email,Account Services,2025-12-18,2025-12-19,Account,High,Password reset link has expired.,0.31,18.33,3.7,1,Resolved
+T000061,C000039,Email,Billing Operations,2025-04-17,2025-04-19,Billing,Low,Refund has not arrived.,1.50,30.93,5.0,0,Resolved
+T000062,C000009,Phone,Product Support,2025-01-08,2025-01-08,Product,High,Customer requests a missing feature.,0.92,6.31,4.7,0,Resolved
+T000063,C000031,Web Form,Logistics,2025-12-04,2025-12-05,Shipping,Medium,Package arrived later than expected.,0.13,21.29,4.2,0,Resolved
+T000064,C000021,Chat,Logistics,2025-03-17,2025-03-17,Shipping,Medium,Package arrived damaged.,0.31,16.33,5.0,0,Resolved
+T000065,C000043,Email,Product Support,2025-08-20,2025-08-22,Product,Medium,Customer asks about product availability.,0.51,107.70,2.0,0,Open
+T000066,C000043,Web Form,Payments,2025-07-10,2025-07-11,Billing,High,Charged twice for subscription.,1.08,8.33,2.6,0,Open
+T000067,C000028,Web Form,Account Services,2025-02-25,2025-02-26,Account,Medium,Verification code was not delivered.,0.35,20.98,3.7,0,Resolved
+T000068,C000041,Social,Billing Operations,2025-01-04,2025-01-05,Billing,High,Refund has not arrived.,0.95,28.45,3.5,0,Resolved
+T000069,C000032,Chat,Logistics,2025-02-13,2025-02-15,Shipping,Medium,Tracking status has not changed.,0.20,23.63,3.1,0,Open
+T000070,C000039,Email,Technical Support,2025-12-14,2025-12-15,Technical,Low,Background worker uses excessive memory.,0.85,19.51,3.0,0,Resolved
+T000071,C000005,Chat,Technical Support,2025-03-08,2025-03-11,Technical,Low,Login endpoint returns an error.,0.80,68.76,2.7,0,Resolved
+T000072,C000011,Phone,Payments,2025-07-27,2025-07-28,Billing,Medium,,0.46,15.30,4.1,1,Resolved
+T000073,C000034,Chat,Payments,2025-06-23,2025-06-23,Billing,Medium,Invoice total is incorrect.,1.28,13.83,5.0,0,Resolved
+T000074,C000044,Web Form,Engineering,2025-12-02,2025-12-02,Technical,High,Background worker uses excessive memory.,0.70,11.78,4.8,0,Resolved
+T000075,C000006,Chat,Engineering,2025-02-07,2025-02-10,Technical,Medium,Login endpoint returns an error.,0.74,28.92,2.3,0,Open
+T000076,C000052,Web Form,Customer Success,2025-06-14,2025-06-15,Product,Medium,Customer requests a missing feature.,0.84,23.30,3.6,0,Resolved
+T000077,C000019,Email,Product Support,2025-12-14,2025-12-17,Product,Medium,Mobile layout is hard to use.,,39.37,1.8,0,Pending
+T000078,C000042,Phone,Billing Operations,2025-12-24,2025-12-27,Billing,Medium,Charged twice for subscription.,0.11,16.50,3.9,0,In Progress
+T000079,C000035,Web Form,Fulfillment,2025-04-09,2025-04-11,Shipping,Medium,Tracking status has not changed.,0.38,13.85,2.4,0,In Progress
+T000080,C000049,Phone,Customer Success,2025-11-16,2025-11-18,Product,High,Documentation is difficult to follow.,0.26,16.76,,1,Open
+T000081,C000042,Chat,Customer Success,2025-05-25,2025-05-27,Product,High,Customer requests a missing feature.,1.37,36.51,3.1,0,Resolved
+T000082,C000024,Email,Product Support,2025-09-20,2025-09-20,Product,Low,Mobile layout is hard to use.,2.49,14.80,3.7,0,Resolved
+T000083,C000017,Email,Technical Support,2025-12-23,2025-12-24,Technical,Critical,Login endpoint returns an error.,0.74,28.45,3.6,0,Resolved
+T000084,C000037,Email,Billing Operations,2025-11-24,2025-11-26,Billing,Low,Invoice total is incorrect.,0.80,30.74,5.0,0,Resolved
+T000085,C000024,Email,Fulfillment,2025-07-04,2025-07-04,Shipping,Critical,Tracking status has not changed.,0.58,7.95,3.7,0,Resolved
+T000086,C000045,Chat,Billing Operations,2025-06-20,2025-06-22,Billing,Medium,Refund has not arrived.,0.57,67.91,1.7,0,Open
+T000087,C000056,Phone,Payments,2025-07-23,2025-07-26,Billing,Medium,Charged twice for subscription.,0.17,5.76,2.9,0,Pending
+T000088,C000006,Phone,Account Services,2025-06-23,2025-06-24,Account,Medium,Profile details cannot be updated.,1.28,25.83,3.5,0,In Progress
+T000089,C000047,Web Form,Customer Success,2025-08-17,2025-08-18,Product,Low,Customer asks about product availability.,0.32,25.56,3.6,0,Resolved
+T000090,C000003,Email,Account Services,2025-12-14,2025-12-16,Account, MEDIUM ,Verification code was not delivered.,0.20,45.24,4.3,0,Resolved
+T000091,C000016,Web Form,Account Services,2025-02-09,2025-02-11,Account,Medium,Account is locked after sign-in attempts.,0.86,39.26,4.5,0,Resolved
+T000092,C000023,Web Form,Logistics,2025-11-10,2025-11-14,Shipping,Medium,Package arrived later than expected.,0.47,97.65,3.0,0,Resolved
+T000093,C000026,Phone,Account Services,2025-12-30,2026-01-02,Account,Medium,Profile details cannot be updated.,2.01,55.98,3.5,0,Resolved
+T000094,C000053,Phone,Billing Operations,2025-03-08,2025-03-10,Billing,Medium,Refund has not arrived.,0.26,37.66,3.2,0,In Progress
+T000095,C000008,Web Form,Account Services,2025-11-24,2025-11-25,Account,Medium,Verification code was not delivered.,1.29,26.52,4.9,0,Resolved
+T000096,C000039,Chat,Technical Support,2025-09-23,2025-09-23,Technical,High,Request times out under load.,0.28,39.24,1.9,0,In Progress
+T000097,C000004,Chat,Customer Success,2025-10-16,2025-10-18,Product,Low,Mobile layout is hard to use.,1.41,13.03,1.9,0,Open
+T000098,C000019,Email,Logistics,2025-12-19,2025-12-20,Shipping,High,Tracking status has not changed.,0.67,37.23,2.9,0, RESOLVED 
+T000099,C000021,Phone,Logistics,2025-05-07,2025-05-07,Shipping,High,Wrong item was delivered.,2.10,14.03,3.5,1,Resolved
+T000100,C000046,Email,Engineering,2025-01-12,2025-01-13,Technical,Medium,Login endpoint returns an error.,1.03,33.15,4.0,0,Resolved
+T000101,C000025,Chat,Customer Success,2025-05-16,2025-05-19,Product,Low,Customer requests a missing feature.,1.52,62.43,4.0,0,Resolved
+T000102,C000052,Chat,Fulfillment,2025-12-15,2025-12-18,Shipping,Medium,Package arrived later than expected.,0.92,49.73,2.1,0,In Progress
+T000103,C000044,Chat,Engineering,2025-11-10,2025-11-13,Technical,Medium,Background worker uses excessive memory.,0.52,68.38,3.8,0,Resolved
+T000104,C000030,Phone,Logistics,2025-10-26,2025-10-30,Shipping,Low,Wrong item was delivered.,0.98,27.10,2.7,0,In Progress
+T000105,C000027,Chat,Customer Success,2025-12-25,2025-12-28,Product,Medium,Customer requests a missing feature.,0.27,79.12,3.3,0,Resolved
+T000106,C000034,Chat,Technical Support,2025-08-24,2025-08-27,Technical,Medium,Request times out under load.,1.00,30.69,2.7,0,In Progress
+T000107,C000051,Phone,Account Services,2025-06-28,2025-06-29,,Medium,Verification code was not delivered.,0.37,22.74,3.8,0,Resolved
+T000108,C000014,Chat,Billing Operations,2025-05-12,2025-05-14,Billing,High,Refund has not arrived.,0.36,29.64,3.3,0,Resolved
+T000109,C000061,Chat,Billing Operations,2025-02-21,2025-02-23,Billing,Medium,Invoice total is incorrect.,2.44,35.47,2.8,1,Resolved
+T000110,C000064,Email,Identity Support,2025-01-20,2025-01-21,Account,High,Password reset link has expired.,1.64,25.38,3.6,3,Open
+T000111,C000015,Email,Payments,2025-09-26,2025-10-01,Billing,High,Invoice total is incorrect.,2.22,112.27,2.0,0,Resolved
+T000112,C000013,Email,Technical Support,2025-04-09,2025-04-09,Technical,Critical,Login endpoint returns an error.,2.27,9.09,4.4,0,Resolved
+T000113,C000016,Chat,Account Services,2025-10-26,2025-10-27,Account,Low,Profile details cannot be updated.,0.45,16.83,4.0,0,Resolved
+T000114,C000078,Chat,Customer Success,2025-07-08,2025-07-11,Product,Low,Documentation is difficult to follow.,0.48,,3.0,0,In Progress
+T000115,C000067,Chat,Technical Support,2025-10-16,2025-10-18,Technical,Medium,Login endpoint returns an error.,0.30,54.97,3.0,0,Resolved
+T000116,C000003,Chat,Billing Operations,2025-08-01,2025-08-03,Billing,Low,Refund has not arrived.,1.06,41.05,3.7,0,Resolved
+T000117,C000054,Chat,Customer Success,2025-08-30,2025-08-30,Product,Critical,Customer asks about product availability.,0.44,8.84,5.0,0,Resolved
+T000118,C000029,Web Form,Fulfillment,2025-12-01,2025-12-04,Shipping,Medium,Tracking status has not changed.,0.27,61.22,4.2,0,Resolved
+T000119,C000077,Email,Fulfillment,2025-05-22,2025-05-22,Shipping,Medium,Wrong item was delivered.,12.93,35.87,2.9,0,Open
+T000120,C000019,Social,Billing Operations,2025-01-29,2025-01-30,Billing,Medium,Discount did not apply.,1.06,21.29,3.7,0,Pending
+T000121,C000049,Email,Identity Support,2025-10-12,2025-10-13,Account,High,Account is locked after sign-in attempts.,2.75,23.63,3.5,0,Open
+T000122,C000058,Web Form,Technical Support,2025-10-15,2025-10-18,Technical,High,Request times out under load.,0.89,72.18,3.5,0,Pending
+T000123,C000025,Web Form,Billing Operations,2025-12-10,2025-12-10,Billing,High,Discount did not apply.,0.63,33.82,3.3,1,Pending
+T000124,C000047,Chat,Engineering,2025-06-14,2025-06-16,Technical,Medium,Login endpoint returns an error.,0.69,48.00,4.9,0,Resolved
+T000125,C000038,Email,Payments,2025-01-24,2025-01-30,Billing,Low,Refund has not arrived.,0.98,134.92,3.0,0,Resolved
+T000126,C000070,Chat,Fulfillment,2025-06-22,2025-06-23,Shipping,Medium,Package arrived later than expected.,0.79,16.22,3.7,0,In Progress
+T000127,C000082,Phone,Payments,2025-12-29,2026-01-02,Billing,Low,Discount did not apply.,0.36,103.69,3.5,0,Resolved
+T000128,C000014,Web Form,Billing Operations,2025-05-21,2025-05-22,Billing,Critical,Refund has not arrived.,3.20,12.78,3.6,1,Resolved
+T000129,C000012,Chat,Engineering,2025-08-24,2025-08-27,Technical,Medium,Login endpoint returns an error.,5.18,20.19,4.7,0,Open
+T000130,C000036,Web Form,Billing Operations,2025-11-27,2025-11-30,Billing,Medium,Refund has not arrived.,1.59,41.73,3.7,1,Open
+T000131,C000018,Phone,Account Services,2025-06-03,2025-06-04,Account,Critical,Verification code was not delivered.,1.59,7.96,3.9,0,Open
+T000132,C000058,Chat,Payments,2025-11-11,2025-11-12,Billing,High,Discount did not apply.,2.34,14.12,2.5,0,Resolved
+T000133,C000014,Email,Logistics,2025-02-07,2025-02-08,Shipping,High,Package arrived damaged.,0.13,23.62,2.8,0,Open
+T000134,C000042,Web Form,Account Services,2025-02-22,2025-02-23,Account,Low,Verification code was not delivered.,0.62,36.49,4.4,0,Resolved
+T000135,C000010,Chat,Fulfillment,2025-09-10,2025-09-11,Shipping,Medium,Package arrived damaged.,0.39,35.51,4.3,0,Resolved
+T000136,C000084,Social,Product Support,2025-07-22,2025-07-23,Product,Medium,Mobile layout is hard to use.,1.61,30.18,4.4,0,Resolved
+T000137,C000047,Email,Account Services,2025-12-22,2025-12-24,Account,Medium,Account is locked after sign-in attempts.,0.55,50.19,3.2,0,Resolved
+T000138,C000049,fax,Customer Success,2025-02-05,2025-02-07,Product,Critical,Customer asks about product availability.,0.36,2.14,3.6,0,Open
+T000139,C000083,Chat,Customer Success,2025-11-23,2025-11-24,Product,Medium,Mobile layout is hard to use.,2.69,41.11,4.5,0,Resolved
+T000140,C000045,Social,Logistics,2025-10-13,2025-10-15,Shipping,High,Package arrived later than expected.,0.70,10.76,2.5,0,Open
+T000141,C000015,Email,Identity Support,2025-08-13,2025-08-14,Account,Medium,Password reset link has expired.,0.54,21.14,3.1,0,Resolved
+T000142,C000024,Email,Engineering,2025-06-19,2025-06-23,Technical,Low,Login endpoint returns an error.,2.01,79.91,3.5,0,Resolved
+T000143,C000047,Email,Payments,2025-05-23,2025-05-26,Billing,Medium,,1.45,73.81,4.0,0,Resolved
+T000144,C000080,Email,Identity Support,2025-07-18,2025-07-19,Account,Medium,Password reset link has expired.,0.98,22.09,4.0,0,Resolved
+T000145,C000083,Web Form,Technical Support,2025-11-02,2025-11-02,Technical,High,Request times out under load.,0.63,14.02,4.5,0,Resolved
+T000146,C000057,Chat,Fulfillment,2025-09-06,2025-09-07,Shipping,High,Package arrived later than expected.,0.81,58.09,3.2,0,In Progress
+T000147,C000047,Chat,Technical Support,2025-09-11,2025-09-12,Technical,High,Login endpoint returns an error.,0.93,11.15,2.9,0,Resolved
+T000148,C000057,Web Form,Product Support,2025-05-07,2025-05-07,Product,High,Documentation is difficult to follow.,0.71,14.23,4.4,0,Resolved
+T000149,C000091,Email,Engineering,2025-03-13,2025-03-13,Technical,Low,Application crashes during startup.,2.40,51.77,2.4,0,Open
+T000150,C000102,Web Form,,2025-12-13,2025-12-13,Technical,Low,Login endpoint returns an error.,0.18,15.53,2.7,0,Open
+T000151,C000102,Chat,Product Support,2025-02-17,2025-03-02,Product,Low,Customer asks about product availability.,1.59,295.90,1.7,0,Resolved
+T000152,C000021,Chat,Technical Support,2025-03-08,2025-03-09,Technical,Medium,Login endpoint returns an error.,2.64,23.78,4.0,0,Resolved
+T000153,C000028,Chat,Technical Support,2025-02-12,2025-02-12,Technical,Low,Request times out under load.,3.33,6.62,3.7,0,Pending
+T000154,C000049,Phone,Product Support,2025-07-16,2025-07-17,Product,Medium,Documentation is difficult to follow.,0.30,28.74,4.3,0,Resolved
+T000155,C000055,Email,Billing Operations,2025-12-18,2025-12-19,Billing,Medium,Refund has not arrived.,2.07,24.69,4.4,0,Resolved
+T000156,C000096,Chat,Account Services,2025-05-26,2025-05-28,Account,Medium,Account is locked after sign-in attempts.,3.85,15.00,3.7,0,Open
+T000157,C000070,Phone,Logistics,2025-07-04,2025-07-04,Shipping,Medium,Package arrived later than expected.,0.27,13.55,4.2,0,Resolved
+T000158,C000066,Web Form,Billing Operations,2025-08-01,2025-08-02,Billing,Medium,Invoice total is incorrect.,0.20,26.95,2.9,0,Open
+T000159,C000078,Email,Fulfillment,2025-05-03,2025-05-06,Shipping,Medium,Package arrived later than expected.,0.26,78.92,,0,Resolved
+T000160,C000016,Phone,Billing Operations,2025-09-25,2025-09-26,,Medium,Invoice total is incorrect.,0.44,42.74,3.5,0,In Progress
+T000161,C000095,Chat,Fulfillment,2025-10-18,2025-10-19,Shipping,High,Package arrived later than expected.,5.18,22.10,3.4,0,Resolved
+T000162,C000041,Email,Technical Support,2025-01-19,2025-01-19,Technical,Critical,Background worker uses excessive memory.,0.45,1.55,4.9,1,Resolved
+T000163,C000038,Chat,Payments,2025-02-05,2025-02-07,Billing,Medium,Refund has not arrived.,,57.62,4.5,0,Open
+T000164,C000002,Web Form,Fulfillment,2025-05-06,2025-05-10,Shipping,Medium,Package arrived damaged.,0.95,110.40,2.9,0,Resolved
+T000165,C000053,Phone,Identity Support,2025-12-31,2026-01-01,Account,High,Profile details cannot be updated.,0.32,20.96,5.0,0,Resolved
+T000166,C000034,Web Form,Payments,2025-10-31,2025-11-02,Billing,Medium,Invoice total is incorrect.,0.05,32.58,4.8,0,Resolved
+T000167,C000088,Email,Account Services,2025-08-20,2025-08-21,Account,Medium,Account is locked after sign-in attempts.,0.53,29.30,3.1,0,Resolved
+T000168,C000013,Chat,Account Services,2025-03-31,2025-03-31,Account,High,Password reset link has expired.,2.75,17.54,5.0,0,Resolved
+T000169,C000109,Phone,Payments,2025-11-27,2025-11-27,Billing,Critical,Charged twice for subscription.,2.61,18.52,3.1,0,Resolved
+T000170,C000036,Chat,Billing Operations,2025-07-15,2025-07-17,Billing,Low,Charged twice for subscription.,0.42,32.88,4.5,0,Resolved
+T000171,C000032,Chat,Product Support,2025-05-24,2025-05-25,Product,Medium,Customer asks about product availability.,0.56,20.75,3.7,0,Resolved
+T000172,C000115,Phone,Identity Support,2025-06-14,2025-06-16,Account,Medium,Password reset link has expired.,0.39,53.57,3.6,0,Resolved
+T000173,C000104,Phone,Logistics,2025-04-23,2025-04-26,Shipping,Medium,Package arrived later than expected.,0.20,41.37,3.0,0,Open
+T000174,C000062,Email,Account Services,2025-09-10,2025-09-12,Account,Low,Account is locked after sign-in attempts.,0.14,52.41,6.5,0,Resolved
+T000175,C000056,Phone,Identity Support,2025-02-07,2025-02-10,Account,Medium,Verification code was not delivered.,0.98,112.42,2.9,2,Open
+T000176,C000023,Phone,Engineering,2025-07-02,2025-07-04,Technical,Medium,Application crashes during startup.,0.39,62.80,2.3,0,Resolved
+T000177,C000009,Chat,Technical Support,2025-05-02,2025-05-03,Technical,Medium,Application crashes during startup.,5.32,14.79,3.8,0,Pending
+T000178,C000058,Email,Billing Operations,2025-10-07,2025-10-10,Billing,Medium,Invoice total is incorrect.,1.32,79.58,4.4,0,Resolved
+T000179,C000007,Email,Billing Operations,2025-02-17,2025-02-19,Billing, HIGH ,Refund has not arrived.,1.39,10.61,1.6,0,Open
+T000180,C000063,Email,Logistics,2025-05-25,2025-05-28,Shipping,Medium,Package arrived later than expected.,0.29,85.90,2.9,0,Resolved
+T000181,C000061,Chat,Logistics,2025-11-23,2025-11-25,Shipping,High,Package arrived later than expected.,0.76,56.44,4.1,0,Resolved
+T000182,C000008,Email,Product Support,2025-01-23,2025-01-24,tech,Medium,Customer requests a missing feature.,0.75,24.91,4.2,0,Resolved
+T000183,C000102,Web Form,Account Services,2025-09-25,2025-09-26,Account,Low,Account is locked after sign-in attempts.,0.93,28.79,4.6,0,Resolved
+T000184,C000038,Web Form,Payments,2025-04-19,2025-04-19,Billing,Low,Invoice total is incorrect.,1.14,13.23,4.3,0,Resolved
+T000185,C000026,Web Form,Billing Operations,2025-01-07,2025-01-11,Billing,High,Invoice total is incorrect.,0.40,23.26,1.3,0,Pending
+T000186,C000103,Email,Customer Success,2025-10-20,2025-10-24,Product,Low,Documentation is difficult to follow.,0.30,81.52,3.2,0,Resolved
+T000187,C000069,Phone,Billing Operations,2025-04-27,2025-04-28,Billing,Low,Refund has not arrived.,2.98,31.68,3.8,0,Resolved
+T000188,C000052,Web Form,Fulfillment,2025-07-11,2025-07-11,Shipping,High,Package arrived later than expected.,0.41,89.79,2.0,0,Open
+T000189,C000122,Chat,Logistics,2025-03-05,2025-03-06,Shipping,Critical,Tracking status has not changed.,0.37,9.73,3.4,0,Resolved
+T000190,C000057,Chat,Technical Support,2025-01-15,2025-01-15,Technical,Low,Background worker uses excessive memory.,0.24,7.93,4.3,1,Resolved
+T000191,C000097,Web Form,Logistics,2025-04-25,2025-04-27,Shipping,Medium,Tracking status has not changed.,2.48,48.51,4.3,0,Resolved
+T000192,C000028,Chat,Engineering,2025-02-22,2025-02-26,Technical,Medium,Background worker uses excessive memory.,1.01,107.44,-1,0,Resolved
+T000193,C000067,Web Form,Identity Support,2025-05-04,2025-05-08,Account,Low,Profile details cannot be updated.,1.74,16.30,2.9,0,Pending
+T000194,C000025,Chat,Payments,2025-11-23,2025-11-24,Billing,Medium,Refund has not arrived.,0.86,16.59,3.4,0,Open
+T000195,C000019,Chat,Account Services,2025-07-10,2025-07-12,Account,Medium,Password reset link has expired.,,20.83,1.6,0, PENDING 
+T000196,C000086,Chat,Fulfillment,2025-04-13,2025-04-14,Shipping,Medium,Tracking status has not changed.,1.58,14.26,4.8,0,Resolved
+T000197,C000099,Email,Billing Operations,2025-02-15,2025-02-15,Billing,Critical,Invoice total is incorrect.,1.13,3.84,4.2,1,Resolved
+T000198,C000079,Email,Billing Operations,2025-01-03,2025-01-07,Billing,Low,Invoice total is incorrect.,-1,84.94,2.5,0,Resolved
+T000199,C000010,Chat,Identity Support,2025-09-08,2025-09-09,Account,Medium,Password reset link has expired.,0.81,33.68,3.7,0,Resolved
+T000200,C000040,Email,Product Support,2025-12-20,2025-12-23,Product,Low,Mobile layout is hard to use.,0.73,77.14,3.1,0,Resolved
+T000201,C000052,Phone,Fulfillment,2025-02-23,2025-02-25,Shipping,Medium,Tracking status has not changed.,0.17,41.81,4.7,0,Resolved
+T000202,C000131,Email,Fulfillment,2025-09-04,2025-09-04,Shipping,High,Tracking status has not changed.,1.09,6.67,5.0,0,Resolved
+T000203,C000113,Web Form,Engineering,2025-01-24,2025-01-24,Technical,Medium,Application crashes during startup.,1.08,19.04,5.0,0,Resolved
+T000204,C000016,Social,Account Services,2025-05-20,2025-05-20,Account,Low,Password reset link has expired.,2.99,23.30,3.9,0,In Progress
+T000205,C000113,Email,Logistics,2025-11-10,2025-11-11,Shipping,Low,Tracking status has not changed.,0.76,41.93,2.8,1,Resolved
+T000206,C000111,Phone,Billing Operations,2025-10-17,2025-10-20,Billing,Medium,Discount did not apply.,0.88,80.23,2.6,0,Resolved
+T000207,C000083,Email,Identity Support,2025-01-06,2025-01-09,Account,Medium,Password reset link has expired.,0.81,39.06,3.6,0,Open
+T000208,C000128,Phone,Product Support,2025-08-24,2025-08-25,Product,High,Customer requests a missing feature.,0.23,26.69,3.3,0,Resolved
+T000209,C000058,Web Form,Logistics,2025-04-16,2025-04-17,Shipping,Medium,Package arrived damaged.,2.38,9.25,3.8,0,Resolved
+T000210,C000105,Email,Account Services,2025-05-30,2025-06-02,Account,Medium,Account is locked after sign-in attempts.,,19.27,3.8,0,Open
+T000211,C000128,Email,Billing Operations,2025-08-01,2025-08-01,Billing,Low,Discount did not apply.,1.72,34.72,2.8,1,Open
+T000212,C000083,Chat,Customer Success,2025-10-24,2025-10-25,Product,Medium,Customer asks about product availability.,0.13,999,3.5,0,Resolved
+T000213,C000141,Web Form,Product Support,2025-03-10,2025-03-13,,Low,Documentation is difficult to follow.,3.22,67.89,3.3,0,In Progress
+T000214,C000030,Phone,Engineering,2025-12-30,2025-12-31,Technical,Medium,,0.82,21.79,3.8,0,Resolved
+T000215,C000092,Phone,Product Support,2025-03-24,2025-03-25,Product,High,Documentation is difficult to follow.,1.39,20.57,3.8,0,Resolved
+T000216,C000142,Email,Customer Success,2025-12-21,2025-12-23,Product,Medium,Documentation is difficult to follow.,2.34,34.13,2.4,2,Open
+T000217,C000048,Web Form,Product Support,2025-07-08,2025-07-12,Product,Low,Customer asks about product availability.,0.54,95.72,2.5,0,Resolved
+T000218,C000083,Chat,Payments,2025-05-11,2025-05-12,Billing,Medium,Discount did not apply.,0.35,34.60,3.0,0,Resolved
+T000219,C000085,Email,Customer Success,2025-10-06,2025-10-09,Product,Medium,Documentation is difficult to follow.,0.36,65.02,3.6,0,Resolved
+T000220,C000096,Chat,Customer Success,2025-11-11,2025-11-15,Product,Medium,Customer asks about product availability.,2.45,46.14,2.3,0,Pending
+T000221,C000055,Web Form,Payments,2025-10-03,2025-10-04,Billing,High,Charged twice for subscription.,1.03,26.14,5.0,0,Resolved
+T000222,C000143,Email,Technical Support,2025-12-18,2025-12-21,Technical,Medium,Background worker uses excessive memory.,,81.52,3.5,0,Pending
+T000223,C000019,Chat,Fulfillment,2025-11-25,2025-11-27,Shipping,Medium,Tracking status has not changed.,2.08,42.16,3.3,0,Resolved
+T000224,C000140,Email,Account Services,2025-03-22,2025-03-23,Account,Medium,Verification code was not delivered.,0.32,14.37,3.2,-1,Resolved
+T000225,C000065,Email,Account Services,2025-06-26,2025-06-28,Account,Low,Password reset link has expired.,0.41,50.82,4.1,0,Resolved
+T000226,C000061,Email,Product Support,2025-02-20,2025-02-21,Product,Medium,Documentation is difficult to follow.,2.37,34.81,4.1,0,Resolved
+T000227,C000085,Web Form,Identity Support,2025-06-11,2025-06-12,Account,Medium,Profile details cannot be updated.,0.15,,3.6,0,Open
+T000228,C000020,Phone,Account Services,2025-02-11,2025-02-13,Account,Low,Password reset link has expired.,1.70,43.23,4.6,0,Resolved
+T000229,C000075,Email,Product Support,2025-10-04,2025-10-06,Product,Medium,Customer asks about product availability.,0.61,48.25,3.6,0,Resolved
+T000230,C000038,Phone,Identity Support,2025-11-11,2025-11-14,Account,Medium,Verification code was not delivered.,,-2,3.6,0,Open
+T000231,C000149,Chat,Billing Operations,2025-07-04,2025-07-05,Billing,High,Discount did not apply.,1.06,19.69,4.5,0,Resolved
+T000232,C000124,Web Form,Fulfillment,2025-07-12,2025-07-16,Shipping,Medium,Wrong item was delivered.,0.14,97.99,3.4,0,Resolved
+T000233,C000054,Chat,Logistics,2025-04-28,2025-04-29,Shipping,High,Package arrived later than expected.,1.54,13.06,4.0,0,Resolved
+T000234,C000104,Chat,Technical Support,2025-01-21,2025-01-22,Technical,Critical,Background worker uses excessive memory.,0.32,13.33,3.7,0,Resolved
+T000235,C000088,Web Form,Billing Operations,2025-03-15,2025-03-16,Billing,High,Refund has not arrived.,1.18,25.48,4.1,0,Resolved
+T000236,C000137,Chat,Fulfillment,2025-09-16,2025-09-19,Shipping,Medium,Package arrived later than expected.,,17.75,3.8,1,Pending
+T000237,C000059,Web Form,Logistics,2025-08-09,2025-08-13,Shipping,Medium,Package arrived damaged.,0.65,91.24,4.3,0,Resolved
+T000238,C000140,Chat,Account Services,2025-02-20,2025-02-22,Account,Medium,Password reset link has expired.,0.16,107.92,,0,Open
+T000239,C000157,Email,Payments,2025-11-30,2025-12-03,Billing,Medium,Refund has not arrived.,0.36,57.98,3.3,0,Resolved
+T000240,C000036,Web Form,Fulfillment,2025-09-05,2025-09-06,Shipping,Medium,Wrong item was delivered.,1.36,34.81,4.2,0,Resolved
+T000241,C000010,Phone,Logistics,2025-01-27,2025-01-27,Shipping,Low,Tracking status has not changed.,,46.11,1.9,0,Open
+T000242,C000060,Chat,Product Support,2025-01-06,2025-01-07,Product,Critical,Mobile layout is hard to use.,0.09,17.87,3.3,0,Resolved
+T000243,C000144,Web Form,Engineering,2025-01-08,2025-01-09,Technical,Medium,Background worker uses excessive memory.,3.37,20.44,3.6,0,Resolved
+T000244,C000076,Email,Account Services,2025-01-03,2025-01-05,Account,High,Verification code was not delivered.,0.68,55.46,3.9,0,Resolved
+T000245,C000057,Phone,Product Support,2025-06-23,2025-06-26,Product,Low,Mobile layout is hard to use.,0.77,59.04,1.4,0,In Progress
+T000246,C000081,Chat,Logistics,2025-05-08,2025-05-09,Shipping,Low,Wrong item was delivered.,0.43,44.89,2.3,0,Open
+T000247,C000158,Email,Technical Support,2025-05-08,2025-05-11,Technical,Medium,Login endpoint returns an error.,0.44,8.19,3.3,0,Pending
+T000248,C000123,Web Form,Account Services,2025-05-21,2025-05-24,Account,Medium,Verification code was not delivered.,0.52,17.07,3.5,0,Pending
+T000249,C000067,Email,Logistics,2025-01-05,2025-01-08,Shipping,Low,Wrong item was delivered.,0.65,81.01,2.7,0,Resolved
+T000250,C000147,Email,Account Services,2025-04-18,2025-04-20,Account,Medium,Password reset link has expired.,0.57,39.64,3.7,0,Resolved
+T000251,C000162,Chat,Identity Support,2025-08-31,2025-09-02,Account,Low,Profile details cannot be updated.,0.70,69.87,3.9,1,Resolved
+T000252,C000144,Chat,Identity Support,2025-05-11,2025-05-12,Account,High,Verification code was not delivered.,0.71,11.25,2.9,0,Resolved
+T000253,C000115,Web Form,Payments,2025-10-03,2025-10-03,Billing,Medium,Invoice total is incorrect.,0.40,18.31,3.1,0,Resolved
+T000254,C000166,Chat,Logistics,2025-06-22,2025-06-23,Shipping,Medium,Tracking status has not changed.,0.41,19.17,2.5,0,Open
+T000255,C000014,Email,Customer Success,2025-05-09,2025-05-11,Product,Medium,Customer requests a missing feature.,,29.79,3.3,1,Pending
+T000256,C000009,Phone,Payments,2025-06-08,2025-06-08,Billing,High,Discount did not apply.,,6.03,3.5,0,Pending
+T000257,C000135,Chat,Logistics,2025-04-01,2025-04-03,Shipping,Low,Tracking status has not changed.,1.39,47.05,4.9,0,Resolved
+T000258,C000137,Email,Logistics,2025-05-14,2025-05-16,Shipping,Medium,Package arrived damaged.,1.27,61.64,3.4,0,Resolved
+T000259,C000100,Phone,Account Services,2025-07-30,2025-07-31,Account,Critical,Verification code was not delivered.,0.66,10.66,4.8,0,Resolved
+T000260,C000047,Email,Billing Operations,2025-12-22,2025-12-26,Billing,Medium,Discount did not apply.,0.22,8.48,3.1,0,Pending
+T000261,C000003,Email,Product Support,2025-01-12,2025-01-14,Product,Medium,Customer requests a missing feature.,0.54,51.40,4.8,0,Resolved
+T000262,C000015,Email,Logistics,2025-07-10,2025-07-11,Shipping,High,Package arrived later than expected.,0.15,12.79,5.0,1,Resolved
+T000263,C000175,Web Form,Customer Success,2025-08-24,2025-08-25,Product,Medium,Documentation is difficult to follow.,4.96,8.57,4.1,0,Resolved
+T000264,C000084,Email,Payments,2025-06-02,2025-06-04,Billing,Low,Charged twice for subscription.,0.49,47.09,3.5,0,Resolved
+T000265,C000161,Email,Logistics,2025-03-22,2025-03-26,Shipping,Low,Wrong item was delivered.,1.23,84.18,3.1,1,Resolved
+T000266,C000181,Chat,Customer Success,2025-11-27,2025-11-27,,Low,Customer asks about product availability.,0.40,24.50,3.2,0,In Progress
+T000267,C000139,Chat,Technical Support,2025-10-11,2025-10-12,Technical,Medium,Login endpoint returns an error.,0.87,34.58,4.5,0,Resolved
+T000268,C000135,Phone,Technical Support,2025-06-14,2025-06-17,Technical, LOW ,Background worker uses excessive memory.,1.36,55.16,2.9,0,Resolved
+T000269,C000165,Web Form,Identity Support,2025-04-02,2025-04-03,Account,Medium,Verification code was not delivered.,0.38,25.26,5.0,0,Resolved
+T000270,C000095,Phone,Billing Operations,2025-04-17,2025-04-21,Billing,Medium,Invoice total is incorrect.,0.70,36.70,3.3,0,Pending
+T000271,C000046,Chat,Customer Success,2025-04-29,2025-05-02,Product,Critical,Customer requests a missing feature.,0.29,5.72,3.5,0,In Progress
+T000272,C000081,Chat,Customer Success,2025-03-27,2025-03-30,Product,Medium,Mobile layout is hard to use.,0.82,27.60,2.8,0,Pending
+T000273,C000001,Phone,Logistics,2025-10-09,2025-10-11,Shipping,Low,Package arrived later than expected.,0.54,32.46,3.4,1,Resolved
+T000274,C000150,Email,Customer Success,2025-05-22,2025-05-23,Product,High,Mobile layout is hard to use.,0.25,7.56,2.9,0,In Progress
+T000275,C000148,fax,Billing Operations,2025-09-07,2025-09-09,Billing,Medium,Invoice total is incorrect.,0.99,35.58,3.5,0,Resolved
+T000276,C000135,Email,Account Services,2025-04-27,2025-04-28,Account,Low,Verification code was not delivered.,1.40,14.20,4.8,0,Resolved
+T000277,C000022,Chat,Product Support,2025-10-22,2025-10-23,Product,Medium,Customer asks about product availability.,0.44,8.93,4.3,0,In Progress
+T000278,C000158,Social,Account Services,2025-03-11,2025-03-12,Account,High,Account is locked after sign-in attempts.,0.76,20.19,3.8,0,Resolved
+T000279,C000079,Email,Payments,2025-07-07,2025-07-08,Billing,High,Discount did not apply.,0.40,15.32,4.6,0,Resolved
+T000280,C000088,Phone,Product Support,2025-02-13,2025-02-14,Product,High,Mobile layout is hard to use.,,11.24,3.6,0,Open
+T000281,C000170,Chat,Logistics,2025-10-08,2025-10-09,Shipping,Medium,Wrong item was delivered.,1.98,14.72,2.9,0,Resolved
+T000282,C000169,Chat,Billing Operations,2025-12-02,2025-12-04,Billing,High,Charged twice for subscription.,0.63,49.64,3.3,0,Resolved
+T000283,C000183,Email,Account Services,2025-06-11,2025-06-13,Account,Low,Verification code was not delivered.,0.30,55.57,4.0,0,Resolved
+T000284,C000008,Web Form,Identity Support,2025-09-14,2025-09-16,Account,Medium,Account is locked after sign-in attempts.,3.97,45.11,unknown,1,Resolved
+T000285,C000115,Chat,Technical Support,2025-11-17,2025-11-20,Technical,Medium,,0.59,27.57,1.8,0,Open
+T000286,C000018,Chat,Product Support,2025-03-11,2025-03-12,Product,Medium,Documentation is difficult to follow.,1.39,14.70,3.9,0,Resolved
+T000287,C000146,Chat,Account Services,2025-05-21,2025-05-22,Account,Low,Account is locked after sign-in attempts.,0.38,97.44,2.7,0,Open
+T000288,C000042,Email,Billing Operations,2025-11-06,2025-11-08,Billing,Medium,Discount did not apply.,0.36,49.27,2.7,0,Resolved
+T000289,C000110,Chat,Billing Operations,2025-04-01,2025-04-05,Billing,Low,Discount did not apply.,7.06,88.20,3.5,1,Resolved
+T000290,C000011,Web Form,Account Services,2025-11-25,2025-11-30,Account,Medium,Profile details cannot be updated.,0.85,109.69,3.6,0,Resolved
+T000291,C000177,Chat,Billing Operations,2025-06-05,2025-06-06,Billing,Medium,Discount did not apply.,0.39,33.72,3.7,1,Resolved
+T000292,C000117,Chat,Fulfillment,2025-12-23,2025-12-24,Shipping,High,Package arrived damaged.,0.63,20.02,4.7,0, RESOLVED 
+T000293,C000012,Phone,Payments,2025-07-05,2025-07-08,Billing,High,Refund has not arrived.,0.98,70.81,4.1,0,Resolved
+T000294,C000052,Email,Engineering,2025-06-08,2025-06-09,Technical,Low,Application crashes during startup.,unknown,11.53,4.6,1,Resolved
+T000295,C000063,Web Form,Logistics,2025-12-04,2025-12-05,Shipping,Medium,Wrong item was delivered.,0.69,31.73,3.4,0,Resolved
+T000296,C000046,Email,Payments,2025-01-17,2025-01-18,Billing,High,Refund has not arrived.,0.60,8.80,4.1,0,Resolved
+T000297,C000135,Email,Fulfillment,2025-02-04,2025-02-06,Shipping,Low,Package arrived later than expected.,0.55,36.97,2.1,0,Open
+T000298,C000128,Chat,Payments,2025-08-07,2025-08-10,Billing,Medium,Discount did not apply.,0.33,57.96,4.1,1,Open
+T000299,C000164,Email,,2025-03-02,2025-03-04,Technical,Low,Background worker uses excessive memory.,0.66,27.99,4.5,0,Resolved
+T000300,C000008,Web Form,Account Services,2025-01-04,2025-01-05,Account,Low,Verification code was not delivered.,0.33,27.56,4.5,0,Resolved
+T000301,C000015,Web Form,Identity Support,2025-08-24,2025-08-26,Account,Low,Verification code was not delivered.,0.59,41.95,4.1,1,Resolved
+T000302,C000193,Email,Customer Success,2025-07-01,2025-07-04,Product,Medium,Customer requests a missing feature.,2.74,10.50,3.4,0,Open
+T000303,C000024,Chat,Account Services,2025-06-04,2025-06-05,Account,Medium,Profile details cannot be updated.,0.65,31.85,4.4,0,Resolved
+T000304,C000053,Phone,Customer Success,2025-06-08,2025-06-12,Product,High,Customer asks about product availability.,1.27,13.79,2.9,0,Pending
+T000305,C000198,Chat,Product Support,2025-01-24,2025-01-26,Product,High,Mobile layout is hard to use.,1.05,15.77,3.5,0,Open
+T000306,C000063,Email,Engineering,2025-10-09,2025-10-10,Technical,High,Background worker uses excessive memory.,0.12,21.66,3.5,0,Resolved
+T000307,C000092,Email,Product Support,2025-08-07,2025-08-08,Product,Medium,Customer requests a missing feature.,1.52,13.82,4.3,0,Resolved
+T000308,C000158,Email,Logistics,2025-11-26,2025-11-28,Shipping,Medium,Package arrived damaged.,0.34,not-a-number,3.9,0,Resolved
+T000309,C000131,Email,Technical Support,2025-09-01,2025-09-03,Technical,Medium,Background worker uses excessive memory.,0.65,81.85,2.2,0,Pending
+T000310,C000088,Email,Customer Success,2025-07-31,2025-08-03,Product,Medium,Customer asks about product availability.,13.63,67.85,3.6,0,Resolved
+T000311,C000211,Chat,Customer Success,2025-10-21,2025-10-23,Product,Low,Customer asks about product availability.,1.04,47.19,5.0,0,Resolved
+T000312,C000051,Email,Payments,2025-06-17,2025-06-19,Billing,Medium,Invoice total is incorrect.,0.42,55.57,3.5,0,Open
+T000313,C000183,Chat,Customer Success,2025-02-01,2025-02-03,Product,Low,Customer asks about product availability.,0.62,56.82,4.5,0,Resolved
+T000314,C000003,Email,Product Support,2025-07-04,2025-07-05,Product,High,Documentation is difficult to follow.,0.06,12.68,2.9,0,Resolved
+T000315,C000061,Phone,Logistics,2025-04-26,2025-04-27,Shipping,Medium,Package arrived damaged.,1.17,41.97,4.1,0,Resolved
+T000316,C000193,Phone,Customer Success,2025-12-20,2025-12-21,Product,Medium,Customer requests a missing feature.,1.69,31.00,3.2,0,Resolved
+T000317,C000121,Chat,Customer Success,2025-11-21,2025-11-23,Product,Low,Customer asks about product availability.,4.89,17.24,,0,Open
+T000318,C000122,Chat,Account Services,2025-11-02,2025-11-06,Account,Low,Verification code was not delivered.,1.79,72.82,3.4,one,Resolved
+T000319,C000039,Phone,Customer Success,2025-11-12,2025-11-12,,Critical,Documentation is difficult to follow.,0.39,11.75,4.2,0,Resolved
+T000320,C000170,Chat,Account Services,2025-01-17,2025-01-18,Account,Low,Account is locked after sign-in attempts.,1.56,29.89,3.3,0,Resolved
+T000321,C000100,Chat,Product Support,2025-07-24,2025-07-27,Product,Medium,Customer asks about product availability.,0.39,19.02,3.3,0,Open
+T000322,C000217,Chat,Payments,2025-09-29,2025-10-01,Billing,High,Invoice total is incorrect.,0.21,35.64,4.1,0,Resolved
+T000323,C000081,Chat,Account Services,2025-12-11,2025-12-11,Account,High,Password reset link has expired.,0.88,4.95,4.3,3,Resolved
+T000324,C000056,Web Form,Billing Operations,2025-05-26,2025-05-27,Billing,Medium,Charged twice for subscription.,0.15,35.24,2.6,1,Resolved
+T000325,C000071,Phone,Payments,2025-02-26,2025-03-02,Billing,Low,Invoice total is incorrect.,0.39,12.07,1.3,0,Pending
+T000326,C000139,Phone,Technical Support,2025-01-31,2025-02-01,Technical,Low,Application crashes during startup.,0.50,33.08,3.1,0,Resolved
+T000327,C000101,Chat,Logistics,2025-11-24,2025-11-25,Shipping,Medium,Package arrived damaged.,1.13,35.88,4.2,0,Resolved
+T000328,C000092,Email,Logistics,2025-04-26,2025-05-01,Shipping,Medium,Package arrived damaged.,0.75,137.38,2.6,1,Resolved
+T000329,C000077,Phone,Billing Operations,2025-11-28,2025-12-02,Billing,Medium,Invoice total is incorrect.,10.65,92.75,2.0,0,Resolved
+T000330,C000079,Chat,Logistics,2025-04-09,2025-04-10,Shipping,High,Package arrived later than expected.,0.79,36.53,4.2,0,Resolved
+T000331,C000189,Email,Billing Operations,2025-09-25,2025-09-26,Billing,Medium,Discount did not apply.,1.30,15.91,4.3,0,Resolved
+T000332,C000210,Phone,Product Support,not-a-date,2025-01-27,Product,Critical,Customer asks about product availability.,0.74,15.85,5.0,0,Resolved
+T000333,C000083,Web Form,Product Support,2025-12-14,2025-12-14,Product,Low,Customer requests a missing feature.,0.13,7.91,4.9,0,Resolved
+T000334,C000217,Chat,Customer Success,2025-03-28,2025-03-29,Product,High,Documentation is difficult to follow.,0.93,9.71,1.1,0,Open
+T000335,C000010,Chat,Payments,2025-03-06,2025-03-08,Billing,Low,Charged twice for subscription.,1.26,51.49,2.9,1,Open
+T000336,C000014,Email,Account Services,2025-07-05,2025-07-06,Account,Medium,Profile details cannot be updated.,0.69,12.04,3.3,0,Resolved
+T000337,C000230,Email,Logistics,2025-06-21,2025-06-22,Shipping,High,Tracking status has not changed.,1.88,24.76,3.8,0,Resolved
+T000338,C000150,Chat,Logistics,2025-06-16,2025-06-16,Shipping,High,Wrong item was delivered.,0.40,27.40,3.7,1,Open
+T000339,C000035,Email,Engineering,2025-05-19,2025-05-20,Technical,Low,Login endpoint returns an error.,0.12,40.28,3.6,0,Resolved
+T000340,C000106,Web Form,Logistics,2025-11-23,2025-11-23,Shipping,High,Wrong item was delivered.,1.05,,3.1,0,Resolved
+T000341,C000147,Web Form,Customer Success,2025-08-11,2025-08-13,Product,Medium,Customer requests a missing feature.,3.52,30.58,4.3,0,Resolved
+T000342,C000004,Phone,Payments,2025-07-21,2025-07-24,Billing,Low,Refund has not arrived.,0.73,77.46,3.0,0,Resolved
+T000343,C000161,Email,Engineering,2025-08-26,2025-08-26,Technical,Medium,Application crashes during startup.,1.55,15.10,2.3,0,Resolved
+T000344,C000029,Chat,Identity Support,2025-02-11,2025-02-15,Account,Medium,Password reset link has expired.,1.18,41.00,1.8,0,Open
+T000345,C000224,Web Form,Account Services,2025-06-21,2025-06-23,Account,Medium,Account is locked after sign-in attempts.,1.92,58.48,3.7,0,Resolved
+T000346,C000121,Phone,Identity Support,2025-02-02,2025-02-03,Account,Medium,Profile details cannot be updated.,0.69,13.36,3.7,0,Resolved
+T000347,C000043,Email,Product Support,2025-08-23,2025-08-23,Product,Medium,Customer asks about product availability.,0.65,63.06,6.5,1,In Progress
+T000348,C000006,Email,Technical Support,2025-12-16,2025-12-18,Technical,Low,Application crashes during startup.,0.75,47.03,3.4,0,Resolved
+T000349,C000079,Email,Engineering,2025-09-06,2025-09-08,Technical,Low,Request times out under load.,0.69,45.59,3.0,1,Resolved
+T000350,C000047,Social,Fulfillment,2025-05-26,2025-05-26,Shipping,Medium,Wrong item was delivered.,1.00,6.17,3.0,0,Resolved
+T000351,C000032,Web Form,Engineering,2025-06-26,2025-06-26,Technical,High,Login endpoint returns an error.,0.03,17.87,3.7,0,Resolved
+T000352,C000147,Phone,Engineering,2025-11-28,2025-12-05,Technical,Low,Background worker uses excessive memory.,0.76,152.65,1.6,1,Resolved
+T000353,C000201,Web Form,Payments,2025-02-17,2025-02-18,Billing,Medium,Refund has not arrived.,0.98,34.96,4.3,0,Resolved
+T000354,C000171,Chat,Billing Operations,2025-09-20,2025-09-20,Billing,High,Discount did not apply.,0.77,73.35,1.8,0,In Progress
+T000355,C000042,Phone,Identity Support,2025-04-21,2025-04-22,Account,Medium,Profile details cannot be updated.,1.51,13.09,3.2,0,Resolved
+T000356,C000002,Chat,Engineering,2025-09-26,2025-09-28,Technical,Low,,4.10,50.48,4.0,0,Resolved
+T000357,C000127,Chat,Engineering,2025-10-11,2025-10-15,Technical, MEDIUM ,Request times out under load.,1.63,89.77,3.6,0,Resolved
+T000358,C000126,Web Form,Billing Operations,2025-11-22,2025-11-23,Billing,Low,Charged twice for subscription.,7.31,24.30,4.6,0,Resolved
+T000359,C000067,Email,Billing Operations,2025-08-12,2025-08-13,Billing,Low,Refund has not arrived.,0.38,33.12,3.3,0,Resolved
+T000360,C000020,Chat,Account Services,2025-07-04,2024-01-01,Account,Medium,Password reset link has expired.,0.30,45.92,4.4,0,Resolved
+T000361,C000096,Phone,Customer Success,2025-12-17,2025-12-20,Product,Low,Mobile layout is hard to use.,0.18,66.40,2.3,0,Open
+T000362,C000034,Web Form,Engineering,2025-10-14,2025-10-15,Technical,High,Background worker uses excessive memory.,0.18,11.74,3.5,0,Resolved
+T000363,C000021,Chat,Account Services,2025-03-30,2025-03-31,tech,Medium,Password reset link has expired.,0.39,14.72,1.1,0,In Progress
+T000364,C000172,Chat,Billing Operations,2025-05-10,2025-05-11,Billing,Low,Refund has not arrived.,1.17,44.76,3.5,0,Resolved
+T000365,C000184,Email,Identity Support,2025-10-19,2025-10-20,Account,Low,Account is locked after sign-in attempts.,6.43,35.39,3.8,0,Resolved
+T000366,C000161,Email,Product Support,2025-12-11,2025-12-11,Product,Critical,Documentation is difficult to follow.,0.63,10.85,3.5,0,Resolved
+T000367,C000209,Email,Logistics,2025-05-26,2025-05-29,Shipping,Low,Wrong item was delivered.,4.92,76.66,3.3,0,Resolved
+T000368,C000053,Phone,Billing Operations,2025-09-25,2025-09-29,Billing,Low,Charged twice for subscription.,0.30,83.26,3.7,0,Resolved
+T000369,C000208,Social,Identity Support,2025-09-13,2025-09-14,Account,Low,Account is locked after sign-in attempts.,5.84,27.27,4.0,1,In Progress
+T000370,C000014,Social,Logistics,2025-03-10,2025-03-10,Shipping,High,Tracking status has not changed.,6.96,11.03,5.0,0,Resolved
+T000371,C000176,Phone,Technical Support,2025-08-27,2025-08-28,Technical,High,Application crashes during startup.,1.31,37.07,3.0,0,Resolved
+T000372,C000200,Chat,Fulfillment,2025-08-15,2025-08-16,,Low,Package arrived damaged.,1.78,19.15,2.9,0,Pending
+T000373,C000024,Email,Customer Success,2025-09-11,2025-09-11,Product,Medium,Mobile layout is hard to use.,1.06,37.76,2.1,0,Pending
+T000374,C000160,Chat,Product Support,2025-06-26,2025-06-27,Product,Critical,Mobile layout is hard to use.,0.41,24.49,3.9,0,Resolved
+T000375,C000194,Chat,Payments,2025-08-04,2025-08-04,Billing,Medium,Charged twice for subscription.,1.67,13.60,4.7,2,Resolved
+T000376,C000255,Chat,Fulfillment,2025-12-08,2025-12-09,Shipping,High,Wrong item was delivered.,1.06,27.45,3.2,0,Resolved
+T000377,C000040,Phone,Identity Support,2025-10-24,2025-10-25,Account,High,Verification code was not delivered.,0.36,11.30,1.7,0,Open
+T000378,C000096,Chat,Fulfillment,2025-09-21,2025-09-22,Shipping,Medium,Package arrived damaged.,3.88,21.82,2.7,0,Resolved
+T000379,C000223,Chat,Account Services,2025-11-17,2025-11-18,Account,Low,Account is locked after sign-in attempts.,,48.72,1.8,0,Open
+T000380,C000224,Chat,Fulfillment,2025-05-01,2025-05-03,Shipping,High,Wrong item was delivered.,0.38,14.75,3.4,0,Open
+T000381,C000209,Web Form,Technical Support,2025-01-11,2025-01-11,Technical,High,Login endpoint returns an error.,0.53,11.04,5.0,0,Resolved
+T000382,C000161,Email,Engineering,2025-12-07,2025-12-08,Technical,High,Request times out under load.,0.80,23.72,4.3,0,Resolved
+T000383,C000244,Phone,Logistics,2025-01-29,2025-01-30,Shipping,High,Wrong item was delivered.,1.13,10.97,-1,0,Resolved
+T000384,C000197,Email,Identity Support,2025-11-07,2025-11-08,Account,Medium,Password reset link has expired.,3.22,25.44,4.8,0,Resolved
+T000385,C000209,Phone,Customer Success,2025-05-11,2025-05-12,Product,Low,Customer requests a missing feature.,,88.81,1.0,0,Pending
+T000386,C000233,Phone,Fulfillment,2025-02-21,2025-02-24,Shipping,Medium,Wrong item was delivered.,0.81,16.57,4.3,0,Open
+T000387,C000164,Chat,Fulfillment,2025-03-22,2025-03-23,Shipping,Low,Tracking status has not changed.,4.40,21.22,3.9,0,Resolved
+T000388,C000046,Social,Technical Support,2025-07-13,2025-07-14,Technical,Medium,Background worker uses excessive memory.,1.01,17.25,4.3,0,Resolved
+T000389,C000233,Phone,Engineering,2025-10-18,2025-10-18,Technical,Critical,Application crashes during startup.,1.45,17.11,4.5,1, RESOLVED 
+T000390,C000210,Phone,Technical Support,2025-03-08,2025-03-10,Technical,Medium,Background worker uses excessive memory.,0.28,51.50,3.6,0,Resolved
+T000391,C000197,Phone,Identity Support,2025-08-29,2025-08-29,Account,High,Password reset link has expired.,2.70,18.49,3.8,0,Resolved
+T000392,C000022,Chat,Payments,2025-12-10,2025-12-12,Billing,Medium,Refund has not arrived.,1.08,30.32,3.6,1,Resolved
+T000393,C000161,Chat,Product Support,2025-05-14,2025-05-15,Product,Medium,Mobile layout is hard to use.,1.66,22.26,3.8,0,Resolved
+T000394,C000240,Chat,Logistics,2025-03-18,2025-03-22,Shipping,Low,Package arrived later than expected.,0.32,112.29,2.3,0,Resolved
+T000395,C000261,Phone,Fulfillment,2025-03-05,2025-03-07,Shipping,Medium,Package arrived later than expected.,-1,52.11,4.5,0,Resolved
+T000396,C000055,Web Form,Product Support,2025-06-18,2025-06-19,Product,Low,Customer requests a missing feature.,1.92,23.97,,0,Resolved
+T000397,C000067,Email,Billing Operations,2025-06-18,2025-06-20,Billing,Medium,Invoice total is incorrect.,0.29,51.69,3.6,0,Resolved
+T000398,C000146,Chat,Account Services,2025-02-17,2025-02-21,Account,Low,Password reset link has expired.,1.53,83.99,4.5,0,Resolved
+T000399,C000244,Email,Identity Support,2025-12-07,2025-12-08,Account,Medium,Password reset link has expired.,0.83,21.04,3.8,1,Resolved
+T000400,C000270,Chat,Fulfillment,2025-01-21,2025-01-24,Shipping,Low,Tracking status has not changed.,1.77,56.03,3.3,1,Resolved
+T000401,C000024,Chat,Logistics,2025-05-08,2025-05-12,Shipping,Medium,Package arrived damaged.,0.57,81.60,4.5,0,Resolved
+,C000094,Web Form,Billing Operations,2025-10-27,2025-11-01,Billing,Medium,Charged twice for subscription.,0.14,131.52,4.1,0,Resolved
+T000403,C000133,Web Form,Fulfillment,2025-05-16,2025-05-17,Shipping,Low,Package arrived damaged.,0.49,24.42,3.5,2,Resolved
+T000404,C000185,Phone,Customer Success,2025-08-24,2025-08-25,Product,Critical,Mobile layout is hard to use.,1.09,10.56,3.2,0,Resolved
+T000405,C000079,Phone,Payments,2025-11-17,2025-11-19,Billing,High,Discount did not apply.,0.31,34.50,3.4,0,Resolved
+T000406,C000284,Social,Fulfillment,2025-07-20,2025-07-20,Shipping,Critical,Package arrived damaged.,6.20,11.08,3.4,0,Resolved
+T000407,C000214,Web Form,Fulfillment,2025-02-01,2025-02-03,Shipping,Medium,Package arrived damaged.,0.67,42.40,4.1,0,Resolved
+T000408,C000174,Web Form,Customer Success,2025-05-28,2025-05-29,Product,Low,Documentation is difficult to follow.,0.74,23.95,3.2,0,Resolved
+T000409,C000103,Email,Identity Support,2025-08-30,2025-08-30,Account,Medium,Password reset link has expired.,0.21,25.53,2.5,0,In Progress
+T000410,C000258,Email,Fulfillment,2025-01-10,2025-01-12,Shipping,Low,Tracking status has not changed.,0.62,43.57,3.2,0,Resolved
+T000411,C000026,Web Form,Logistics,2025-01-24,2025-01-25,Shipping,High,Package arrived damaged.,3.44,9.45,5.0,0,Resolved
+T000412,C000150,fax,Payments,2025-02-22,2025-02-24,Billing,Low,Charged twice for subscription.,,104.66,2.1,0,Pending
+T000413,C000185,Chat,Technical Support,2025-01-04,2025-01-07,Technical,Medium,Request times out under load.,,25.42,2.2,0,Open
+T000414,C000265,Web Form,Product Support,2025-07-29,2025-07-29,Product,Medium,Mobile layout is hard to use.,2.73,6.17,4.4,0,Resolved
+T000415,C000284,Web Form,Identity Support,2025-03-19,2025-03-22,Account,Medium,Verification code was not delivered.,2.81,57.04,5.0,1,Resolved
+T000416,C000227,Phone,Payments,2025-07-26,2025-08-01,Billing,Low,Refund has not arrived.,3.93,151.07,3.1,0,Resolved
+T000417,C000015,Web Form,Identity Support,2025-10-04,2025-10-05,Account,High,Account is locked after sign-in attempts.,0.20,21.53,3.6,0,Open
+T000418,C000174,Social,Account Services,2025-07-01,2025-07-01,Account,Medium,Verification code was not delivered.,0.66,13.78,3.4,0,Resolved
+T000419,C000233,Email,Identity Support,2025-05-07,2025-05-09,Account,High,Profile details cannot be updated.,0.83,66.36,3.3,0,Resolved
+T000420,C000136,Chat,Payments,2025-02-09,2025-02-10,Billing,High,Discount did not apply.,1.06,18.03,3.1,0,Resolved
+T000421,C000081,Web Form,Logistics,2025-12-27,2025-12-28,Shipping,Medium,Package arrived later than expected.,1.39,28.40,3.1,0,Resolved
+T000422,C000073,Phone,Customer Success,2025-09-25,2025-09-26,Product,Low,Customer requests a missing feature.,0.44,20.95,4.1,0,Resolved
+T000423,C000071,Chat,Identity Support,2025-10-21,2025-10-23,Account,Low,Profile details cannot be updated.,0.70,999,4.3,0,Resolved
+T000424,C000227,Phone,Fulfillment,2025-11-16,2025-11-17,Shipping,High,Wrong item was delivered.,0.40,27.01,3.4,0,Resolved
+T000425,C000258,Web Form,Billing Operations,2025-04-09,2025-04-14,,Medium,Refund has not arrived.,3.50,107.90,3.8,0,Resolved
+T000426,C000012,Email,Billing Operations,2025-10-01,2025-10-04,Billing,High,Discount did not apply.,0.68,52.65,4.3,0,Resolved
+T000427,C000087,Email,Payments,2025-03-15,2025-03-16,Billing,Low,,1.31,32.75,4.2,1,Resolved
+T000428,C000122,Chat,Payments,2025-06-15,2025-06-16,Billing,Medium,Charged twice for subscription.,0.32,24.45,4.2,0,Resolved
+T000429,C000156,Chat,Identity Support,2025-01-10,2025-01-10,Account,Critical,Password reset link has expired.,0.33,11.17,3.6,0,Resolved
+T000430,C000149,Phone,Product Support,2025-05-06,2025-05-09,Product,High,Customer requests a missing feature.,3.97,49.03,3.0,0,In Progress
+T000431,C000285,Social,Payments,2025-11-20,2025-11-20,Billing,Low,Refund has not arrived.,0.92,41.72,2.3,0,Open
+T000432,C000212,Chat,Customer Success,2025-04-18,2025-04-19,Product,Medium,Customer asks about product availability.,0.55,14.28,4.5,0,Resolved
+T000433,C000184,Chat,Product Support,2025-08-16,2025-08-19,Product,High,Customer requests a missing feature.,0.24,73.18,4.5,0,Resolved
+T000434,C000253,Web Form,Fulfillment,2025-12-30,2025-12-31,Shipping,Medium,Tracking status has not changed.,0.16,107.17,1.3,0,Open
+T000435,C000290,Email,Fulfillment,2025-05-23,2025-05-26,Shipping,Low,Package arrived later than expected.,0.43,60.25,3.9,0,Resolved
+T000436,C000233,Email,Engineering,2025-05-21,2025-05-22,Technical,High,Application crashes during startup.,0.86,22.30,3.3,0,Resolved
+T000437,C000201,Email,Account Services,2025-04-25,2025-04-27,Account,Medium,Password reset link has expired.,3.18,48.01,3.8,0,Resolved
+T000438,C000172,Web Form,Technical Support,2025-03-26,2025-03-28,Technical,Low,Application crashes during startup.,0.22,39.86,2.2,0,Resolved
+T000439,C000044,Social,Fulfillment,2025-11-04,2025-11-05,Shipping,High,Package arrived damaged.,2.38,16.34,4.5,0,Resolved
+T000440,C000029,Chat,Identity Support,2025-08-15,2025-08-20,Account,Low,Profile details cannot be updated.,1.08,128.06,1.2,0,Resolved
+T000441,C000014,Chat,Logistics,2025-07-16,2025-07-17,Shipping,High,Wrong item was delivered.,3.73,29.67,3.8,0,Resolved
+T000442,C000125,Email,Billing Operations,2025-04-10,2025-04-12,Billing,High,Charged twice for subscription.,1.06,22.61,2.9,0,Open
+T000443,C000075,Email,Technical Support,2025-03-16,2025-03-18,Technical,High,Login endpoint returns an error.,0.51,2.95,2.6,0,Open
+T000444,C000172,Chat,Identity Support,2025-12-22,2025-12-24,Account,High,Verification code was not delivered.,1.01,33.65,5.0,0,Resolved
+T000445,C000095,Phone,Technical Support,2025-04-20,2025-04-21,Technical,High,Background worker uses excessive memory.,0.29,18.82,3.7,0,Resolved
+T000446,C000135,Phone,Payments,2025-07-04,2025-07-04,Billing, CRITICAL ,Refund has not arrived.,0.42,8.78,3.3,0,Resolved
+T000447,C000191,Phone,Engineering,2025-12-02,2025-12-02,Technical,High,Application crashes during startup.,2.11,11.81,4.3,-1,Resolved
+T000448,C000077,Email,,2025-11-03,2025-11-04,Billing,High,Invoice total is incorrect.,2.02,11.03,3.7,0,Resolved
+T000449,C000192,Chat,Engineering,2025-09-18,2025-09-19,Technical,Low,Login endpoint returns an error.,0.80,30.09,3.8,0,Resolved
+T000450,C000112,Email,Logistics,2025-01-19,2025-01-19,Shipping,High,Wrong item was delivered.,2.43,4.42,3.9,0,Resolved
+T000451,C000163,Email,Account Services,2025-06-22,2025-06-23,Account,High,Account is locked after sign-in attempts.,0.73,11.99,4.9,0,Resolved
+T000452,C000141,Email,Fulfillment,2025-09-14,2025-09-15,Shipping,High,Tracking status has not changed.,0.40,26.26,4.2,0,Resolved
+T000453,C000301,Phone,Payments,2025-12-02,2025-12-02,Billing,Low,Discount did not apply.,0.17,,4.2,0,In Progress
+T000454,C000157,Web Form,Account Services,2025-12-24,2025-12-28,Account,Low,Profile details cannot be updated.,,33.37,2.4,0,Open
+T000455,C000170,Chat,Identity Support,2025-06-16,2025-06-17,Account,Medium,Profile details cannot be updated.,0.89,23.49,4.1,0,Resolved
+T000456,C000284,Email,Engineering,2025-06-18,2025-06-19,Technical,Low,Application crashes during startup.,1.09,18.73,3.1,0,Resolved
+T000457,C000211,Chat,Technical Support,2025-08-21,2025-08-22,Technical,High,Request times out under load.,0.83,44.71,3.5,0,Resolved
+T000458,C000159,Chat,Customer Success,2025-04-16,2025-04-18,Product,Medium,Mobile layout is hard to use.,0.16,51.60,3.6,0,Pending
+T000459,C000234,Email,Engineering,2025-08-24,2025-08-24,Technical,Critical,Login endpoint returns an error.,1.34,-2,5.0,1,Resolved
+T000460,C000292,Email,Product Support,2025-11-13,2025-11-17,Product,Low,Documentation is difficult to follow.,0.39,90.23,2.5,0,Resolved
+T000461,C000038,Chat,Engineering,2025-04-22,2025-04-24,Technical,High,Login endpoint returns an error.,0.49,24.85,2.6,0,Pending
+T000462,C000035,Email,Account Services,2025-02-28,2025-03-04,Account,Low,Profile details cannot be updated.,0.28,89.33,2.2,0,Resolved
+T000463,C000092,Email,Technical Support,2025-03-05,2025-03-07,Technical,Medium,Request times out under load.,,23.32,2.6,0,Open
+T000464,C000128,Chat,Fulfillment,2025-07-19,2025-07-20,Shipping,Medium,Wrong item was delivered.,,58.14,2.3,0,Pending
+T000465,C000166,Chat,Billing Operations,2025-12-07,2025-12-08,Billing,Critical,Refund has not arrived.,0.19,39.95,4.1,0,Resolved
+T000466,C000235,Email,Customer Success,2025-06-15,2025-06-16,Product,Medium,Mobile layout is hard to use.,0.64,28.59,3.8,0,Resolved
+T000467,C000324,Phone,Billing Operations,2025-10-02,2025-10-03,Billing,Critical,Invoice total is incorrect.,0.52,7.40,4.5,0,Resolved
+T000468,C000007,Email,Technical Support,2025-09-04,2025-09-06,Technical,Medium,Background worker uses excessive memory.,0.68,62.92,2.5,0,Pending
+T000469,C000228,Phone,Engineering,2025-03-19,2025-03-22,Technical,Medium,Request times out under load.,1.07,72.11,3.0,0,Resolved
+T000470,C000114,Chat,Identity Support,2025-01-13,2025-01-17,Account,High,Verification code was not delivered.,,36.40,3.3,1,Open
+T000471,C000160,Email,Technical Support,2025-02-16,2025-02-16,Technical,Medium,Request times out under load.,0.51,16.88,4.4,0,Resolved
+T000472,C000185,Chat,Fulfillment,2025-11-22,2025-11-22,Shipping,High,Package arrived damaged.,2.35,13.12,4.5,1,Resolved
+T000473,C000132,Chat,Logistics,2025-07-15,2025-07-17,Shipping,Medium,Package arrived damaged.,0.95,40.35,4.6,0,Resolved
+T000474,C000203,Social,Identity Support,2025-08-29,2025-08-30,Account,Medium,Profile details cannot be updated.,0.58,36.71,3.6,0,Resolved
+T000475,C000134,Chat,Fulfillment,2025-01-30,2025-02-02,Shipping,High,Tracking status has not changed.,2.96,31.80,,0,Open
+T000476,C000155,Chat,Engineering,2025-10-28,2025-11-07,Technical,Medium,Background worker uses excessive memory.,1.60,257.75,2.2,0,Resolved
+T000477,C000214,Phone,Logistics,2025-04-18,2025-04-20,Shipping,Low,Wrong item was delivered.,,14.68,3.3,0,Open
+T000478,C000210,Chat,Technical Support,2025-02-26,2025-02-28,,Medium,Request times out under load.,0.10,43.44,3.2,0,Resolved
+T000479,C000137,Web Form,Payments,2025-12-11,2025-12-11,Billing,High,Invoice total is incorrect.,0.83,16.33,3.3,0,Resolved
+T000480,C000052,Email,Customer Success,2025-05-03,2025-05-04,Product,Medium,Documentation is difficult to follow.,0.66,7.79,2.7,0,In Progress
+T000481,C000165,Email,Payments,2025-11-13,2025-11-17,Billing,Medium,Charged twice for subscription.,,59.19,2.9,0,Open
+T000482,C000311,Email,Account Services,2025-02-11,2025-02-13,Account,Medium,Password reset link has expired.,0.72,17.20,2.4,0,Open
+T000483,C000015,Email,Engineering,2025-05-05,2025-05-07,Technical,Medium,Login endpoint returns an error.,2.52,21.78,2.1,0,In Progress
+T000484,C000115,Web Form,Account Services,2025-03-05,2025-03-07,Account,High,Verification code was not delivered.,4.75,11.47,3.2,0,Pending
+T000485,C000175,Phone,Fulfillment,2025-08-12,2025-08-17,Shipping,Low,Package arrived later than expected.,0.47,127.14,3.4,0,Resolved
+T000486,C000236,Email,Customer Success,2025-08-05,2025-08-05,Product,Medium,Documentation is difficult to follow.,0.14,10.31,1.2,0, OPEN 
+T000487,C000193,Email,Logistics,2025-01-18,2025-01-21,Shipping,Medium,Wrong item was delivered.,1.47,17.72,3.8,0,Open
+T000488,C000201,Email,Engineering,2025-04-02,2025-04-02,Technical,Low,Background worker uses excessive memory.,0.15,86.26,1.2,0,Open
+T000489,C000156,Chat,Fulfillment,2025-07-21,2025-07-24,Shipping,Medium,Wrong item was delivered.,0.22,33.53,3.4,0,Open
+T000490,C000076,Chat,Logistics,2025-04-11,2025-04-12,Shipping,Medium,Wrong item was delivered.,0.18,23.86,5.0,0,Resolved
+T000491,C000193,Phone,Billing Operations,2025-01-18,2025-01-18,Billing,High,Discount did not apply.,0.64,31.16,2.4,0,In Progress
+T000492,C000301,Chat,Logistics,2025-02-12,2025-02-13,Shipping,High,Tracking status has not changed.,8.69,26.75,3.4,0,Resolved
+T000493,C000208,Phone,Billing Operations,2025-02-20,2025-02-21,Billing,Low,Discount did not apply.,8.78,20.94,3.1,0,Resolved
+T000494,C000061,Email,Product Support,2025-10-27,2025-10-31,Product,Low,Customer requests a missing feature.,1.31,90.80,3.7,0,Resolved
+T000495,C000279,Email,Product Support,2025-05-12,2025-05-13,Product,Medium,Documentation is difficult to follow.,3.59,25.37,3.8,0,Resolved
+T000496,C000276,Chat,Account Services,2025-09-09,2025-09-10,Account,Critical,Password reset link has expired.,9.78,7.05,3.9,0,Resolved
+T000497,C000084,Chat,Technical Support,2025-11-15,2025-11-15,Technical,Critical,Background worker uses excessive memory.,0.89,8.08,3.6,0,Resolved
+T000498,C000262,Chat,Logistics,2025-05-18,2025-05-19,Shipping,Low,,1.71,25.69,3.6,0,Resolved
+T000499,C000116,Email,Account Services,2025-02-26,2025-02-28,Account,Low,Profile details cannot be updated.,0.58,40.54,4.1,0,Resolved
+T000500,C000312,Email,Technical Support,2025-09-08,2025-09-08,Technical,Medium,Request times out under load.,7.97,7.63,4.3,0,Resolved
+T000501,C000074,Chat,Identity Support,2025-11-01,2025-11-04,Account,Low,Password reset link has expired.,0.97,35.93,3.7,0,Open
+T000502,C000118,Email,Account Services,2025-04-04,2025-04-08,Account,Medium,Verification code was not delivered.,2.02,14.82,2.9,0,Open
+T000503,C000006,Web Form,Logistics,2025-10-22,2025-10-27,Shipping,Low,Wrong item was delivered.,1.86,136.87,2.9,0,Resolved
+T000504,C000218,Phone,Logistics,2025-03-05,2025-03-08,Shipping,Medium,Wrong item was delivered.,6.00,63.66,3.9,0,Resolved
+T000505,C000027,Chat,Customer Success,2025-04-26,2025-04-26,Product,Medium,Documentation is difficult to follow.,0.63,11.81,5.0,0,Resolved
+T000506,C000157,Web Form,Account Services,2025-03-02,2025-03-03,Account,Low,Profile details cannot be updated.,,24.00,2.4,0,Open
+T000507,C000264,Web Form,Customer Success,2025-07-25,2025-07-27,Product,Low,Customer requests a missing feature.,0.24,41.11,3.1,0,Resolved
+T000508,C000056,Social,Logistics,2025-07-11,2025-07-12,Shipping,Critical,Wrong item was delivered.,0.70,18.47,5.0,0,Resolved
+T000509,C000341,Social,Technical Support,2025-01-21,2025-01-24,Technical,Medium,Login endpoint returns an error.,,28.27,3.1,0,Pending
+T000510,C000007,Phone,Fulfillment,2025-07-24,2025-07-29,Shipping,Medium,Package arrived later than expected.,1.34,112.85,3.5,0,Resolved
+T000511,C000059,Web Form,Account Services,2025-08-08,2025-08-09,Account,Medium,Profile details cannot be updated.,1.24,35.99,3.8,0,Resolved
+T000512,C000075,Chat,Technical Support,2025-11-09,2025-11-13,Technical,Medium,Application crashes during startup.,,46.72,3.0,0,Open
+T000513,C000180,Phone,Billing Operations,2025-02-01,2025-02-02,Billing,Medium,Invoice total is incorrect.,1.10,35.37,3.0,0,In Progress
+T000514,C000007,Phone,Billing Operations,2025-11-07,2025-11-07,Billing,High,Invoice total is incorrect.,0.59,14.82,4.8,0,Resolved
+T000515,C000336,Phone,Account Services,2025-04-18,2025-04-19,Account,Low,Profile details cannot be updated.,1.32,20.73,3.2,0,Resolved
+T000516,C000178,Web Form,Payments,2025-04-14,2025-04-18,Billing,Critical,Charged twice for subscription.,0.89,13.07,3.9,0,Open
+T000517,C000356,Email,Logistics,2025-12-23,2025-12-23,Shipping,Critical,Package arrived damaged.,0.16,2.91,5.0,0,Resolved
+T000518,C000258,Phone,Customer Success,2025-07-25,2025-07-27,Product,Low,Mobile layout is hard to use.,,71.74,2.6,1,Open
+T000519,C000329,Social,Technical Support,2025-11-24,2025-11-24,Technical,High,Application crashes during startup.,1.98,14.59,3.4,0,Resolved
+T000520,C000144,Email,Billing Operations,2025-11-10,2025-11-12,Billing,Medium,Charged twice for subscription.,0.25,59.88,6.5,0,Resolved
+T000521,C000080,Chat,Logistics,2025-06-16,2025-06-17,Shipping,Low,Tracking status has not changed.,1.54,20.18,4.2,0,Resolved
+T000522,C000202,Phone,Technical Support,2025-04-01,2025-04-02,Technical,Low,Application crashes during startup.,0.49,24.24,4.7,1,Resolved
+T000523,C000074,Web Form,Technical Support,2025-01-11,2025-01-11,Technical,Critical,Application crashes during startup.,,13.50,2.5,0,Open
+T000524,C000053,Chat,Billing Operations,2025-05-05,2025-05-07,Billing,Medium,Discount did not apply.,1.00,55.30,3.2,0,Resolved
+T000525,C000145,Chat,Engineering,2025-12-17,2025-12-17,Technical,Critical,Application crashes during startup.,0.20,7.82,3.7,0,Resolved
+T000526,C000147,Email,Account Services,2025-11-04,2025-11-06,Account,Low,Verification code was not delivered.,0.16,51.26,4.2,0,Resolved
+T000527,C000245,Phone,Fulfillment,2025-12-02,2025-12-03,Shipping,Medium,Package arrived damaged.,0.30,42.12,4.2,0,Resolved
+T000528,C000335,Web Form,Identity Support,2025-06-30,2025-07-01,Account,High,Profile details cannot be updated.,0.55,15.68,2.9,0,Open
+T000529,C000286,Chat,Product Support,2025-08-04,2025-08-04,Product,Medium,Customer requests a missing feature.,,34.90,2.1,3,Open
+T000530,C000361,Email,Billing Operations,2025-03-13,2025-03-17,Billing,Low,Discount did not apply.,,14.52,3.7,0,Open
+T000531,C000094,Chat,Account Services,2025-03-17,2025-03-17,,Critical,Verification code was not delivered.,1.42,3.87,3.8,0,Resolved
+T000532,C000233,Chat,Logistics,2025-05-27,2025-05-28,Shipping,Medium,Tracking status has not changed.,,13.09,2.8,0,Open
+T000533,C000245,Email,Engineering,2025-04-23,2025-04-27,Technical,Medium,Login endpoint returns an error.,0.95,103.07,3.4,0,Resolved
+T000534,C000145,Email,Technical Support,2025-02-23,2025-02-23,Technical,Critical,Application crashes during startup.,2.26,9.18,5.0,0,Resolved
+T000535,C000162,Email,Engineering,2025-05-18,2025-05-20,Technical, MEDIUM ,Application crashes during startup.,1.28,49.98,3.6,0,Resolved
+T000536,C000052,Chat,Account Services,2025-07-20,2025-07-26,Account,Low,Password reset link has expired.,0.28,132.48,2.7,0,Resolved
+T000537,C000349,Phone,Product Support,2025-02-10,2025-02-12,Product,Low,Mobile layout is hard to use.,1.99,35.63,4.4,0,Resolved
+T000538,C000256,Email,Logistics,2025-08-09,2025-08-12,Shipping,Low,Wrong item was delivered.,1.45,32.52,3.8,0,Pending
+T000539,C000064,Social,Identity Support,2025-05-13,2025-05-14,Account,High,Password reset link has expired.,1.66,13.21,4.6,1,Resolved
+T000540,C000231,Email,Account Services,2025-03-08,2025-03-10,Account,Low,Password reset link has expired.,0.84,19.15,4.2,0,Pending
+T000541,C000240,Chat,Engineering,2025-02-07,2025-02-08,Technical,Medium,Application crashes during startup.,4.59,34.89,3.2,0,Resolved
+T000542,C000020,Chat,Payments,2025-02-03,2025-02-04,Billing,High,Refund has not arrived.,1.45,16.08,4.7,0,Resolved
+T000543,C000036,Email,Technical Support,2025-01-28,2025-01-28,Technical,Medium,Background worker uses excessive memory.,0.30,3.33,3.4,0,Resolved
+T000544,C000179,Web Form,Logistics,2025-01-28,2025-01-30,tech,Low,Package arrived damaged.,0.30,48.15,4.1,0,Resolved
+T000545,C000376,Phone,Customer Success,2025-01-06,2025-01-07,Product,Medium,Customer requests a missing feature.,1.04,8.35,3.9,2,Resolved
+T000546,C000065,Chat,Technical Support,2025-12-12,2025-12-17,Technical,Low,Application crashes during startup.,0.83,124.58,2.3,0,Resolved
+T000547,C000064,Phone,Engineering,2025-04-18,2025-04-21,Technical,Low,Login endpoint returns an error.,0.58,12.79,2.7,0,Open
+T000548,C000224,Chat,Logistics,2025-06-21,2025-06-21,Shipping,Medium,Tracking status has not changed.,0.72,63.57,2.3,0,In Progress
+T000549,C000283,fax,Product Support,2025-01-17,2025-01-21,Product,Low,Customer asks about product availability.,1.59,97.72,2.6,0,Resolved
+T000550,C000136,Email,Payments,2025-11-27,2025-12-01,Billing,Medium,Refund has not arrived.,0.24,61.79,1.9,0,Pending
+T000551,C000285,Social,Billing Operations,2025-11-04,2025-11-06,Billing,Low,Discount did not apply.,0.24,39.64,2.8,0,Resolved
+T000552,C000065,Chat,Payments,2025-03-30,2025-04-01,Billing,Low,Invoice total is incorrect.,0.84,48.98,4.7,0,Resolved
+T000553,C000233,Chat,Customer Success,2025-03-20,2025-03-20,Product,High,Documentation is difficult to follow.,0.90,15.81,5.0,0,Resolved
+T000554,C000306,Email,Technical Support,2025-07-13,2025-07-15,Technical,Medium,Background worker uses excessive memory.,1.38,21.14,,0,Open
+T000555,C000083,Email,Account Services,2025-09-09,2025-09-09,Account,Low,Account is locked after sign-in attempts.,0.60,16.73,4.4,1,Resolved
+T000556,C000099,Chat,Product Support,2025-06-27,2025-06-29,Product,Medium,Documentation is difficult to follow.,0.10,51.85,3.0,1,Resolved
+T000557,C000283,Phone,Engineering,2025-03-06,2025-03-07,Technical,Low,Login endpoint returns an error.,0.44,24.37,4.2,0,Resolved
+T000558,C000106,Web Form,Logistics,2025-12-18,2025-12-20,Shipping,Medium,Package arrived damaged.,2.40,27.57,5.0,0,Resolved
+T000559,C000130,Chat,Logistics,2025-10-18,2025-10-25,Shipping,Medium,Tracking status has not changed.,0.39,160.35,2.1,1,Resolved
+T000560,C000353,Email,Logistics,2025-07-03,2025-07-03,Shipping,Critical,Wrong item was delivered.,,6.80,2.6,0,Open
+T000561,C000331,Chat,Logistics,2025-04-22,2025-04-23,Shipping,Medium,Tracking status has not changed.,3.39,24.20,3.8,0,Resolved
+T000562,C000197,Email,Account Services,2025-05-21,2025-05-21,Account,High,Verification code was not delivered.,0.40,6.87,4.6,0,Resolved
+T000563,C000141,Email,Payments,2025-09-28,2025-09-30,Billing,Medium,Discount did not apply.,,63.85,1.3,0,Open
+T000564,C000015,Email,Billing Operations,2025-12-23,2025-12-24,Billing,Medium,Refund has not arrived.,0.31,17.94,4.9,0,Resolved
+T000565,C000156,Email,Payments,2025-07-08,2025-07-17,Billing,Low,Discount did not apply.,0.14,212.31,3.7,0,Resolved
+T000566,C000124,Chat,Identity Support,2025-06-13,2025-06-17,Account,Medium,Verification code was not delivered.,1.51,,3.7,0,Resolved
+T000567,C000240,Phone,Account Services,2025-05-05,2025-05-08,Account,Low,Profile details cannot be updated.,1.11,43.01,unknown,0,Open
+T000568,C000067,Email,Payments,2025-06-10,2025-06-16,Billing,Medium,Discount did not apply.,3.87,155.62,2.0,0,Resolved
+T000569,C000096,Email,Logistics,2025-06-07,2025-06-09,Shipping,Low,,1.32,47.36,3.6,1,Resolved
+T000570,C000196,Phone,Identity Support,2025-09-18,2025-09-19,Account,High,Account is locked after sign-in attempts.,0.69,18.15,4.5,0,Resolved
+T000571,C000116,Web Form,Identity Support,2025-01-26,2025-01-27,Account,High,Profile details cannot be updated.,0.54,11.70,3.7,0,Resolved
+T000572,C000319,Chat,Logistics,2025-06-27,2025-07-01,Shipping,High,Wrong item was delivered.,,14.09,3.0,0,Open
+T000573,C000243,Chat,Engineering,2025-08-31,2025-09-01,Technical,High,Request times out under load.,1.63,10.59,3.2,0,Pending
+T000574,C000172,Chat,Logistics,2025-04-27,2025-04-30,Shipping,High,Tracking status has not changed.,4.61,48.46,-1,0,In Progress
+T000575,C000011,Email,Logistics,2025-12-06,2025-12-07,Shipping,High,Wrong item was delivered.,0.12,15.00,3.6,0,Resolved
+T000576,C000231,Social,Technical Support,2025-02-15,2025-02-17,Technical,Medium,Background worker uses excessive memory.,4.90,48.37,4.5,1,Resolved
+T000577,C000178,Email,Account Services,2025-09-24,2025-09-27,Account,Low,Profile details cannot be updated.,1.44,35.15,2.8,0,In Progress
+T000578,C000157,Email,Engineering,2025-05-28,2025-05-30,Technical,Medium,Application crashes during startup.,0.35,49.83,3.9,0,Resolved
+T000579,C000017,Chat,Payments,2025-03-21,2025-03-22,Billing,High,Refund has not arrived.,0.10,15.56,2.4,1,Pending
+T000580,C000129,Email,Fulfillment,2025-10-16,2025-10-17,Shipping,Medium,Tracking status has not changed.,1.38,21.22,2.9,0,Resolved
+T000581,C000351,Phone,Identity Support,2025-08-12,2025-08-13,Account,High,Verification code was not delivered.,0.91,24.81,2.9,0,Resolved
+T000582,C000066,Chat,Logistics,2025-01-14,2025-01-16,Shipping,Medium,Package arrived later than expected.,2.23,89.51,3.4,0,Pending
+T000583,C000247,Phone,Fulfillment,2025-02-13,2025-02-14,Shipping,High,Package arrived later than expected.,3.43,29.25,1.5,0, OPEN 
+T000584,C000369,Social,Product Support,2025-03-15,2025-03-17,,Medium,Customer asks about product availability.,1.03,43.35,3.6,0,Resolved
+T000585,C000337,Chat,Customer Success,2025-09-16,2025-09-18,Product,Medium,Documentation is difficult to follow.,1.20,36.88,4.1,0,Resolved
+T000586,C000302,Chat,Payments,2025-12-25,2025-12-28,Billing,High,Discount did not apply.,0.76,61.10,4.4,0,Resolved
+T000587,C000337,Chat,Fulfillment,2025-10-16,2025-10-17,Shipping,Medium,Tracking status has not changed.,unknown,14.25,4.9,0,Resolved
+T000588,C000336,Email,Engineering,2025-07-03,2025-07-03,Technical,Medium,Login endpoint returns an error.,0.36,46.35,2.9,0,In Progress
+T000589,C000270,Email,Engineering,2025-07-12,2025-07-13,Technical,High,Background worker uses excessive memory.,4.03,31.44,4.8,0,Resolved
+T000590,C000396,Phone,Product Support,2025-03-23,2025-03-24,Product,Medium,Customer requests a missing feature.,1.33,28.35,2.4,0,Pending
+T000591,C000294,Chat,Technical Support,2025-03-31,2025-04-02,Technical,Medium,Background worker uses excessive memory.,1.31,54.77,3.5,2,Resolved
+T000592,C000105,Email,Fulfillment,2025-09-28,2025-09-29,Shipping,Medium,Package arrived later than expected.,-1,23.20,3.8,0,Resolved
+T000593,C000257,Chat,Account Services,2025-11-25,2025-11-29,Account,Low,Password reset link has expired.,0.44,80.59,2.6,0,Resolved
+T000594,C000170,Email,Logistics,2025-09-22,2025-09-23,Shipping,Medium,Tracking status has not changed.,0.37,27.27,2.2,0,Resolved
+T000595,C000216,Email,Logistics,2025-01-30,2025-01-30,Shipping,Medium,Package arrived later than expected.,6.07,59.27,1.9,0,Pending
+T000596,C000139,Phone,Technical Support,2025-02-01,2025-02-05,Technical,High,Application crashes during startup.,,35.27,2.8,0,Open
+T000597,C000195,Phone,,2025-01-11,2025-01-12,Shipping,Medium,Package arrived damaged.,7.51,43.96,4.9,0,Resolved
+T000598,C000224,Web Form,Billing Operations,2025-10-09,2025-10-09,Billing,Medium,Refund has not arrived.,0.32,27.04,1.3,0,Open
+T000599,C000126,Social,Billing Operations,2025-01-08,2025-01-11,Billing,Medium,Discount did not apply.,,8.74,3.4,0,Pending
+T000600,C000126,Chat,Logistics,2025-04-16,2025-04-20,Shipping,Medium,Tracking status has not changed.,0.71,39.23,1.9,0,Pending
+T000601,C000418,Phone,Product Support,2025-09-24,2025-09-26,Product,Medium,Documentation is difficult to follow.,1.28,61.46,3.7,0,Resolved
+T000602,C000031,Email,Logistics,2025-01-18,2025-01-19,Shipping,Medium,Package arrived damaged.,0.97,30.06,4.3,1,Resolved
+T000603,C000135,Phone,Billing Operations,2025-01-27,2025-01-29,Billing,Low,Charged twice for subscription.,1.45,38.06,4.1,0,Resolved
+T000604,C000196,Chat,Account Services,2025-01-30,2025-01-31,Account,Medium,Account is locked after sign-in attempts.,0.88,94.89,3.0,0,Open
+T000605,C000415,Phone,Billing Operations,2025-10-20,2025-10-23,Billing,High,Charged twice for subscription.,1.06,27.06,3.0,0,In Progress
+T000606,C000210,Email,Account Services,2025-08-25,2025-08-26,Account,Medium,Verification code was not delivered.,0.44,23.89,3.3,0,Resolved
+T000607,C000026,Email,Product Support,2025-09-11,2025-09-14,Product,Medium,Documentation is difficult to follow.,1.01,84.65,3.5,0,Resolved
+T000608,C000058,Chat,Product Support,2025-02-01,2025-02-03,Product,Low,Documentation is difficult to follow.,0.85,48.63,2.1,0,Open
+T000609,C000241,Web Form,Identity Support,2025-01-13,2025-01-18,Account,Medium,Password reset link has expired.,0.52,110.48,2.5,0,Resolved
+T000610,C000261,Phone,Engineering,2025-02-24,2025-02-25,Technical,Medium,Request times out under load.,2.11,23.81,4.2,0,Resolved
+T000611,C000242,Phone,Logistics,2025-08-03,2025-08-07,Shipping,Low,Tracking status has not changed.,2.49,86.37,2.5,0,Resolved
+T000612,C000210,Chat,Identity Support,2025-07-05,2025-07-07,Account,High,Password reset link has expired.,1.37,55.25,3.2,1,Resolved
+T000613,C000071,Chat,Identity Support,2025-03-06,2025-03-08,Account,Medium,Verification code was not delivered.,1.64,40.25,2.5,0,Resolved
+T000614,C000381,Email,Account Services,2025-09-11,2025-09-12,Account,High,Profile details cannot be updated.,0.35,16.02,3.4,1,Resolved
+T000615,C000024,Email,Payments,2025-03-02,2025-03-05,Billing,Medium,Discount did not apply.,1.16,not-a-number,2.4,3,Resolved
+T000616,C000004,Chat,Logistics,2025-12-25,2025-12-25,Shipping,Medium,Package arrived damaged.,1.86,53.41,2.3,0,Open
+T000617,C000219,Email,Logistics,2025-09-10,2025-09-10,Shipping,Medium,Tracking status has not changed.,2.10,7.90,4.2,0,Resolved
+T000618,C000148,Web Form,Engineering,2025-06-10,2025-06-13,Technical,Low,Application crashes during startup.,0.55,39.20,2.3,0,Pending
+T000619,C000152,Web Form,Technical Support,2025-01-21,2025-01-25,Technical,Medium,Login endpoint returns an error.,3.93,18.58,3.0,0,Open
+T000620,C000323,Phone,Fulfillment,2025-02-10,2025-02-12,Shipping,Medium,Tracking status has not changed.,1.35,14.33,2.9,0,In Progress
+T000621,C000113,Phone,Payments,2025-11-21,2025-11-22,Billing,Medium,Discount did not apply.,0.31,8.04,4.3,0,Resolved
+T000622,C000215,Phone,Engineering,2025-11-22,2025-11-22,Technical,Medium,Request times out under load.,0.90,15.17,3.9,0,Resolved
+T000623,C000113,Email,Identity Support,2025-09-06,2025-09-08,Account,Medium,Profile details cannot be updated.,1.11,40.27,3.9,0,Resolved
+T000624,C000248,Web Form,Logistics,2025-06-13,2025-06-15,Shipping, MEDIUM ,Package arrived damaged.,0.54,39.90,4.4,0,Resolved
+T000625,C000249,Phone,Engineering,2025-06-15,2025-06-15,Technical,Critical,Application crashes during startup.,0.39,8.41,2.3,0,Pending
+T000626,C000011,Phone,Account Services,2025-11-11,2025-11-13,Account,Medium,Verification code was not delivered.,0.23,38.94,4.3,1,Resolved
+T000627,C000192,Email,Account Services,2025-03-22,2025-03-24,Account,Low,Account is locked after sign-in attempts.,1.64,52.89,3.3,0,Resolved
+T000628,C000417,Phone,Payments,2025-03-22,2025-03-22,Billing,Critical,Refund has not arrived.,1.08,5.43,4.5,0,Resolved
+T000629,C000402,Email,Account Services,2025-10-05,2025-10-09,Account,Low,Verification code was not delivered.,0.18,15.77,3.0,0,Open
+T000630,C000126,Chat,Identity Support,2025-04-24,2025-04-26,Account,Medium,Profile details cannot be updated.,0.61,37.06,3.7,0,Resolved
+T000631,C000415,Chat,Account Services,2025-08-17,2025-08-20,Account,Low,Password reset link has expired.,1.05,70.43,4.8,0,Resolved
+T000632,C000031,Phone,Customer Success,2025-03-14,2025-03-16,Product,High,Customer asks about product availability.,1.00,47.20,3.9,0,Resolved
+T000633,C000440,Phone,Account Services,2025-10-15,2025-10-17,Account,Low,Password reset link has expired.,0.35,77.46,,0,Pending
+T000634,C000412,Chat,Fulfillment,2025-03-04,2025-03-04,Shipping,Medium,Package arrived damaged.,0.23,999,4.5,0,Resolved
+T000635,C000383,Phone,Fulfillment,2025-05-29,2025-05-31,Shipping,Critical,Wrong item was delivered.,0.48,8.00,2.7,one,Pending
+T000636,C000276,Chat,Product Support,2025-08-29,2025-08-30,Product,Medium,Customer requests a missing feature.,0.56,30.56,3.7,0,Resolved
+T000637,C000207,Web Form,Product Support,2025-04-09,2025-04-10,,Medium,Customer requests a missing feature.,0.97,16.96,4.2,0,Resolved
+T000638,C000142,Web Form,Customer Success,2025-02-22,2025-02-23,Product,High,Documentation is difficult to follow.,0.25,29.38,5.0,0,Resolved
+T000639,C000202,Chat,Engineering,2025-09-01,2025-09-01,Technical,Critical,Login endpoint returns an error.,0.64,7.96,2.8,0,Pending
+T000640,C000351,Email,Identity Support,2025-04-20,2025-04-23,Account,High,,6.14,21.16,2.7,0,Pending
+T000641,C000101,Chat,Technical Support,2025-10-14,2025-10-14,Technical,Critical,Application crashes during startup.,0.04,8.87,4.0,3,Resolved
+T000642,C000023,Social,Customer Success,2025-01-07,2025-01-08,Product,High,Mobile layout is hard to use.,0.30,9.24,3.6,0,Resolved
+T000643,C000068,Email,Billing Operations,2025-02-23,2025-02-25,Billing,Low,Charged twice for subscription.,0.11,60.08,4.5,0,Resolved
+T000644,C000265,Email,Logistics,2025-12-11,2025-12-11,Shipping,Medium,Package arrived damaged.,3.64,12.36,3.2,1,Resolved
+T000645,C000160,Email,Payments,2025-05-22,2025-05-26,Billing,Critical,Charged twice for subscription.,1.31,26.26,3.6,0,Open
+T000646,C000192,Chat,Account Services,2025-06-12,2025-06-15,Account,Medium,Verification code was not delivered.,5.62,59.13,4.0,0,Resolved
+T000647,C000091,Social,Engineering,2025-10-17,2025-10-20,Technical,Low,Login endpoint returns an error.,0.48,66.61,3.4,1,Resolved
+T000648,C000416,Phone,Identity Support,2025-09-25,2025-09-26,Account,High,Account is locked after sign-in attempts.,0.55,15.22,3.6,0,Open
+T000649,C000289,Chat,Account Services,2025-05-13,2025-05-14,Account,Medium,Verification code was not delivered.,0.86,32.86,4.0,0,Open
+T000650,C000012,Chat,Payments,2025-02-21,2025-02-22,Billing,Medium,Discount did not apply.,0.46,27.77,4.6,0,Resolved
+T000651,C000206,Chat,Fulfillment,2025-01-21,2025-01-21,Shipping,Medium,Wrong item was delivered.,0.47,10.51,3.3,1,Resolved
+T000652,C000203,Email,Account Services,2025-01-28,2025-01-30,Account,Low,Account is locked after sign-in attempts.,1.35,62.29,3.7,0,Resolved
+T000653,C000109,Web Form,Engineering,2025-05-06,2025-05-07,Technical,Low,Login endpoint returns an error.,0.20,33.94,4.0,0,Resolved
+T000654,C000014,Email,Technical Support,2025-05-25,2025-05-29,Technical,Low,Request times out under load.,1.10,63.35,2.9,0,Open
+T000655,C000174,Chat,Account Services,2025-04-28,2025-04-29,Account,Medium,Profile details cannot be updated.,0.43,32.06,3.6,0,Resolved
+T000656,C000413,Email,Technical Support,2025-08-04,2025-08-04,Technical,High,Login endpoint returns an error.,0.58,9.35,4.3,0,Resolved
+T000657,C000411,Web Form,Payments,2025-12-10,2025-12-12,Billing,High,Discount did not apply.,1.46,8.10,4.2,0,Open
+T000658,C000223,Email,Identity Support,2025-12-12,2025-12-15,Account,Low,Password reset link has expired.,1.23,22.52,3.1,0,Open
+T000659,C000009,Chat,Payments,2025-12-12,2025-12-14,Billing,Low,Charged twice for subscription.,0.87,41.84,3.2,0,Resolved
+T000660,C000458,Email,Customer Success,2025-03-31,2025-04-01,Product,High,Documentation is difficult to follow.,0.41,36.23,4.4,0,Resolved
+T000661,C000206,Email,Customer Success,2025-02-21,2025-02-22,Product,Medium,Customer requests a missing feature.,0.40,14.11,3.1,0,Resolved
+T000662,C000224,Email,Fulfillment,2025-11-12,2025-11-13,Shipping,Low,Tracking status has not changed.,1.10,100.08,1.4,0,In Progress
+T000663,C000326,Email,Product Support,not-a-date,2025-01-15,Product,Medium,Documentation is difficult to follow.,0.42,128.74,2.8,0,Resolved
+T000664,C000175,Email,Payments,2025-11-08,2025-11-08,Billing,Medium,Refund has not arrived.,1.09,13.51,3.8,1,Open
+T000665,C000107,Phone,Logistics,2025-12-05,2025-12-07,Shipping,Low,Tracking status has not changed.,1.27,43.88,3.2,0,Resolved
+T000666,C000385,Social,Identity Support,2025-10-27,2025-10-28,Account,Low,Account is locked after sign-in attempts.,0.95,39.44,4.3,0,Resolved
+T000667,C000210,Chat,Fulfillment,2025-02-26,2025-02-28,Shipping,Low,Package arrived damaged.,0.44,14.27,3.5,0,Open
+T000668,C000207,Chat,Customer Success,2025-12-18,2025-12-20,Product,High,Mobile layout is hard to use.,0.81,48.15,4.0,0,Resolved
+T000669,C000211,Email,Fulfillment,2025-12-02,2025-12-03,Shipping,High,Wrong item was delivered.,0.48,42.23,4.4,2,Resolved
+T000670,C000351,Email,Engineering,2025-07-29,2025-07-30,Technical,Medium,Application crashes during startup.,0.98,32.14,2.8,-1,Resolved
+T000671,C000237,Chat,Customer Success,2025-07-08,2025-07-09,Product,Low,Documentation is difficult to follow.,2.09,66.51,2.8,1,Pending
+T000672,C000017,Phone,Engineering,2025-06-19,2025-06-21,Technical,Low,Login endpoint returns an error.,0.17,44.01,3.4,0,Resolved
+T000673,C000372,Phone,Logistics,2025-11-28,2025-12-02,Shipping,Critical,Package arrived damaged.,,10.49,4.0,0,Open
+T000674,C000073,Web Form,Customer Success,2025-05-15,2025-05-16,Product,Medium,Documentation is difficult to follow.,1.37,22.81,4.9,0,Resolved
+T000675,C000019,Phone,Account Services,2025-05-14,2025-05-15,Account,High,Verification code was not delivered.,1.24,24.05,2.4,0,Pending
+T000676,C000381,Phone,Billing Operations,2025-03-23,2025-03-24,Billing,High,Refund has not arrived.,0.75,15.68,4.1,0,Resolved
+T000677,C000265,Chat,Product Support,2025-10-27,2025-10-27,Product,High,Mobile layout is hard to use.,0.52,13.64,4.2,0,Resolved
+T000678,C000195,Email,Technical Support,2025-09-06,2025-09-08,Technical,Medium,Background worker uses excessive memory.,2.42,32.09,4.5,0,Resolved
+T000679,C000404,Chat,Technical Support,2025-07-02,2025-07-05,Technical,High,Request times out under load.,,,3.3,0,Open
+T000680,C000379,Email,Account Services,2025-02-04,2025-02-05,Account,Medium,Account is locked after sign-in attempts.,0.92,27.95,2.9,0, RESOLVED 
+T000681,C000275,Web Form,Fulfillment,2025-03-09,2025-03-11,Shipping,High,Tracking status has not changed.,0.33,7.07,4.5,0,Open
+T000682,C000454,Chat,Billing Operations,2025-09-07,2025-09-07,Billing,High,Discount did not apply.,1.98,9.04,3.3,0,Resolved
+T000683,C000348,Chat,Payments,2025-05-26,2025-05-27,Billing,High,Discount did not apply.,0.37,17.16,3.6,0,Resolved
+T000684,C000227,Email,Billing Operations,2025-09-18,2025-09-23,Billing,Low,Refund has not arrived.,0.69,125.05,3.7,1,Resolved
+T000685,C000393,Chat,Billing Operations,2025-06-03,2025-06-04,Billing,Low,Refund has not arrived.,0.91,22.04,3.6,0,Resolved
+T000686,C000428,fax,Product Support,2025-11-01,2025-11-02,Product,Medium,Mobile layout is hard to use.,0.45,20.76,3.9,1,Resolved
+T000687,C000234,Phone,Account Services,2025-01-03,2025-01-05,Account,Medium,Account is locked after sign-in attempts.,2.45,57.01,2.5,0,Resolved
+T000688,C000317,Chat,Engineering,2025-08-07,2025-08-07,Technical,Medium,Application crashes during startup.,1.13,-2,3.7,0,Resolved
+T000689,C000328,Email,Payments,2025-01-24,2025-01-25,Billing,High,Discount did not apply.,0.78,13.37,1.1,0,Open
+T000690,C000168,Chat,Identity Support,2025-03-19,2025-03-19,,High,Verification code was not delivered.,1.04,7.83,4.5,0,Resolved
+T000691,C000361,Email,Billing Operations,2025-04-20,2025-04-22,Billing,High,Refund has not arrived.,0.73,50.03,1.9,0,In Progress
+T000692,C000405,Chat,Payments,2025-09-28,2025-10-01,Billing,Medium,Invoice total is incorrect.,,20.40,4.0,0,Open
+T000693,C000451,Social,Billing Operations,2025-08-28,2025-08-30,Billing,Medium,Invoice total is incorrect.,4.25,65.72,6.5,0,Open
+T000694,C000219,Email,Billing Operations,2025-08-10,2025-08-10,Billing,High,Invoice total is incorrect.,0.90,23.60,2.7,0,Open
+T000695,C000014,Chat,Product Support,2025-10-23,2025-10-26,Product,Medium,Documentation is difficult to follow.,1.36,75.87,2.5,0,Resolved
+T000696,C000064,Email,Product Support,2025-04-30,2025-05-02,Product,Medium,Customer requests a missing feature.,0.71,20.86,4.2,0,In Progress
+T000697,C000058,Web Form,Technical Support,2025-04-08,2025-04-09,Technical,Low,Application crashes during startup.,1.65,18.03,4.0,0,Resolved
+T000698,C000415,Chat,Logistics,2025-06-08,2025-06-08,Shipping,Low,Package arrived later than expected.,0.20,18.99,3.4,0,Resolved
+T000699,C000151,Chat,Identity Support,2025-08-29,2025-08-31,Account,Medium,Account is locked after sign-in attempts.,0.97,53.14,3.3,0,Resolved
+T000700,C000466,Web Form,Logistics,2025-02-26,2025-03-02,Shipping,High,Package arrived later than expected.,0.80,92.54,3.2,0,Resolved
+T000701,C000439,Web Form,Payments,2025-01-08,2025-01-09,Billing,Medium,Refund has not arrived.,0.26,13.35,3.6,2,Resolved
+T000702,C000101,Email,Product Support,2025-10-04,2025-10-07,Product,Low,Documentation is difficult to follow.,0.70,83.92,3.3,0,Resolved
+T000703,C000453,Email,Technical Support,2025-05-09,2025-05-12,Technical,Medium,Background worker uses excessive memory.,1.37,89.89,2.9,0,Resolved
+T000704,C000440,Email,Logistics,2025-07-17,2025-07-19,Shipping,Medium,Package arrived damaged.,1.58,6.36,2.8,0,Pending
+T000705,C000343,Web Form,Engineering,2025-06-22,2025-06-25,Technical,Medium,Application crashes during startup.,0.11,19.24,2.5,0,Open
+T000706,C000094,Chat,Account Services,2025-03-06,2025-03-10,Account,Medium,Account is locked after sign-in attempts.,0.68,50.21,2.0,1,Open
+T000707,C000485,Social,Technical Support,2025-09-29,2025-09-30,Technical,Low,Background worker uses excessive memory.,1.66,10.67,4.3,0,Resolved
+T000708,C000486,Chat,Engineering,2025-03-19,2025-03-20,Technical,High,Login endpoint returns an error.,1.72,6.67,3.2,1,Resolved
+T000709,C000331,Chat,Fulfillment,2025-01-31,2025-02-03,Shipping,Medium,Wrong item was delivered.,6.64,35.27,1.4,0,Pending
+T000710,C000267,Email,Account Services,2025-03-05,2025-03-08,Account,Critical,Profile details cannot be updated.,0.47,25.89,1.7,0,Pending
+T000711,C000449,Phone,Engineering,2025-06-24,2025-06-26,Technical,Medium,,,24.28,2.7,0,Open
+T000712,C000142,Web Form,Engineering,2025-01-30,2025-02-01,Technical,Medium,Login endpoint returns an error.,1.75,31.30,,0,Resolved
+T000713,C000266,Web Form,Identity Support,2025-02-23,2025-02-26,Account, LOW ,Password reset link has expired.,1.42,71.48,2.6,0,Resolved
+T000714,C000216,Phone,Product Support,2025-02-18,2025-02-20,Product,High,Mobile layout is hard to use.,0.41,62.32,3.0,1,Resolved
+T000715,C000150,Web Form,Fulfillment,2025-08-10,2025-08-12,Shipping,Low,Package arrived damaged.,0.47,52.92,3.1,0,In Progress
+T000716,C000083,Email,Identity Support,2025-05-22,2025-05-25,Account,Medium,Profile details cannot be updated.,0.33,44.93,1.8,0,In Progress
+T000717,C000096,Phone,Account Services,2025-04-27,2025-04-28,Account,Low,Verification code was not delivered.,1.09,20.02,3.4,0,Resolved
+T000718,C000357,Email,Fulfillment,2025-09-17,2025-09-18,Shipping,Medium,Package arrived later than expected.,1.89,25.18,4.7,0,Resolved
+T000719,C000409,Email,Product Support,2025-03-10,2024-01-01,Product,Low,Mobile layout is hard to use.,6.03,165.70,2.3,0,Resolved
+T000720,C000449,Email,Technical Support,2025-05-21,2025-05-21,Technical,Medium,Request times out under load.,0.20,9.45,4.7,0,Resolved
+T000721,C000383,Email,Payments,2025-04-06,2025-04-07,Billing,High,Invoice total is incorrect.,4.67,19.30,4.5,2,Resolved
+T000722,C000505,Chat,Logistics,2025-03-10,2025-03-14,Shipping,Medium,Tracking status has not changed.,2.36,22.87,3.0,0,In Progress
+T000723,C000489,Social,Billing Operations,2025-04-25,2025-04-27,Billing,Low,Discount did not apply.,0.90,68.77,1.9,0,Open
+T000724,C000361,Phone,Product Support,2025-02-02,2025-02-04,Product,Medium,Customer asks about product availability.,6.19,79.36,1.7,0,Open
+T000725,C000028,Phone,Engineering,2025-09-18,2025-09-19,tech,Medium,Application crashes during startup.,2.13,15.05,4.2,2,Resolved
+T000726,C000413,Chat,Payments,2025-05-08,2025-05-11,Billing,Medium,Refund has not arrived.,0.60,36.54,4.2,0,Open
+T000727,C000269,Email,Account Services,2025-05-14,2025-05-15,Account,High,Password reset link has expired.,1.09,15.18,4.0,0,Resolved
+T000728,C000112,Social,Account Services,2025-10-18,2025-10-19,Account,High,Account is locked after sign-in attempts.,0.22,8.38,4.4,0,Resolved
+T000729,C000350,Email,Product Support,2025-08-16,2025-08-16,Product,Medium,Customer requests a missing feature.,1.34,15.99,3.2,1,Open
+T000730,C000073,Email,Logistics,2025-08-21,2025-08-22,Shipping,High,Wrong item was delivered.,1.06,6.86,3.2,0,Resolved
+T000731,C000268,Chat,Fulfillment,2025-09-24,2025-09-24,Shipping,Critical,Tracking status has not changed.,3.43,10.33,4.1,0,Resolved
+T000732,C000314,Chat,Identity Support,2025-07-26,2025-07-27,Account,High,Password reset link has expired.,0.20,31.29,2.9,0,Resolved
+T000733,C000054,Phone,Customer Success,2025-03-30,2025-03-31,Product,Low,Documentation is difficult to follow.,,29.16,2.9,0,Pending
+T000734,C000120,Web Form,Product Support,2025-11-24,2025-11-25,Product,Medium,Documentation is difficult to follow.,0.26,16.81,3.1,1,Resolved
+T000735,C000318,Email,Identity Support,2025-12-09,2025-12-10,Account,Low,Profile details cannot be updated.,2.09,17.03,4.4,1,Resolved
+T000736,C000229,Email,Billing Operations,2025-09-07,2025-09-09,Billing,Medium,Charged twice for subscription.,1.11,27.72,3.4,0,Pending
+T000737,C000268,Email,Technical Support,2025-12-15,2025-12-17,Technical,Low,Login endpoint returns an error.,0.50,43.26,4.3,0,Resolved
+T000738,C000189,Email,Technical Support,2025-01-19,2025-01-21,Technical,Low,Request times out under load.,0.37,50.16,3.5,0,Resolved
+T000739,C000058,Chat,Fulfillment,2025-04-07,2025-04-08,Shipping,Medium,Tracking status has not changed.,0.50,29.34,5.0,0,Resolved
+T000740,C000165,Email,Customer Success,2025-08-13,2025-08-13,Product,Critical,Customer requests a missing feature.,0.33,7.49,4.6,0,Resolved
+T000741,C000230,Phone,Billing Operations,2025-07-09,2025-07-10,Billing,Medium,Charged twice for subscription.,0.26,25.37,4.8,0,Resolved
+T000742,C000466,Chat,Billing Operations,2025-08-19,2025-08-21,Billing,Medium,Discount did not apply.,1.66,40.77,5.0,0,Resolved
+T000743,C000233,Social,Product Support,2025-05-12,2025-05-13,,Low,Mobile layout is hard to use.,1.54,27.64,3.6,0,Open
+T000744,C000223,Phone,Technical Support,2025-08-16,2025-08-17,Technical,Low,Background worker uses excessive memory.,0.59,37.40,2.7,0,Open
+T000745,C000423,Email,Fulfillment,2025-02-25,2025-02-28,Shipping,Medium,Tracking status has not changed.,0.13,54.67,3.7,0,Resolved
+T000746,C000160,Chat,,2025-04-16,2025-04-16,Product,Low,Documentation is difficult to follow.,0.20,10.40,4.5,0,Resolved
+T000747,C000055,Email,Fulfillment,2025-11-10,2025-11-14,Shipping,High,Tracking status has not changed.,,6.22,2.1,0,Open
+T000748,C000104,Phone,Account Services,2025-07-05,2025-07-06,Account,High,Account is locked after sign-in attempts.,1.69,11.74,3.2,0,Open
+T000749,C000139,Web Form,Engineering,2025-05-24,2025-05-26,Technical,Medium,Login endpoint returns an error.,0.30,35.42,3.0,0,Resolved
+T000750,C000202,Web Form,Logistics,2025-09-09,2025-09-13,Shipping,High,Tracking status has not changed.,0.36,22.65,2.7,0,Pending
+T000751,C000025,Chat,Billing Operations,2025-07-06,2025-07-10,Billing,Medium,Charged twice for subscription.,2.54,101.00,1.2,1,Resolved
+T000752,C000011,Phone,Technical Support,2025-12-03,2025-12-07,Technical,Medium,Background worker uses excessive memory.,0.61,24.47,1.7,0,In Progress
+T000753,C000501,Email,Fulfillment,2025-07-07,2025-07-09,Shipping,High,Package arrived damaged.,0.64,18.86,2.9,0,Open
+T000754,C000472,Chat,Payments,2025-10-20,2025-10-21,Billing,Low,Charged twice for subscription.,3.56,30.24,4.6,0,Resolved
+T000755,C000198,Chat,Product Support,2025-02-16,2025-02-17,Product,High,Customer asks about product availability.,,27.17,3.2,0,Open
+T000756,C000270,Email,Product Support,2025-02-01,2025-02-02,Product,Medium,Customer requests a missing feature.,0.81,27.88,4.1,2,Resolved
+T000757,C000258,Email,Billing Operations,2025-11-24,2025-11-27,Billing,High,Charged twice for subscription.,0.42,11.65,2.9,0,Open
+T000758,C000371,Phone,Billing Operations,2025-08-09,2025-08-09,Billing,Critical,Invoice total is incorrect.,0.17,5.96,4.9,1,Resolved
+T000759,C000473,Email,Identity Support,2025-04-08,2025-04-10,Account,Medium,Profile details cannot be updated.,0.27,56.01,3.7,0,Resolved
+T000760,C000177,Email,Fulfillment,2025-06-12,2025-06-13,Shipping,Medium,Wrong item was delivered.,0.68,28.98,3.3,0,Resolved
+T000761,C000446,Web Form,Billing Operations,2025-10-09,2025-10-09,Billing,Critical,Discount did not apply.,0.24,11.46,3.6,0,Resolved
+T000762,C000163,Email,Payments,2025-09-23,2025-09-26,Billing,Medium,Discount did not apply.,0.70,60.13,3.6,0,Resolved
+T000763,C000240,Web Form,Customer Success,2025-07-09,2025-07-11,Product,High,Customer asks about product availability.,0.24,10.76,3.6,0,Open
+T000764,C000256,Chat,Identity Support,2025-03-07,2025-03-08,Account,Medium,Password reset link has expired.,1.82,36.76,2.4,0,Resolved
+T000765,C000147,Chat,Account Services,2025-05-17,2025-05-18,Account,Medium,Profile details cannot be updated.,0.65,37.61,-1,0,Resolved
+T000766,C000205,Phone,Technical Support,2025-10-15,2025-10-15,Technical,High,Application crashes during startup.,3.14,7.92,3.2,0,Resolved
+T000767,C000432,Email,Identity Support,2025-08-05,2025-08-08,Account,Medium,Account is locked after sign-in attempts.,0.54,45.47,2.5,0,Open
+T000768,C000018,Email,Logistics,2025-02-25,2025-02-25,Shipping,Medium,Package arrived damaged.,0.25,37.68,4.1,0,Open
+T000769,C000041,Web Form,Account Services,2025-04-02,2025-04-03,Account,High,Account is locked after sign-in attempts.,1.11,37.84,3.2,0,Resolved
+T000770,C000411,Chat,Logistics,2025-07-04,2025-07-05,Shipping,Critical,Package arrived damaged.,0.30,18.95,4.3,0,Resolved
+T000771,C000231,Chat,Technical Support,2025-04-27,2025-04-28,Technical,Medium,Request times out under load.,1.33,17.18,4.1,0,Resolved
+T000772,C000070,Email,Technical Support,2025-07-22,2025-07-23,Technical,Low,Request times out under load.,0.77,30.88,2.4,0,Resolved
+T000773,C000263,Email,Engineering,2025-10-02,2025-10-05,Technical,Medium,Background worker uses excessive memory.,0.45,37.37,3.1,0,Pending
+T000774,C000211,Email,Logistics,2025-07-27,2025-07-28,Shipping,High,Wrong item was delivered.,0.30,28.55,4.4,0,Resolved
+T000775,C000342,Email,Customer Success,2025-05-10,2025-05-11,Product,Low,Mobile layout is hard to use.,0.55,36.88,2.4,0,Resolved
+T000776,C000080,Chat,Fulfillment,2025-10-15,2025-10-17,Shipping,Low,Package arrived later than expected.,3.14,50.94,3.1,1,Resolved
+T000777,C000123,Email,Customer Success,2025-07-10,2025-07-10,Product,Critical,Customer asks about product availability.,0.70,5.58,5.0,0, RESOLVED 
+T000778,C000387,Email,Engineering,2025-05-20,2025-05-20,Technical,High,Login endpoint returns an error.,1.46,12.46,2.9,0,Open
+T000779,C000046,Web Form,Logistics,2025-01-13,2025-01-15,Shipping,Medium,Package arrived damaged.,3.75,50.19,2.4,3,Resolved
+T000780,C000150,Email,Engineering,2025-07-08,2025-07-10,Technical,Medium,Login endpoint returns an error.,0.89,48.13,3.9,1,Resolved
+T000781,C000368,Chat,Engineering,2025-07-28,2025-07-30,Technical,Medium,Request times out under load.,0.34,46.63,4.6,0,Resolved
+T000782,C000115,Social,Billing Operations,2025-03-23,2025-03-24,Billing,Medium,,1.84,16.75,3.3,0,Resolved
+T000783,C000109,Email,Customer Success,2025-07-11,2025-07-13,Product,Critical,Documentation is difficult to follow.,0.97,7.13,2.9,0,Open
+T000784,C000196,Email,Technical Support,2025-12-22,2025-12-26,Technical,Medium,Background worker uses excessive memory.,1.41,65.32,2.9,0,Pending
+T000785,C000490,Chat,Billing Operations,2025-07-03,2025-07-06,Billing,High,Discount did not apply.,0.54,68.52,3.2,0,Resolved
+T000786,C000503,Social,Payments,2025-07-16,2025-07-17,Billing,Medium,Charged twice for subscription.,0.60,25.18,4.1,1,Resolved
+T000787,C000481,Email,Logistics,2025-11-20,2025-11-21,Shipping,Low,Package arrived damaged.,0.60,22.66,4.0,0,Resolved
+T000788,C000398,Phone,Technical Support,2025-09-17,2025-09-19,Technical,Medium,Background worker uses excessive memory.,0.80,45.21,5.0,0,Resolved
+T000789,C000204,Chat,Product Support,2025-11-04,2025-11-05,Product,High,Customer requests a missing feature.,-1,20.49,4.1,0,Resolved
+T000790,C000025,Chat,Logistics,2025-09-10,2025-09-12,Shipping,Low,Package arrived damaged.,,24.70,2.8,2,Open
+T000791,C000520,Web Form,Billing Operations,2025-08-12,2025-08-15,Billing,Medium,Charged twice for subscription.,4.56,68.15,,0,Resolved
+T000792,C000424,Email,Billing Operations,2025-10-07,2025-10-08,Billing,High,Refund has not arrived.,0.25,,4.0,0,Resolved
+T000793,C000141,Email,Technical Support,2025-02-27,2025-02-27,Technical,High,Login endpoint returns an error.,0.91,4.57,5.0,1,Resolved
+T000794,C000070,Chat,Technical Support,2025-07-18,2025-07-19,Technical,High,Request times out under load.,0.43,18.87,4.5,0,Resolved
+T000795,C000522,Web Form,Technical Support,2025-08-10,2025-08-10,Technical,Medium,Request times out under load.,0.52,24.25,3.3,0,Pending
+T000796,C000041,Chat,Customer Success,2025-08-02,2025-08-03,,Medium,Mobile layout is hard to use.,3.30,31.88,3.2,0,Resolved
+T000797,C000141,Chat,Fulfillment,2025-08-29,2025-09-02,Shipping,Medium,Package arrived damaged.,0.20,77.73,1.1,0,Open
+T000798,C000314,Email,Identity Support,2025-05-19,2025-05-20,Account,Medium,Profile details cannot be updated.,3.41,37.15,2.8,0,Resolved
+T000799,C000533,Email,Identity Support,2025-12-19,2025-12-22,Account,High,Account is locked after sign-in attempts.,1.26,15.29,3.4,0,Open
+T000800,C000261,Chat,Engineering,2025-09-12,2025-09-13,Technical,Medium,Application crashes during startup.,0.44,40.75,2.5,0,Pending
+T000801,C000321,Email,Fulfillment,2025-10-18,2025-10-20,Shipping,Low,Package arrived later than expected.,1.18,112.89,1.5,0,In Progress
+T000802,C000274,Web Form,Identity Support,2025-12-18,2025-12-20,Account, LOW ,Account is locked after sign-in attempts.,0.52,46.19,3.4,0,Resolved
+,C000417,Email,Engineering,2025-10-05,2025-10-06,Technical,Critical,Request times out under load.,0.40,18.36,4.7,0,Resolved
+T000804,C000390,Email,Engineering,2025-07-17,2025-07-20,Technical,Low,Request times out under load.,,63.31,2.4,1,Pending
+T000805,C000387,Email,Logistics,2025-08-15,2025-08-18,Shipping,Medium,Wrong item was delivered.,0.41,63.48,2.8,0,Resolved
+T000806,C000023,Chat,Engineering,2025-04-29,2025-04-30,Technical,High,Background worker uses excessive memory.,1.05,17.18,4.0,0,Resolved
+T000807,C000530,Chat,Fulfillment,2025-05-18,2025-05-18,Shipping,Critical,Package arrived later than expected.,0.77,10.45,3.5,0,Resolved
+T000808,C000447,Email,Fulfillment,2025-02-17,2025-02-18,Shipping,Medium,Wrong item was delivered.,0.36,45.14,3.0,0,Pending
+T000809,C000079,Email,Fulfillment,2025-04-01,2025-04-02,Shipping,High,Tracking status has not changed.,0.10,20.65,5.0,0,Resolved
+T000810,C000059,Chat,Technical Support,2025-04-02,2025-04-05,Technical,Medium,Application crashes during startup.,0.82,67.77,3.9,0,Resolved
+T000811,C000387,Email,Logistics,2025-02-26,2025-03-01,Shipping,High,Package arrived damaged.,0.21,51.30,3.7,0,Resolved
+T000812,C000415,Phone,Customer Success,2025-07-26,2025-07-29,Product,Low,Documentation is difficult to follow.,0.45,62.59,4.0,0,Resolved
+T000813,C000144,Chat,Customer Success,2025-01-13,2025-01-16,Product,Low,Customer asks about product availability.,,70.00,2.0,0,Pending
+T000814,C000359,Chat,Engineering,2025-07-10,2025-07-11,Technical,High,Login endpoint returns an error.,0.50,12.20,3.5,0,Open
+T000815,C000012,Social,Billing Operations,2025-09-03,2025-09-04,Billing,Medium,Invoice total is incorrect.,0.55,22.38,5.0,0,Resolved
+T000816,C000530,Chat,Payments,2025-07-26,2025-07-26,Billing,Critical,Discount did not apply.,0.56,5.93,3.5,0,Resolved
+T000817,C000202,Email,Logistics,2025-07-13,2025-07-16,Shipping,Low,Tracking status has not changed.,2.13,82.88,5.0,0,Resolved
+T000818,C000170,Web Form,Logistics,2025-03-19,2025-03-19,Shipping,High,Package arrived later than expected.,1.41,9.37,3.8,1,Resolved
+T000819,C000533,Phone,Billing Operations,2025-05-13,2025-05-16,Billing,Medium,Refund has not arrived.,,56.56,2.0,0,Open
+T000820,C000476,Web Form,Billing Operations,2025-03-17,2025-03-20,Billing,Medium,Invoice total is incorrect.,1.58,55.75,4.2,1,Resolved
+T000821,C000032,Email,Logistics,2025-12-06,2025-12-07,Shipping,Low,Package arrived later than expected.,0.62,38.06,4.3,0,Resolved
+T000822,C000345,Email,Identity Support,2025-10-29,2025-11-01,Account,High,Profile details cannot be updated.,0.69,48.99,3.4,0,In Progress
+T000823,C000366,fax,Billing Operations,2025-12-24,2025-12-27,Billing,High,Charged twice for subscription.,0.45,9.59,4.3,0,Pending
+T000824,C000401,Phone,Engineering,2025-01-21,2025-01-23,Technical,Low,Application crashes during startup.,1.48,35.59,3.3,0,Resolved
+T000825,C000033,Chat,Identity Support,2025-11-07,2025-11-10,Account,Medium,Account is locked after sign-in attempts.,,42.87,2.7,0,Open
+T000826,C000317,Phone,Fulfillment,2025-12-28,2025-12-29,Shipping,Low,Wrong item was delivered.,1.49,31.15,4.2,2,Resolved
+T000827,C000446,Chat,Logistics,2025-02-07,2025-02-08,Shipping,High,Wrong item was delivered.,1.59,22.54,3.6,0,Resolved
+T000828,C000408,Phone,Logistics,2025-01-26,2025-01-27,Shipping,Medium,Package arrived damaged.,0.32,24.49,4.1,0,Resolved
+T000829,C000096,Chat,Engineering,2025-12-25,2025-12-30,Technical,Low,Request times out under load.,1.58,120.40,4.2,0,Resolved
+T000830,C000382,Email,Billing Operations,2025-04-14,2025-04-17,Billing,Low,Discount did not apply.,0.46,20.00,2.7,0,In Progress
+T000831,C000561,Email,Customer Success,2025-07-20,2025-07-23,Product,High,Customer requests a missing feature.,0.11,5.33,3.1,0,Pending
+T000832,C000461,Email,Account Services,2025-08-31,2025-09-02,Account,Medium,Account is locked after sign-in attempts.,4.10,23.74,2.4,0,Open
+T000833,C000427,Email,Customer Success,2025-07-23,2025-07-23,Product,High,Customer requests a missing feature.,2.19,10.97,4.9,1,Resolved
+T000834,C000206,Email,Logistics,2025-03-01,2025-03-01,Shipping,Low,Package arrived later than expected.,0.92,15.93,3.8,0,Resolved
+T000835,C000556,Phone,Account Services,2025-04-15,2025-04-16,Account,Medium,Password reset link has expired.,0.32,13.71,2.7,0,Resolved
+T000836,C000524,Email,Engineering,2025-05-19,2025-05-21,Technical,Low,Application crashes during startup.,1.48,10.71,3.9,0,Open
+T000837,C000548,Email,Identity Support,2025-11-14,2025-11-15,Account,Low,Password reset link has expired.,0.36,32.99,5.0,0,Resolved
+T000838,C000233,Web Form,Identity Support,2025-07-26,2025-07-26,Account,Low,Profile details cannot be updated.,0.21,81.73,2.0,0,Open
+T000839,C000323,Web Form,Fulfillment,2025-01-09,2025-01-10,Shipping,Medium,Wrong item was delivered.,1.18,6.63,4.5,0,Resolved
+T000840,C000550,Phone,Payments,2025-09-11,2025-09-13,Billing,Medium,Charged twice for subscription.,2.71,34.79,4.8,0,Resolved
+T000841,C000024,Email,Payments,2025-07-30,2025-07-30,Billing,Critical,Invoice total is incorrect.,0.31,6.67,4.5,0,Resolved
+T000842,C000081,Email,Engineering,2025-02-18,2025-02-21,Technical,Medium,Background worker uses excessive memory.,0.58,73.57,4.0,0,Resolved
+T000843,C000071,Email,Product Support,2025-07-26,2025-07-26,Product,Low,Customer requests a missing feature.,2.44,117.19,1.8,0,Pending
+T000844,C000018,Chat,Fulfillment,2025-03-23,2025-03-24,Shipping,Critical,Wrong item was delivered.,1.36,22.43,3.7,0,Resolved
+T000845,C000353,Email,Customer Success,2025-04-07,2025-04-09,Product,High,Mobile layout is hard to use.,0.34,999,2.0,0,Pending
+T000846,C000591,Email,Account Services,2025-11-28,2025-11-30,Account,High,Account is locked after sign-in attempts.,1.39,32.60,3.3,0,Resolved
+T000847,C000015,Chat,Engineering,2025-04-22,2025-04-23,Technical,Medium,Request times out under load.,1.11,20.80,4.7,0,Resolved
+T000848,C000212,Chat,Fulfillment,2025-06-16,2025-06-19,Shipping,High,Wrong item was delivered.,1.73,70.25,2.8,0,Pending
+T000849,C000295,Email,Logistics,2025-01-31,2025-02-01,,Medium,Wrong item was delivered.,0.84,24.05,3.7,0,Resolved
+T000850,C000283,Web Form,Logistics,2025-08-21,2025-08-23,Shipping,Low,Tracking status has not changed.,1.20,38.43,unknown,0,Resolved
+T000851,C000414,Email,Technical Support,2025-10-10,2025-10-13,Technical,Medium,Request times out under load.,0.89,29.37,2.5,0,Open
+T000852,C000192,Email,Identity Support,2025-11-18,2025-11-20,Account,High,Profile details cannot be updated.,4.84,65.25,2.0,0,Pending
+T000853,C000333,Email,Identity Support,2025-10-16,2025-10-17,Account,Medium,,0.49,22.73,4.5,1,Resolved
+T000854,C000075,Email,Logistics,2025-10-15,2025-10-16,Shipping,Low,Wrong item was delivered.,0.37,47.52,2.9,3,Resolved
+T000855,C000257,Phone,Technical Support,2025-05-24,2025-05-25,Technical,Medium,Application crashes during startup.,4.31,22.01,4.6,0,Resolved
+T000856,C000358,Web Form,Logistics,2025-01-04,2025-01-04,Shipping,Medium,Wrong item was delivered.,0.23,36.95,2.5,0,Open
+T000857,C000033,Email,Billing Operations,2025-04-02,2025-04-04,Billing,Medium,Invoice total is incorrect.,,41.04,2.8,0,Open
+T000858,C000112,Email,Account Services,2025-03-23,2025-03-27,Account,Low,Account is locked after sign-in attempts.,0.24,33.85,3.1,0,Open
+T000859,C000460,Chat,Payments,2025-10-12,2025-10-15,Billing,High,Invoice total is incorrect.,1.62,10.87,3.0,0,Open
+T000860,C000130,Web Form,Account Services,2025-01-11,2025-01-13,Account,High,Password reset link has expired.,0.20,5.52,4.0,0,Open
+T000861,C000538,Chat,Customer Success,2025-10-03,2025-10-03,Product,Medium,Mobile layout is hard to use.,,103.33,2.8,0,Open
+T000862,C000560,Email,Identity Support,2025-04-23,2025-04-25,Account,Medium,Profile details cannot be updated.,0.86,29.83,4.6,0,Resolved
+T000863,C000169,Phone,Technical Support,2025-12-07,2025-12-11,Technical,Medium,Application crashes during startup.,6.05,78.19,3.6,0,Resolved
+T000864,C000321,Chat,Technical Support,2025-11-28,2025-12-02,Technical,Medium,Background worker uses excessive memory.,4.67,61.52,2.6,0,Pending
+T000865,C000044,Email,Identity Support,2025-02-09,2025-02-10,Account,High,Password reset link has expired.,1.62,26.58,2.3,0,Resolved
+T000866,C000242,Chat,Customer Success,2025-07-05,2025-07-06,Product,Medium,Documentation is difficult to follow.,0.86,20.07,6.5,0,Resolved
+T000867,C000421,Chat,Identity Support,2025-10-10,2025-10-11,Account,Medium,Verification code was not delivered.,0.98,14.59,3.0,0,Resolved
+T000868,C000542,Phone,Payments,2025-02-01,2025-02-05,Billing,Low,Invoice total is incorrect.,0.36,108.44,2.6,1,Resolved
+T000869,C000145,Phone,Engineering,2025-04-07,2025-04-08,Technical,Medium,Request times out under load.,0.65,24.56,4.4,0,Resolved
+T000870,C000258,Email,Product Support,2025-03-23,2025-03-25,Product,Medium,Customer asks about product availability.,2.04,68.11,,0,Resolved
+T000871,C000192,Email,Account Services,2025-01-22,2025-01-24,Account,Low,Password reset link has expired.,3.96,53.07,2.2,0,In Progress
+T000872,C000570,Phone,Fulfillment,2025-10-22,2025-10-23,Shipping,Medium,Tracking status has not changed.,3.81,27.60,4.4,0,Resolved
+T000873,C000539,Email,Identity Support,2025-05-29,2025-05-30,Account,Medium,Password reset link has expired.,0.45,10.37,2.8,0,Open
+T000874,C000222,Email,Logistics,2025-03-05,2025-03-06,Shipping,Medium,Wrong item was delivered.,0.98,28.90,2.3,0, PENDING 
+T000875,C000190,Email,Billing Operations,2025-09-16,2025-09-16,Billing,Low,Charged twice for subscription.,3.73,205.29,2.6,0,In Progress
+T000876,C000510,Email,Customer Success,2025-11-02,2025-11-03,Product,High,Customer requests a missing feature.,0.42,29.15,3.4,0,Resolved
+T000877,C000589,Email,Logistics,2025-01-30,2025-02-06,Shipping,Low,Wrong item was delivered.,1.85,184.81,2.2,0,Resolved
+T000878,C000518,Email,Technical Support,2025-07-28,2025-07-29,Technical,Medium,Login endpoint returns an error.,1.42,27.05,3.5,0,Resolved
+T000879,C000439,Chat,Account Services,2025-05-31,2025-06-03,Account,Medium,Password reset link has expired.,0.65,28.72,2.4,0,Pending
+T000880,C000396,Email,Payments,2025-04-09,2025-04-12,Billing,Low,Charged twice for subscription.,unknown,24.76,1.6,0,Pending
+T000881,C000435,Phone,Account Services,2025-10-09,2025-10-12,Account,Low,Account is locked after sign-in attempts.,0.99,67.69,4.3,0,Resolved
+T000882,C000564,Phone,Product Support,2025-09-28,2025-09-29,Product,Low,Customer asks about product availability.,0.58,22.68,4.2,0,Resolved
+T000883,C000579,Chat,Billing Operations,2025-12-20,2025-12-22,Billing,High,Invoice total is incorrect.,0.95,31.43,4.5,0,Resolved
+T000884,C000566,Chat,Identity Support,2025-07-26,2025-07-28,Account,Medium,Password reset link has expired.,2.10,29.67,3.3,0,Open
+T000885,C000584,Chat,Product Support,2025-06-19,2025-06-20,Product,High,Documentation is difficult to follow.,0.20,21.38,4.5,1,Resolved
+T000886,C000121,Chat,Engineering,2025-08-09,2025-08-11,Technical,High,Application crashes during startup.,0.50,4.39,3.0,0,Open
+T000887,C000575,Phone,Logistics,2025-06-16,2025-06-19,Shipping,High,Package arrived later than expected.,7.86,9.18,3.2,0,In Progress
+T000888,C000151,Chat,Identity Support,2025-06-24,2025-06-24,Account,Low,Password reset link has expired.,0.43,10.76,5.0,0,Resolved
+T000889,C000195,Phone,Customer Success,2025-09-04,2025-09-05,Product,Medium,Mobile layout is hard to use.,1.86,25.01,4.0,0,Resolved
+T000890,C000031,Web Form,Billing Operations,2025-05-04,2025-05-05,Billing,High,Discount did not apply.,1.68,12.08,4.0,1,Resolved
+T000891,C000343,Phone,Technical Support,2025-01-29,2025-01-29,Technical, CRITICAL ,Application crashes during startup.,0.81,18.16,4.6,0,Resolved
+T000892,C000201,Web Form,Payments,2025-06-14,2025-06-14,Billing,Medium,Discount did not apply.,0.67,8.19,3.7,0,Resolved
+T000893,C000144,Phone,Engineering,2025-11-03,2025-11-03,Technical,Critical,Request times out under load.,0.13,7.76,4.8,-1,Resolved
+T000894,C000136,Web Form,Customer Success,2025-08-31,2025-09-01,Product,High,Mobile layout is hard to use.,0.34,35.77,3.3,0,Resolved
+T000895,C000526,Social,,2025-04-15,2025-04-17,Technical,High,Request times out under load.,0.63,46.05,4.5,0,Resolved
+T000896,C000607,Email,Fulfillment,2025-04-22,2025-04-24,Shipping,Medium,Tracking status has not changed.,3.02,36.61,3.5,0,Resolved
+T000897,C000111,Web Form,Payments,2025-01-28,2025-01-30,Billing,High,Discount did not apply.,0.44,15.48,3.5,0,In Progress
+T000898,C000504,Phone,Customer Success,2025-04-04,2025-04-04,Product,High,Documentation is difficult to follow.,0.60,18.90,4.3,0,Resolved
+T000899,C000461,Web Form,Fulfillment,2025-10-06,2025-10-07,Shipping,Low,Package arrived damaged.,0.65,7.16,4.8,0,Resolved
+T000900,C000151,Web Form,Product Support,2025-03-02,2025-03-04,Product,Medium,Mobile layout is hard to use.,1.34,42.12,3.4,0,Pending
+T000901,C000179,Email,Billing Operations,2025-12-12,2025-12-12,Billing,Medium,Invoice total is incorrect.,0.67,9.13,4.2,0,Resolved
+T000902,C000560,Web Form,Product Support,2025-10-30,2025-10-31,,Medium,Documentation is difficult to follow.,0.27,28.15,4.6,0,Resolved
+T000903,C000567,Chat,Billing Operations,2025-12-21,2025-12-23,Billing,Low,Invoice total is incorrect.,1.11,59.34,1.5,0,Open
+T000904,C000192,Email,Identity Support,2025-01-19,2025-01-22,Account,Medium,Verification code was not delivered.,0.33,35.41,3.3,0,Open
+T000905,C000328,Chat,Fulfillment,2025-08-12,2025-08-14,Shipping,Low,Package arrived damaged.,1.19,,4.4,0,Resolved
+T000906,C000370,Phone,Payments,2025-11-26,2025-11-28,tech,Low,Discount did not apply.,0.41,49.67,4.6,1,Resolved
+T000907,C000537,Chat,Customer Success,2025-04-01,2025-04-03,Product,Medium,Documentation is difficult to follow.,1.68,30.31,4.7,0,Resolved
+T000908,C000106,Email,Technical Support,2025-11-21,2025-11-23,Technical,Medium,Background worker uses excessive memory.,1.65,54.71,5.0,0,Resolved
+T000909,C000228,Email,Payments,2025-04-02,2025-04-05,Billing,Medium,Charged twice for subscription.,0.24,59.14,2.3,0,Open
+T000910,C000500,Phone,Engineering,2025-11-27,2025-11-30,Technical,Low,Background worker uses excessive memory.,0.88,65.70,1.8,0,Resolved
+T000911,C000242,Email,Technical Support,2025-02-08,2025-02-09,Technical,Critical,Application crashes during startup.,0.96,6.48,4.2,0,Pending
+T000912,C000488,Phone,Account Services,2025-06-17,2025-06-18,Account,High,Account is locked after sign-in attempts.,0.13,14.20,3.2,0,Resolved
+T000913,C000135,Phone,Fulfillment,2025-04-01,2025-04-04,Shipping,Medium,Tracking status has not changed.,0.19,53.12,3.8,0,Open
+T000914,C000598,Chat,Identity Support,2025-06-28,2025-07-02,Account,High,Profile details cannot be updated.,2.21,47.97,3.4,0,Pending
+T000915,C000325,Phone,Identity Support,2025-12-09,2025-12-09,Account,High,Account is locked after sign-in attempts.,1.49,9.11,3.5,0,Resolved
+T000916,C000601,Chat,Product Support,2025-01-04,2025-01-04,Product,High,Customer requests a missing feature.,0.37,17.57,5.0,0,Resolved
+T000917,C000533,Chat,Engineering,2025-10-12,2025-10-13,Technical,High,Login endpoint returns an error.,1.18,-2,4.4,0,Resolved
+T000918,C000424,Email,Product Support,2025-12-20,2025-12-24,Product,Medium,Documentation is difficult to follow.,0.64,43.37,3.8,0,In Progress
+T000919,C000147,Web Form,Account Services,2025-03-30,2025-03-31,Account,Low,Verification code was not delivered.,1.26,89.23,2.8,0,In Progress
+T000920,C000414,Chat,Product Support,2025-03-23,2025-03-23,Product,High,Customer asks about product availability.,0.48,10.42,4.3,0,Resolved
+T000921,C000034,Email,Technical Support,2025-11-18,2025-11-22,Technical,Low,Login endpoint returns an error.,0.41,110.80,3.1,0,Resolved
+T000922,C000454,Phone,Fulfillment,2025-10-09,2025-10-11,Shipping,Low,Wrong item was delivered.,0.32,not-a-number,2.9,0,Resolved
+T000923,C000311,Email,Billing Operations,2025-03-29,2025-03-29,Billing,Medium,Refund has not arrived.,3.08,12.64,3.1,0,Resolved
+T000924,C000403,Email,Technical Support,2025-05-17,2025-05-18,Technical,Medium,,0.76,34.35,2.0,1,Pending
+T000925,C000611,Chat,Identity Support,2025-08-17,2025-08-31,Account,Low,Password reset link has expired.,0.72,320.67,2.6,0,Resolved
+T000926,C000056,Chat,Technical Support,2025-10-13,2025-10-16,Technical,Medium,Application crashes during startup.,0.33,64.79,3.2,0,Resolved
+T000927,C000527,Chat,Billing Operations,2025-09-17,2025-09-19,Billing,High,Discount did not apply.,0.60,23.60,3.6,0,Pending
+T000928,C000585,Web Form,Billing Operations,2025-10-21,2025-10-22,Billing,Low,Charged twice for subscription.,1.48,26.23,3.3,0,Resolved
+T000929,C000426,Social,Technical Support,2025-09-19,2025-09-20,Technical,Medium,Request times out under load.,0.99,39.76,3.5,0,Resolved
+T000930,C000472,Chat,Product Support,2025-11-21,2025-11-22,Product,Medium,Customer requests a missing feature.,0.40,37.09,5.0,0,Resolved
+T000931,C000352,Phone,Payments,2025-04-03,2025-04-04,Billing,Medium,Refund has not arrived.,0.96,44.26,3.4,0,Resolved
+T000932,C000467,Phone,Engineering,2025-04-09,2025-04-12,Technical,Low,Application crashes during startup.,0.47,64.15,3.8,0,Resolved
+T000933,C000611,Email,Technical Support,2025-11-17,2025-11-19,Technical,Low,Application crashes during startup.,0.95,32.89,4.2,0,Resolved
+T000934,C000018,Phone,Product Support,2025-12-02,2025-12-04,Product,High,Customer asks about product availability.,1.73,14.95,1.9,0,Open
+T000935,C000166,Chat,Payments,2025-01-14,2025-01-15,Billing,High,Invoice total is incorrect.,2.53,22.77,4.0,0,Resolved
+T000936,C000351,Email,Billing Operations,2025-02-13,2025-02-17,Billing,High,Charged twice for subscription.,0.49,25.87,2.5,0,Open
+T000937,C000357,Chat,Engineering,2025-08-20,2025-08-22,Technical,Medium,Request times out under load.,1.92,5.67,2.0,0,In Progress
+T000938,C000040,Email,Engineering,2025-08-25,2025-08-27,Technical,High,Request times out under load.,0.21,32.17,2.4,0,Open
+T000939,C000111,Social,Billing Operations,2025-12-10,2025-12-11,Billing,Medium,Discount did not apply.,0.18,31.27,4.2,0,Resolved
+T000940,C000283,Chat,Billing Operations,2025-08-25,2025-08-26,Billing,High,Discount did not apply.,1.58,7.33,4.2,1,Resolved
+T000941,C000206,Chat,Technical Support,2025-12-27,2025-12-31,Technical,High,Login endpoint returns an error.,0.79,17.74,2.7,0,Pending
+T000942,C000487,Email,Account Services,2025-06-30,2025-07-04,Account,Low,Verification code was not delivered.,1.00,100.99,2.5,0,Resolved
+T000943,C000269,Chat,Fulfillment,2025-09-06,2025-09-08,Shipping,Medium,Tracking status has not changed.,0.37,37.41,4.4,0,Resolved
+T000944,C000230,Chat,Product Support,2025-11-03,2025-11-04,Product,Critical,Customer asks about product availability.,2.03,12.14,4.6,0,Resolved
+T000945,C000492,Chat,Product Support,2025-07-15,2025-07-15,Product,Medium,Documentation is difficult to follow.,0.43,14.68,4.1,0,Resolved
+T000946,C000271,Email,Engineering,2025-09-21,2025-09-21,Technical,Low,Request times out under load.,3.42,39.97,2.5,0,Open
+T000947,C000559,Web Form,Billing Operations,2025-07-30,2025-07-31,Billing,High,Refund has not arrived.,1.66,7.36,3.3,0,Pending
+T000948,C000516,Chat,Identity Support,2025-10-27,2025-10-30,Account,Medium,Password reset link has expired.,0.73,64.65,3.3,0,Resolved
+T000949,C000177,Email,Billing Operations,2025-07-02,2025-07-02,Billing,Low,Invoice total is incorrect.,0.97,33.49,,0,Open
+T000950,C000664,Phone,Product Support,2025-04-03,2025-04-03,Product,Critical,Customer asks about product availability.,0.92,11.32,4.6,0,Resolved
+T000951,C000364,Email,Product Support,2025-07-20,2025-07-21,Product,High,Mobile layout is hard to use.,1.05,5.91,3.3,0,Resolved
+T000952,C000567,Chat,Payments,2025-10-10,2025-10-12,Billing,Low,Discount did not apply.,0.40,38.16,3.8,one,Resolved
+T000953,C000272,Web Form,Identity Support,2025-04-04,2025-04-05,Account,High,Password reset link has expired.,1.24,68.79,1.9,0,Pending
+T000954,C000594,Phone,Identity Support,2025-10-15,2025-10-16,Account,Medium,Verification code was not delivered.,0.65,25.15,3.0,1,Resolved
+T000955,C000070,Chat,Product Support,2025-08-12,2025-08-14,,Medium,Customer requests a missing feature.,0.66,20.03,3.0,0,Open
+T000956,C000001,Email,Account Services,2025-11-24,2025-11-27,Account,Critical,Password reset link has expired.,1.16,4.92,-1,0,In Progress
+T000957,C000198,Phone,Identity Support,2025-07-04,2025-07-06,Account,Medium,Password reset link has expired.,0.79,32.72,2.4,0,Open
+T000958,C000555,Web Form,Product Support,2025-02-03,2025-02-03,Product,Medium,Customer asks about product availability.,1.71,69.95,1.0,0,Open
+T000959,C000272,Chat,Fulfillment,2025-02-23,2025-02-24,Shipping,Low,Package arrived damaged.,8.30,24.53,2.7,0,Resolved
+T000960,C000051,fax,Product Support,2025-12-19,2025-12-19,Product,Medium,Documentation is difficult to follow.,0.57,20.23,4.7,0,Resolved
+T000961,C000664,Email,Payments,2025-11-02,2025-11-03,Billing,Low,Invoice total is incorrect.,0.41,18.19,3.9,0,Resolved
+T000962,C000421,Email,Identity Support,2025-10-25,2025-10-27,Account,Medium,Verification code was not delivered.,3.39,50.21,3.2,0,Resolved
+T000963,C000327,Web Form,Technical Support,2025-06-24,2025-06-25,Technical,Critical,Application crashes during startup.,1.33,19.91,3.2,0,Resolved
+T000964,C000619,Chat,Fulfillment,2025-07-15,2025-07-17,Shipping,High,Package arrived later than expected.,1.50,39.48,3.8,0,Open
+T000965,C000324,Chat,Payments,2025-08-20,2025-08-22,Billing,Medium,Charged twice for subscription.,1.41,41.12,4.1,0,Resolved
+T000966,C000493,Phone,Billing Operations,2025-01-31,2025-01-31,Billing,Critical,Refund has not arrived.,0.18,2.76,4.7,2,Resolved
+T000967,C000169,Chat,Payments,2025-05-20,2025-05-26,Billing,High,Charged twice for subscription.,2.91,143.40,2.8,0,Resolved
+T000968,C000473,Chat,Technical Support,2025-09-03,2025-09-05,Technical,Medium,Background worker uses excessive memory.,0.56,33.47,2.7,0,Open
+T000969,C000293,Phone,Identity Support,2025-06-16,2025-06-17,Account,Low,Account is locked after sign-in attempts.,2.01,28.12,3.7,0,Resolved
+T000970,C000661,Chat,Technical Support,2025-09-09,2025-09-12,Technical,Low,Login endpoint returns an error.,0.37,53.25,2.2,0,Open
+T000971,C000622,Phone,Technical Support,2025-09-01,2025-09-02,Technical,Critical,Application crashes during startup.,1.03,32.37,4.0,0, RESOLVED 
+T000972,C000037,Web Form,Account Services,2025-04-28,2025-04-30,Account,Medium,Password reset link has expired.,0.57,37.86,4.1,0,Resolved
+T000973,C000216,Phone,Logistics,2025-05-23,2025-05-24,Shipping,Medium,Package arrived later than expected.,0.42,32.41,1.9,0,Resolved
+T000974,C000468,Web Form,Logistics,2025-01-08,2025-01-09,Shipping,Medium,Package arrived damaged.,0.30,10.15,5.0,0,Resolved
+T000975,C000108,Email,Customer Success,2025-12-20,2025-12-21,Product,Medium,Documentation is difficult to follow.,0.73,25.78,4.8,0,Resolved
+T000976,C000461,Email,Account Services,2025-07-15,2025-07-16,Account,Medium,Account is locked after sign-in attempts.,0.45,63.43,3.9,0,Open
+T000977,C000218,Email,Product Support,2025-03-22,2025-03-23,Product,Low,Customer requests a missing feature.,0.82,27.43,3.7,0,Resolved
+T000978,C000303,Email,Payments,2025-01-16,2025-01-17,Billing,Critical,Charged twice for subscription.,1.17,9.42,4.0,0,Resolved
+T000979,C000657,Email,Identity Support,2025-01-25,2025-01-25,Account,Critical,Verification code was not delivered.,0.49,8.28,5.0,0,Resolved
+T000980,C000286,Web Form,Logistics,2025-01-18,2025-01-21,Shipping, LOW ,Package arrived damaged.,0.61,82.97,2.0,0,Open
+T000981,C000231,Social,Billing Operations,2025-11-28,2025-11-29,Billing,Medium,Discount did not apply.,0.57,14.64,4.0,0,Resolved
+T000982,C000568,Email,Customer Success,2025-05-18,2025-05-19,Product,Medium,Documentation is difficult to follow.,0.50,16.42,3.3,0,Pending
+T000983,C000373,Email,Logistics,2025-11-22,2025-11-25,Shipping,Medium,Wrong item was delivered.,1.29,66.06,2.7,0,Resolved
+T000984,C000647,Chat,Account Services,2025-12-21,2025-12-22,Account,Medium,Profile details cannot be updated.,1.51,12.63,3.7,0,Resolved
+T000985,C000142,Chat,Payments,2025-09-19,2025-09-22,Billing,High,Refund has not arrived.,0.72,74.41,2.6,0,In Progress
+T000986,C000145,Chat,Payments,2025-05-24,2025-05-27,Billing,High,Invoice total is incorrect.,-1,70.32,2.8,0,Resolved
+T000987,C000047,Email,Product Support,2025-07-07,2025-07-10,Product,Medium,Customer requests a missing feature.,0.20,23.18,3.5,0,Pending
+T000988,C000055,Chat,Product Support,2025-12-30,2025-12-31,Product,High,Documentation is difficult to follow.,1.04,38.46,2.5,0,Open
+T000989,C000530,Email,Identity Support,2025-05-24,2025-05-25,Account,Low,Profile details cannot be updated.,0.21,42.11,3.2,1,Resolved
+T000990,C000183,Web Form,Technical Support,2025-07-11,2025-07-11,Technical,High,Application crashes during startup.,,63.70,2.3,0,Pending
+T000991,C000005,Web Form,Identity Support,2025-10-19,2025-10-21,Account,High,Password reset link has expired.,0.22,29.22,3.0,0,Open
+T000992,C000423,Email,Customer Success,2025-04-27,2025-04-28,Product,Medium,Mobile layout is hard to use.,2.09,14.65,2.8,0,Open
+T000993,C000361,Phone,Logistics,2025-03-14,2025-03-14,Shipping,Low,Wrong item was delivered.,1.16,29.82,3.1,0,In Progress
+T000994,C000543,Email,Engineering,not-a-date,2025-07-05,Technical,Critical,Login endpoint returns an error.,1.09,21.84,2.1,0,Pending
+T000995,C000234,Chat,Payments,2025-06-03,2025-06-05,Billing,Low,,7.61,37.79,3.7,0,Resolved
+T000996,C000164,Email,Technical Support,2025-05-22,2025-05-26,Technical,Medium,Application crashes during startup.,0.59,25.82,2.4,0,Open
+T000997,C000399,Email,Product Support,2025-11-04,2025-11-04,Product,Critical,Documentation is difficult to follow.,0.55,9.63,4.0,1,Resolved
+T000998,C000322,Phone,Payments,2025-05-18,2025-05-26,Billing,Medium,Charged twice for subscription.,4.94,193.98,2.9,0,Resolved
+T000999,C000451,Chat,Payments,2025-04-20,2025-04-23,Billing,High,Charged twice for subscription.,2.09,11.81,3.4,0,Pending
+T001000,C000375,Chat,Fulfillment,2025-12-27,2025-12-29,Shipping,High,Package arrived later than expected.,0.71,58.79,2.8,0,Open
+T001001,C000066,Email,Payments,2025-04-20,2025-04-21,Billing,Critical,Charged twice for subscription.,0.83,20.63,3.0,0,Resolved
+T001002,C000371,Chat,Technical Support,2025-10-07,2025-10-08,Technical,Low,Application crashes during startup.,1.36,26.43,4.4,0,Pending
+T001003,C000046,Phone,Fulfillment,2025-10-08,2025-10-10,Shipping,Low,Package arrived damaged.,1.03,53.60,3.0,0,Resolved
+T001004,C000022,Email,Customer Success,2025-12-06,2025-12-09,Product,High,Customer asks about product availability.,0.30,42.93,3.2,2,In Progress
+T001005,C000401,Email,Fulfillment,2025-01-06,2025-01-09,Shipping,Low,Package arrived damaged.,0.39,82.20,3.7,0,Resolved
+T001006,C000098,Email,Product Support,2025-10-21,2025-10-23,Product,High,Customer requests a missing feature.,0.46,26.07,4.5,0,Resolved
+T001007,C000091,Chat,Logistics,2025-07-31,2025-08-01,Shipping,Low,Wrong item was delivered.,0.50,21.40,4.9,1,Resolved
+T001008,C000434,Email,Engineering,2025-10-16,2025-10-19,,Medium,Application crashes during startup.,0.43,67.28,2.3,0,Pending
+T001009,C000611,Email,Engineering,2025-03-14,2025-03-18,Technical,Low,Application crashes during startup.,0.61,17.05,3.5,2,Pending
+T001010,C000176,Email,Billing Operations,2025-01-04,2025-01-07,Billing,Low,Discount did not apply.,,74.76,1.0,0,Open
+T001011,C000391,Chat,Billing Operations,2025-07-10,2025-07-13,Billing,Medium,Charged twice for subscription.,0.98,36.77,2.3,0,Open
+T001012,C000522,Email,Identity Support,2025-04-21,2025-04-21,Account,Low,Password reset link has expired.,0.98,39.46,2.8,0,Open
+T001013,C000235,Email,Billing Operations,2025-04-20,2025-04-21,Billing,Low,Charged twice for subscription.,0.93,9.20,4.6,0,Resolved
+T001014,C000643,Phone,Account Services,2025-09-26,2025-09-29,Account,High,Password reset link has expired.,4.24,39.94,2.8,0,Pending
+T001015,C000250,Chat,Technical Support,2025-08-13,2025-08-14,Technical,Low,Application crashes during startup.,1.49,17.23,4.3,0,Resolved
+T001016,C000610,Email,Engineering,2025-07-22,2025-07-22,Technical,Medium,Login endpoint returns an error.,3.99,13.45,3.7,0,Resolved
+T001017,C000076,Chat,Logistics,2025-11-03,2025-11-04,Shipping,Medium,Package arrived later than expected.,3.61,33.69,4.3,2,Resolved
+T001018,C000122,Chat,Technical Support,2025-07-20,2025-07-21,Technical,Medium,Application crashes during startup.,1.35,,3.9,0,Resolved
+T001019,C000261,Email,Account Services,2025-07-05,2025-07-06,Account,Medium,Profile details cannot be updated.,0.52,18.88,2.8,0,Resolved
+T001020,C000173,Chat,Logistics,2025-04-26,2025-04-27,Shipping,Medium,Package arrived later than expected.,0.57,18.92,2.4,0,Open
+T001021,C000526,Chat,Billing Operations,2025-06-25,2025-06-26,Billing,High,Discount did not apply.,0.52,11.64,5.0,0,Resolved
+T001022,C000574,Email,Product Support,2025-03-17,2025-03-18,Product,Low,Documentation is difficult to follow.,2.08,75.76,3.5,0,Pending
+T001023,C000029,Chat,Identity Support,2025-04-14,2025-04-15,Account,Low,Verification code was not delivered.,0.43,37.08,3.9,0,Resolved
+T001024,C000275,Phone,Logistics,2025-09-13,2025-09-14,Shipping,Low,Wrong item was delivered.,0.47,28.79,4.5,0,Resolved
+T001025,C000379,Email,Account Services,2025-11-01,2025-11-03,Account,Low,Verification code was not delivered.,0.43,36.94,2.7,0,In Progress
+T001026,C000187,Email,Product Support,2025-07-24,2025-07-26,Product,Low,Customer requests a missing feature.,0.97,34.10,4.6,0,Resolved
+T001027,C000598,Email,Fulfillment,2025-04-03,2025-04-06,Shipping,Low,Package arrived damaged.,2.04,30.90,2.6,1,Open
+T001028,C000019,Email,Billing Operations,2025-01-29,2025-02-01,Billing,High,Discount did not apply.,0.12,14.55,,1,Open
+T001029,C000518,Phone,Customer Success,2025-05-24,2025-05-25,Product,Low,Mobile layout is hard to use.,2.04,21.37,5.0,0,Resolved
+T001030,C000152,Email,Logistics,2025-11-28,2025-11-29,Shipping,Critical,Package arrived damaged.,1.32,11.89,5.0,0,Resolved
+T001031,C000157,Phone,Fulfillment,2025-05-23,2025-05-23,Shipping,High,Package arrived later than expected.,4.70,15.35,4.1,0,Resolved
+T001032,C000475,Phone,Account Services,2025-03-19,2025-03-25,Account,Medium,Password reset link has expired.,1.17,135.66,2.9,0,Resolved
+T001033,C000355,Chat,Fulfillment,2025-11-18,2025-11-20,Shipping,Critical,Package arrived damaged.,,15.62,3.1,0,Pending
+T001034,C000219,Web Form,Technical Support,2025-05-07,2025-05-09,Technical,Low,Request times out under load.,0.09,56.28,2.7,0,Resolved
+T001035,C000228,Phone,Technical Support,2025-11-08,2025-11-11,Technical,Medium,Request times out under load.,0.09,57.36,3.0,0,Open
+T001036,C000399,Chat,Technical Support,2025-07-23,2025-07-23,Technical,Medium,Request times out under load.,0.93,14.92,4.9,0,Resolved
+T001037,C000725,Phone,Engineering,2025-10-11,2025-10-11,Technical,Medium,Login endpoint returns an error.,0.76,12.41,4.9,0,Resolved
+T001038,C000018,Chat,Logistics,2025-04-21,2025-04-22,Shipping,High,Tracking status has not changed.,0.41,18.22,4.7,0,Resolved
+T001039,C000633,Social,Engineering,2025-04-02,2025-04-04,Technical,Medium,Request times out under load.,0.63,42.37,6.5,0,Resolved
+T001040,C000283,Email,Account Services,2025-09-03,2025-09-06,Account,Medium,Password reset link has expired.,,60.34,1.2,0,Pending
+T001041,C000059,Chat,Logistics,2025-03-18,2025-03-18,Shipping,Medium,Package arrived damaged.,0.40,15.31,4.7,0,Resolved
+T001042,C000642,Phone,Engineering,2025-06-10,2025-06-13,Technical,Medium,Application crashes during startup.,0.42,69.13,4.2,0,Resolved
+T001043,C000509,Chat,Fulfillment,2025-05-20,2025-05-21,Shipping,Low,Package arrived later than expected.,0.97,32.52,2.6,0,Open
+T001044,C000441,Web Form,,2025-09-12,2025-09-14,Shipping,Low,Package arrived damaged.,1.18,54.58,2.1,1,Pending
+T001045,C000449,Phone,Product Support,2025-08-07,2025-08-08,Product,Medium,Customer asks about product availability.,0.10,30.21,2.6,2,In Progress
+T001046,C000647,Phone,Identity Support,2025-10-06,2025-10-10,Account,Medium,Account is locked after sign-in attempts.,0.26,105.95,3.2,0,Resolved
+T001047,C000124,Chat,Payments,2025-10-24,2025-10-26,Billing,Medium,Charged twice for subscription.,0.46,41.20,4.7,0,Resolved
+T001048,C000682,Phone,Identity Support,2025-09-03,2025-09-04,Account,Medium,Profile details cannot be updated.,0.21,36.78,3.0,0,Pending
+T001049,C000362,Email,Account Services,2025-07-17,2025-07-19,Account,Medium,Profile details cannot be updated.,1.08,137.59,3.0,0,Pending
+T001050,C000390,Email,Technical Support,2025-08-14,2025-08-16,Technical,Critical,Application crashes during startup.,3.12,14.71,3.8,0,In Progress
+T001051,C000322,Chat,Identity Support,2025-07-31,2025-08-02,Account,Medium,Profile details cannot be updated.,0.69,44.09,4.0,0,Resolved
+T001052,C000075,Phone,Identity Support,2025-06-19,2025-06-20,Account,Low,Password reset link has expired.,1.38,36.65,4.2,0,Resolved
+T001053,C000420,Email,Fulfillment,2025-05-13,2025-05-14,Shipping,Medium,Wrong item was delivered.,0.37,37.72,4.7,0,Resolved
+T001054,C000277,Email,Technical Support,2025-09-02,2025-09-03,Technical,Critical,Application crashes during startup.,1.00,8.41,2.6,0,Resolved
+T001055,C000294,Chat,Payments,2025-01-23,2025-01-26,Billing,Low,Invoice total is incorrect.,0.10,77.31,4.1,0,Resolved
+T001056,C000391,Web Form,Account Services,2025-05-06,2025-05-08,Account,Medium,Account is locked after sign-in attempts.,0.39,999,4.9,0,Resolved
+T001057,C000569,Web Form,Product Support,2025-07-02,2025-07-06,Product,Critical,Documentation is difficult to follow.,0.25,18.27,2.6,0,Pending
+T001058,C000564,Chat,Billing Operations,2025-06-17,2025-06-18,Billing,High,Invoice total is incorrect.,0.50,15.75,4.7,1,Resolved
+T001059,C000462,Phone,Engineering,2025-06-08,2025-06-09,Technical,High,Login endpoint returns an error.,0.35,3.82,3.7,0,Open
+T001060,C000213,Web Form,Product Support,2025-01-26,2025-01-26,Product,Low,Documentation is difficult to follow.,0.70,49.38,2.8,0,Open
+T001061,C000164,Email,Technical Support,2025-05-24,2025-05-26,,Medium,Request times out under load.,0.51,55.60,4.1,0,Resolved
+T001062,C000126,Phone,Customer Success,2025-04-15,2025-04-16,Product,Low,Customer asks about product availability.,0.62,27.27,4.7,0,Resolved
+T001063,C000178,Web Form,Identity Support,2025-01-30,2025-01-31,Account,Low,Profile details cannot be updated.,1.06,19.30,4.0,0,Resolved
+T001064,C000017,Email,Technical Support,2025-03-09,2025-03-12,Technical,High,Request times out under load.,0.90,6.02,2.5,1,In Progress
+T001065,C000424,Email,Technical Support,2025-08-25,2025-08-29,Technical,High,Background worker uses excessive memory.,2.13,77.83,2.3,0,Pending
+T001066,C000614,Email,Payments,2025-08-14,2025-08-14,Billing,Medium,,1.08,39.77,4.4,0,Pending
+T001067,C000191,Email,Fulfillment,2025-09-06,2025-09-07,Shipping,Low,Package arrived later than expected.,0.58,30.95,3.8,0,Resolved
+T001068,C000076,Chat,Billing Operations,2025-06-27,2025-06-28,Billing,High,Discount did not apply.,5.06,18.03,2.2,0, RESOLVED 
+T001069,C000022,Chat,Identity Support,2025-07-01,2025-07-02,Account, MEDIUM ,Account is locked after sign-in attempts.,0.33,38.40,3.4,0,Resolved
+T001070,C000201,Email,Engineering,2025-05-14,2025-05-17,Technical,High,Background worker uses excessive memory.,1.56,5.95,2.8,0,Open
+T001071,C000701,Email,Identity Support,2025-05-19,2025-05-20,Account,Medium,Account is locked after sign-in attempts.,0.43,32.18,3.3,0,Resolved
+T001072,C000464,Web Form,Logistics,2025-11-21,2025-11-28,Shipping,Medium,Tracking status has not changed.,1.51,150.23,2.4,0,Resolved
+T001073,C000162,Email,Engineering,2025-02-12,2025-02-12,Technical,High,Application crashes during startup.,0.25,16.37,4.6,0,Resolved
+T001074,C000158,Chat,Billing Operations,2025-06-11,2025-06-13,Billing,Medium,Invoice total is incorrect.,0.46,28.60,3.5,0,Resolved
+T001075,C000552,Phone,Technical Support,2025-10-10,2025-10-10,Technical,Critical,Application crashes during startup.,0.14,9.61,3.0,0,Resolved
+T001076,C000304,Chat,Account Services,2025-02-02,2025-02-03,Account,Medium,Verification code was not delivered.,0.44,55.16,2.6,0,Pending
+T001077,C000399,Email,Customer Success,2025-02-23,2025-02-24,Product,High,Documentation is difficult to follow.,0.85,17.51,2.7,0,Resolved
+T001078,C000398,Chat,Payments,2025-09-12,2024-01-01,Billing,Critical,Discount did not apply.,0.45,8.78,5.0,0,Resolved
+T001079,C000018,Email,Account Services,2025-11-09,2025-11-10,Account,Low,Password reset link has expired.,1.43,19.56,3.9,0,Resolved
+T001080,C000630,Chat,Identity Support,2025-05-25,2025-05-26,Account,High,Verification code was not delivered.,1.72,13.69,3.5,0,In Progress
+T001081,C000006,Email,Product Support,2025-01-30,2025-01-30,Product,Medium,Documentation is difficult to follow.,0.71,17.96,3.7,0,Open
+T001082,C000543,Web Form,Product Support,2025-06-14,2025-06-16,Product,Medium,Mobile layout is hard to use.,0.58,34.15,4.5,0,Resolved
+T001083,C000250,Web Form,Product Support,2025-07-23,2025-07-25,Product,Medium,Documentation is difficult to follow.,0.31,48.19,3.5,0,Resolved
+T001084,C000413,Email,Customer Success,2025-04-20,2025-04-22,Product,Medium,Customer requests a missing feature.,0.60,16.63,2.9,0,In Progress
+T001085,C000749,Social,Engineering,2025-09-16,2025-09-16,Technical,Medium,Request times out under load.,0.15,11.18,4.5,0,Resolved
+T001086,C000098,Phone,Logistics,2025-12-29,2025-12-31,Shipping,Medium,Tracking status has not changed.,0.20,42.88,4.0,0,Resolved
+T001087,C000710,Email,Customer Success,2025-03-07,2025-03-08,tech,High,Documentation is difficult to follow.,0.46,24.17,3.0,0,Open
+T001088,C000363,Chat,Billing Operations,2025-07-08,2025-07-11,Billing,Low,Refund has not arrived.,1.00,69.36,3.8,0,Resolved
+T001089,C000456,Phone,Account Services,2025-04-25,2025-04-26,Account,Medium,Password reset link has expired.,1.63,20.04,4.7,0,Resolved
+T001090,C000023,Chat,Logistics,2025-10-30,2025-10-31,Shipping,High,Tracking status has not changed.,2.09,17.62,3.8,0,Resolved
+T001091,C000470,Chat,Logistics,2025-09-18,2025-09-18,Shipping,High,Wrong item was delivered.,0.26,12.56,3.8,0,Resolved
+T001092,C000656,Chat,Logistics,2025-05-30,2025-05-31,Shipping,Medium,Package arrived later than expected.,0.47,35.14,3.0,0,In Progress
+T001093,C000227,Email,Account Services,2025-10-11,2025-10-12,Account,Low,Password reset link has expired.,0.10,17.27,3.8,0,In Progress
+T001094,C000458,Phone,Account Services,2025-11-01,2025-11-04,Account,Medium,Password reset link has expired.,0.31,49.50,3.9,0,Resolved
+T001095,C000449,Social,Payments,2025-11-02,2025-11-03,Billing,High,Discount did not apply.,0.59,43.24,1.9,0,Open
+T001096,C000647,Phone,Logistics,2025-01-10,2025-01-10,Shipping,Medium,Tracking status has not changed.,0.85,32.20,3.5,0,Open
+T001097,C000411,fax,Payments,2025-01-23,2025-01-27,Billing,Critical,Refund has not arrived.,0.47,8.13,3.1,0,In Progress
+T001098,C000183,Email,Account Services,2025-06-15,2025-06-16,Account,Low,Password reset link has expired.,1.56,22.07,5.0,1,Resolved
+T001099,C000099,Web Form,Product Support,2025-07-19,2025-07-20,Product,Critical,Documentation is difficult to follow.,1.22,15.43,3.0,0,Open
+T001100,C000070,Web Form,Identity Support,2025-03-27,2025-03-28,Account,Critical,Account is locked after sign-in attempts.,0.40,4.68,4.8,0,Resolved
+T001101,C000685,Email,Engineering,2025-05-07,2025-05-08,Technical,Medium,Request times out under load.,1.08,30.37,2.0,0,Open
+T001102,C000653,Email,Identity Support,2025-11-11,2025-11-11,Account,High,Password reset link has expired.,0.29,7.91,3.9,0,Resolved
+T001103,C000595,Email,Identity Support,2025-03-14,2025-03-14,Account,Medium,Account is locked after sign-in attempts.,1.74,20.65,2.5,0,Open
+T001104,C000086,Web Form,Account Services,2025-09-08,2025-09-10,Account,High,Account is locked after sign-in attempts.,0.49,36.62,3.3,0,Resolved
+T001105,C000179,Chat,Engineering,2025-09-17,2025-09-19,Technical,Low,Request times out under load.,2.37,46.89,4.6,0,Resolved
+T001106,C000747,Email,Billing Operations,2025-06-10,2025-06-13,Billing,High,Charged twice for subscription.,0.71,21.68,2.6,0,Open
+T001107,C000408,Chat,Product Support,2025-09-12,2025-09-12,Product,Medium,Mobile layout is hard to use.,0.69,14.10,,0,Resolved
+T001108,C000030,Phone,Technical Support,2025-07-12,2025-07-13,Technical,High,Application crashes during startup.,0.15,14.78,5.0,0,Resolved
+T001109,C000420,Phone,Customer Success,2025-12-17,2025-12-18,Product,Medium,Mobile layout is hard to use.,0.14,24.96,5.0,0,Resolved
+T001110,C000380,Phone,Engineering,2025-09-22,2025-09-23,Technical,Medium,Background worker uses excessive memory.,1.00,19.39,3.2,0,Resolved
+T001111,C000647,Web Form,Product Support,2025-03-15,2025-03-17,Product,Medium,Mobile layout is hard to use.,1.62,49.59,2.8,0,Open
+T001112,C000337,Phone,Customer Success,2025-02-11,2025-02-19,Product,Medium,Documentation is difficult to follow.,1.37,194.48,2.5,0,Resolved
+T001113,C000550,Email,Fulfillment,2025-04-22,2025-04-26,Shipping,Medium,Wrong item was delivered.,0.33,82.03,3.1,0,Resolved
+T001114,C000738,Chat,Product Support,2025-06-22,2025-06-24,,Low,Customer requests a missing feature.,3.01,43.06,3.7,0,Resolved
+T001115,C000773,Phone,Fulfillment,2025-04-17,2025-04-17,Shipping,Medium,Tracking status has not changed.,0.45,14.45,3.4,0,Resolved
+T001116,C000315,Email,Engineering,2025-10-22,2025-10-22,Technical,High,Background worker uses excessive memory.,1.13,12.15,4.4,-1,Resolved
+T001117,C000212,Chat,Payments,2025-02-21,2025-02-24,Billing,High,Discount did not apply.,0.28,16.26,2.6,0,Open
+T001118,C000634,Email,Technical Support,2025-12-20,2025-12-20,Technical,Medium,Background worker uses excessive memory.,0.91,8.02,4.9,0,Resolved
+T001119,C000119,Email,Customer Success,2025-07-17,2025-07-19,Product,Medium,Documentation is difficult to follow.,1.08,40.09,4.4,0,Resolved
+T001120,C000352,Web Form,Logistics,2025-05-03,2025-05-05,Shipping,Low,Wrong item was delivered.,0.22,65.69,2.9,0,Open
+T001121,C000651,Web Form,Customer Success,2025-02-23,2025-02-27,Product,High,Mobile layout is hard to use.,2.28,32.85,2.7,0,Open
+T001122,C000522,Web Form,Payments,2025-04-20,2025-04-22,Billing,Low,Invoice total is incorrect.,0.31,68.91,3.2,0,Resolved
+T001123,C000676,Web Form,Account Services,2025-10-22,2025-10-23,Account,Medium,Account is locked after sign-in attempts.,0.65,34.75,4.3,0,Resolved
+T001124,C000243,Web Form,Engineering,2025-08-21,2025-08-23,Technical,Medium,Login endpoint returns an error.,1.46,49.61,2.1,0,Resolved
+T001125,C000278,Phone,Technical Support,2025-10-11,2025-10-12,Technical,Low,Request times out under load.,5.03,23.76,3.5,0,Resolved
+T001126,C000240,Email,Identity Support,2025-09-17,2025-09-18,Account,Low,Profile details cannot be updated.,0.91,69.25,1.9,1,Pending
+T001127,C000171,Web Form,Logistics,2025-06-28,2025-06-28,Shipping,Critical,Package arrived later than expected.,0.41,8.13,5.0,0,Resolved
+T001128,C000068,Email,Engineering,2025-12-01,2025-12-02,Technical,Low,Background worker uses excessive memory.,0.75,30.98,4.0,0,Resolved
+T001129,C000284,Chat,Payments,2025-01-31,2025-02-01,Billing,Medium,Charged twice for subscription.,1.29,16.70,3.6,1,Open
+T001130,C000508,Web Form,Product Support,2025-05-11,2025-05-13,Product,Medium,Documentation is difficult to follow.,0.46,34.74,2.9,0,Resolved
+T001131,C000102,Phone,Account Services,2025-10-01,2025-10-03,Account,Critical,Password reset link has expired.,0.28,,3.9,0,Resolved
+T001132,C000401,Web Form,Logistics,2025-01-29,2025-01-29,Shipping,Critical,Wrong item was delivered.,0.27,13.27,4.4,0,Resolved
+T001133,C000222,Chat,Billing Operations,2025-02-19,2025-02-21,Billing,Medium,Refund has not arrived.,0.88,35.41,unknown,0,Resolved
+T001134,C000400,Chat,Billing Operations,2025-07-14,2025-07-15,Billing,Medium,Charged twice for subscription.,1.63,20.71,3.9,0,Resolved
+T001135,C000251,Chat,Billing Operations,2025-10-19,2025-10-21,Billing,Low,Refund has not arrived.,0.77,62.43,4.2,0,Resolved
+T001136,C000681,Phone,Identity Support,2025-01-08,2025-01-08,Account,High,Verification code was not delivered.,0.54,12.83,4.6,1,Resolved
+T001137,C000419,Email,Logistics,2025-11-25,2025-11-27,Shipping,Low,,0.55,42.38,3.9,0,Resolved
+T001138,C000550,Chat,Product Support,2025-01-19,2025-01-19,Product,Critical,Documentation is difficult to follow.,0.13,8.31,4.6,0,Resolved
+T001139,C000527,Phone,Fulfillment,2025-07-31,2025-08-01,Shipping,Medium,Wrong item was delivered.,1.21,19.95,3.3,1,Resolved
+T001140,C000579,Email,Fulfillment,2025-09-19,2025-09-21,Shipping,Medium,Package arrived damaged.,0.61,33.46,3.3,2,Resolved
+T001141,C000203,Phone,Account Services,2025-09-28,2025-09-29,Account,Medium,Verification code was not delivered.,1.48,34.96,4.8,0,Resolved
+T001142,C000010,Email,Product Support,2025-09-16,2025-09-19,Product,High,Documentation is difficult to follow.,0.66,17.44,3.3,0,In Progress
+T001143,C000114,Chat,Fulfillment,2025-01-11,2025-01-11,Shipping,Medium,Package arrived later than expected.,0.46,24.88,3.0,0,Pending
+T001144,C000468,Phone,Payments,2025-10-18,2025-10-20,Billing,High,Charged twice for subscription.,1.42,38.84,3.8,0,Resolved
+T001145,C000284,Phone,Fulfillment,2025-10-08,2025-10-09,Shipping,Critical,Package arrived damaged.,2.05,20.48,4.2,0,Resolved
+T001146,C000379,Phone,Payments,2025-02-19,2025-02-22,Billing,Low,Refund has not arrived.,0.35,-2,3.3,0,Resolved
+T001147,C000257,Email,Customer Success,2025-06-15,2025-06-17,Product,Low,Customer asks about product availability.,0.70,26.57,-1,1,Open
+T001148,C000094,Phone,Fulfillment,2025-05-17,2025-05-19,Shipping,Medium,Wrong item was delivered.,4.09,42.63,3.8,0,Resolved
+T001149,C000140,Chat,Engineering,2025-03-14,2025-03-15,Technical,Medium,Request times out under load.,0.80,52.62,3.6,0,In Progress
+T001150,C000143,Chat,Logistics,2025-01-09,2025-01-11,Shipping,High,Package arrived later than expected.,0.15,40.13,4.1,3,In Progress
+T001151,C000033,Email,Product Support,2025-10-17,2025-10-17,Product,High,Documentation is difficult to follow.,8.58,18.01,3.6,0,Resolved
+T001152,C000764,Web Form,Billing Operations,2025-05-05,2025-05-06,Billing,High,Refund has not arrived.,0.75,17.80,3.5,0,Resolved
+T001153,C000791,Web Form,Customer Success,2025-05-16,2025-05-19,Product,Medium,Mobile layout is hard to use.,0.69,78.04,4.2,1,Resolved
+T001154,C000637,Email,Fulfillment,2025-03-15,2025-03-18,Shipping,Medium,Package arrived later than expected.,0.14,72.20,4.3,0,Resolved
+T001155,C000104,Phone,Account Services,2025-03-18,2025-03-21,Account,Medium,Profile details cannot be updated.,0.85,69.93,3.4,0,Resolved
+T001156,C000453,Web Form,Engineering,2025-06-29,2025-07-05,Technical,Medium,Login endpoint returns an error.,0.55,130.69,2.0,1,Resolved
+T001157,C000112,Phone,Customer Success,2025-10-24,2025-10-24,Product,Low,Customer asks about product availability.,0.64,21.10,4.5,2,Resolved
+T001158,C000388,Chat,Account Services,2025-04-18,2025-04-19,Account, LOW ,Account is locked after sign-in attempts.,0.48,22.86,3.0,0,Resolved
+T001159,C000290,Chat,Billing Operations,2025-05-12,2025-05-16,Billing,Medium,Charged twice for subscription.,0.23,91.68,3.3,0,Resolved
+T001160,C000240,Email,Payments,2025-02-11,2025-02-14,Billing,Medium,Invoice total is incorrect.,0.76,58.18,3.2,0,Resolved
+T001161,C000019,Email,Product Support,2025-08-03,2025-08-05,Product,Low,Customer requests a missing feature.,2.88,44.17,2.8,0,Resolved
+T001162,C000762,Web Form,Payments,2025-04-06,2025-04-06,Billing,High,Charged twice for subscription.,0.30,10.33,4.0,0,Resolved
+T001163,C000051,Email,Engineering,2025-12-24,2025-12-26,Technical,Medium,Application crashes during startup.,1.11,66.20,2.6,0,In Progress
+T001164,C000668,Chat,Billing Operations,2025-02-24,2025-02-27,Billing,High,Charged twice for subscription.,2.03,52.13,3.9,0,Resolved
+T001165,C000374,Web Form,Fulfillment,2025-05-13,2025-05-14,Shipping,Low,Package arrived later than expected.,3.46,23.85,4.2,0, IN PROGRESS 
+T001166,C000455,Chat,Technical Support,2025-03-03,2025-03-04,Technical,Low,Login endpoint returns an error.,3.50,32.96,3.8,0,Resolved
+T001167,C000133,Web Form,Engineering,2025-08-07,2025-08-09,,Low,Background worker uses excessive memory.,1.80,49.89,4.3,0,Resolved
+T001168,C000008,Email,Logistics,2025-04-27,2025-04-27,Shipping,Medium,Package arrived later than expected.,3.01,18.13,4.5,0,Resolved
+T001169,C000191,Email,Product Support,2025-12-09,2025-12-09,Product,Medium,Customer asks about product availability.,1.36,8.39,5.0,0,Resolved
+T001170,C000374,Phone,Product Support,2025-05-13,2025-05-14,Product,Critical,Customer requests a missing feature.,1.24,24.29,3.1,0,Open
+T001171,C000289,Web Form,Account Services,2025-09-03,2025-09-03,Account,Critical,Account is locked after sign-in attempts.,0.84,5.51,4.3,0,Resolved
+T001172,C000324,Web Form,Product Support,2025-01-13,2025-01-13,Product,High,Documentation is difficult to follow.,1.81,21.47,4.2,0,Resolved
+T001173,C000630,Web Form,Billing Operations,2025-07-18,2025-07-19,Billing,Medium,Invoice total is incorrect.,unknown,11.97,4.4,0,Resolved
+T001174,C000784,Web Form,Product Support,2025-03-21,2025-03-22,Product,High,Documentation is difficult to follow.,1.50,46.99,1.8,0,Open
+T001175,C000655,Email,Customer Success,2025-09-17,2025-09-18,Product,Low,Documentation is difficult to follow.,0.62,35.06,3.2,0,Resolved
+T001176,C000067,Chat,Technical Support,2025-07-09,2025-07-09,Technical,Medium,Login endpoint returns an error.,1.77,14.09,4.8,0,Resolved
+T001177,C000499,Email,Technical Support,2025-09-30,2025-10-01,Technical,Critical,Application crashes during startup.,0.72,12.00,4.0,0,Resolved
+T001178,C000177,Email,Engineering,2025-06-16,2025-06-18,Technical,Low,Login endpoint returns an error.,1.23,33.80,4.9,0,Resolved
+T001179,C000148,Chat,Technical Support,2025-05-09,2025-05-10,Technical,Low,Request times out under load.,0.37,20.18,4.7,0,Resolved
+T001180,C000740,Chat,Identity Support,2025-12-21,2025-12-22,Account,High,Password reset link has expired.,0.98,41.74,4.0,0,Resolved
+T001181,C000797,Email,Fulfillment,2025-10-30,2025-11-05,Shipping,Low,Tracking status has not changed.,0.16,138.96,5.0,0,Resolved
+T001182,C000264,Phone,Payments,2025-04-13,2025-04-18,Billing,Medium,Refund has not arrived.,0.13,122.84,2.0,0,Resolved
+T001183,C000029,Email,Identity Support,2025-06-26,2025-06-26,Account,Medium,Account is locked after sign-in attempts.,-1,11.67,2.9,0,Resolved
+T001184,C000504,Email,Technical Support,2025-11-26,2025-11-26,Technical,Medium,Application crashes during startup.,1.26,8.66,4.4,0,Resolved
+T001185,C000765,Chat,Account Services,2025-10-11,2025-10-13,Account,High,Password reset link has expired.,1.43,41.60,4.2,1,Resolved
+T001186,C000778,Email,Account Services,2025-08-05,2025-08-06,Account,High,Password reset link has expired.,2.25,15.67,,1,Resolved
+T001187,C000592,Email,Fulfillment,2025-05-30,2025-05-31,Shipping,Low,Package arrived damaged.,0.37,32.77,2.2,0,Pending
+T001188,C000161,Web Form,Engineering,2025-10-12,2025-10-14,Technical,Medium,Application crashes during startup.,0.08,58.23,2.0,0,Resolved
+T001189,C000440,Email,Customer Success,2025-10-04,2025-10-06,Product,High,Customer asks about product availability.,,23.10,3.8,2,Open
+T001190,C000383,Email,Fulfillment,2025-10-11,2025-10-14,Shipping,Medium,Package arrived damaged.,0.60,25.05,2.9,0,Pending
+T001191,C000048,Email,Account Services,2025-03-28,2025-03-29,Account,Low,Verification code was not delivered.,1.51,36.26,2.5,0,Resolved
+T001192,C000007,Web Form,Account Services,2025-04-26,2025-04-27,Account,Low,Verification code was not delivered.,0.60,22.36,4.8,0,Resolved
+T001193,C000415,Chat,,2025-04-26,2025-04-27,Billing,Critical,Refund has not arrived.,0.31,20.99,4.2,1,In Progress
+T001194,C000028,Email,Product Support,2025-05-07,2025-05-08,Product,High,Customer requests a missing feature.,0.94,30.14,4.9,0,Resolved
+T001195,C000138,Web Form,Technical Support,2025-06-20,2025-06-28,Technical,Low,Request times out under load.,0.08,178.69,2.9,0,Resolved
+T001196,C000657,Email,Technical Support,2025-10-29,2025-10-31,Technical,Low,Login endpoint returns an error.,0.51,38.72,3.6,0,Resolved
+T001197,C000281,Chat,Account Services,2025-02-21,2025-02-24,Account,Medium,Profile details cannot be updated.,0.40,75.69,2.3,1,Resolved
+T001198,C000340,Chat,Identity Support,2025-05-18,2025-05-21,Account,Medium,Password reset link has expired.,0.52,44.45,3.1,0,Pending
+T001199,C000268,Chat,Account Services,2025-01-26,2025-01-27,Account,High,Verification code was not delivered.,0.76,28.75,3.6,0,Resolved
+T001200,C000310,Phone,Identity Support,2025-12-12,2025-12-14,Account,Low,Profile details cannot be updated.,1.36,53.01,4.7,1,Resolved
+T000097,C000004,Chat,Customer Success,2025-10-16,2025-10-18,Product,Low,Intentional duplicate ticket ID.,1.41,13.03,1.9,0,Open
+T000194,C000025,Chat,Payments,2025-11-23,2025-11-24,Billing,Medium,Intentional duplicate ticket ID.,0.86,16.59,3.4,0,Open
+T000291,C000177,Chat,Billing Operations,2025-06-05,2025-06-06,Billing,Medium,Intentional duplicate ticket ID.,0.39,33.72,3.7,1,Resolved
+T000388,C000046,Social,Technical Support,2025-07-13,2025-07-14,Technical,Medium,Intentional duplicate ticket ID.,1.01,17.25,4.3,0,Resolved
+T000485,C000175,Phone,Fulfillment,2025-08-12,2025-08-17,Shipping,Low,Intentional duplicate ticket ID.,0.47,127.14,3.4,0,Resolved
+T000582,C000066,Chat,Logistics,2025-01-14,2025-01-16,Shipping,Medium,Intentional duplicate ticket ID.,2.23,89.51,3.4,0,Pending
+T000679,C000404,Chat,Technical Support,2025-07-02,2025-07-05,Technical,High,Intentional duplicate ticket ID.,,,3.3,0,Open
+T000776,C000080,Chat,Fulfillment,2025-10-15,2025-10-17,Shipping,Low,Intentional duplicate ticket ID.,3.14,50.94,3.1,1,Resolved
+T000873,C000539,Email,Identity Support,2025-05-29,2025-05-30,Account,Medium,Intentional duplicate ticket ID.,0.45,10.37,2.8,0,Open
+T000970,C000661,Chat,Technical Support,2025-09-09,2025-09-12,Technical,Low,Intentional duplicate ticket ID.,0.37,53.25,2.2,0,Open
+T001067,C000191,Email,Fulfillment,2025-09-06,2025-09-07,Shipping,Low,Intentional duplicate ticket ID.,0.58,30.95,3.8,0,Resolved
+T001164,C000668,Chat,Billing Operations,2025-02-24,2025-02-27,Billing,High,Intentional duplicate ticket ID.,2.03,52.13,3.9,0,Resolved
