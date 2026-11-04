@@ -18,10 +18,10 @@ from dataclasses import dataclass
 
 from ticket_pipeline.analytics.summary import TicketSummary, summarise
 from ticket_pipeline.config import PipelineConfig
-from ticket_pipeline.errors import InvalidRowError, RejectedRowsError
+from ticket_pipeline.errors import InvalidRowError, RejectedRowsError, RowIssue
 from ticket_pipeline.logging_config import log_duration
 from ticket_pipeline.models.ticket import Ticket
-from ticket_pipeline.processing.loader import CSVLoader
+from ticket_pipeline.processing.loader import CSVLoader, RawRow
 from ticket_pipeline.processing.parser import REQUIRED_COLUMNS, parse_row
 
 logger = logging.getLogger(__name__)
@@ -34,6 +34,22 @@ class PipelineResult:
     tickets: tuple[Ticket, ...]
     rejected: tuple[InvalidRowError, ...]
     summary: TicketSummary
+
+
+def _check_duplicate_id(row: RawRow, first_line_for_id: dict[str, int]) -> RowIssue | None:
+    """Record the row's ID; return an issue if an earlier row used it.
+
+    Every row with an ID is recorded, valid or not, so a duplicate is still
+    reported after the earlier row is fixed. IDs that differ only by case or
+    surrounding spaces ('T1', ' t1 ') are treated as the same ticket.
+    """
+    id_key = row.values.get("id", "").strip().casefold()
+    if not id_key:
+        return None  # an empty ID is reported by the parser
+    if id_key in first_line_for_id:
+        return RowIssue("id", f"duplicates line {first_line_for_id[id_key]}")
+    first_line_for_id[id_key] = row.line
+    return None
 
 
 @log_duration("pipeline")
@@ -50,21 +66,24 @@ def run_pipeline(config: PipelineConfig) -> PipelineResult:
 
     for row in loader.iter_rows():  # lazy: one row in memory at a time
         rows_read += 1
+        duplicate = _check_duplicate_id(row, first_line_for_id)
         try:
             ticket = parse_row(row)
-            if ticket.ticket_id in first_line_for_id:
-                raise InvalidRowError(
-                    row.line, "ticket_id",
-                    f"duplicate of line {first_line_for_id[ticket.ticket_id]}",
-                )
+            if duplicate is not None:
+                raise InvalidRowError(row.line, [duplicate])
         except InvalidRowError as exc:
-            # Log the line and column only — never the row's values.
+            error = exc
+            if duplicate is not None and duplicate not in exc.issues:
+                # The row has other problems too: report all of them together.
+                error = InvalidRowError(row.line, [*exc.issues, duplicate])
+                error.__cause__ = exc.__cause__
+            # Log the line and column names only - never the row's values.
             logger.warning(
-                "stage=parse status=rejected line=%d column=%s", exc.line, exc.column
+                "stage=parse status=rejected line=%d columns=%s",
+                error.line, ",".join(error.columns),
             )
-            rejected.append(exc)
+            rejected.append(error)
             continue
-        first_line_for_id[ticket.ticket_id] = row.line
         tickets.append(ticket)
 
     logger.info(

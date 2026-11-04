@@ -10,14 +10,15 @@ Each error message states three things so it is actionable:
     2. where (file name, line, column),
     3. how to fix it.
 
-Messages never contain personal data. The customer e-mail column is never
-echoed; only coded values (priority, status, numbers) may be quoted, because
-the user needs them to find and fix the bad cell.
+Messages never contain personal data. Free-text columns (customer,
+description) are never echoed; only coded values (priority, status, dates,
+numbers) may be quoted, because the user needs them to find the bad cell.
 """
 
 from __future__ import annotations
 
 from collections.abc import Iterable, Sequence
+from dataclasses import dataclass
 from pathlib import Path
 
 
@@ -61,18 +62,35 @@ class MalformedFileError(TicketPipelineError):
         super().__init__(f"{problem} ({location}). {hint}")
 
 
+@dataclass(frozen=True)
+class RowIssue:
+    """One problem in one cell: which column, and why."""
+
+    column: str
+    reason: str
+
+    def __str__(self) -> str:
+        return f"'{self.column}' {self.reason}"
+
+
 class InvalidRowError(TicketPipelineError):
-    """One data row breaks a business rule.
+    """One data row breaks one or more business rules.
 
     This is *recoverable*: the pipeline catches it per row, records the
-    rejection and continues with the next row.
+    rejection and continues with the next row. All problems found in the
+    row are reported together, so the file can be fixed in one pass.
     """
 
-    def __init__(self, line: int, column: str, reason: str) -> None:
+    def __init__(self, line: int, issues: Sequence[RowIssue]) -> None:
+        if not issues:
+            raise ValueError("InvalidRowError needs at least one issue")
         self.line = line
-        self.column = column
-        self.reason = reason
-        super().__init__(f"line {line}, column '{column}': {reason}")
+        self.issues: tuple[RowIssue, ...] = tuple(issues)
+        super().__init__(f"line {line}: {'; '.join(map(str, self.issues))}")
+
+    @property
+    def columns(self) -> tuple[str, ...]:
+        return tuple(issue.column for issue in self.issues)
 
 
 class RejectedRowsError(TicketPipelineError):

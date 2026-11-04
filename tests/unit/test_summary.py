@@ -1,42 +1,79 @@
-"""Unit tests: analytics summary."""
+"""Unit tests: the ticket analytics contract."""
 
 from __future__ import annotations
 
 from datetime import datetime
 
-from ticket_pipeline.analytics.summary import format_summary, summarise
-from ticket_pipeline.models.ticket import Priority, Status, Ticket
+import pytest
+
+from ticket_pipeline.analytics.summary import format_summary, summarise, top_customers
+from ticket_pipeline.models.ticket import Category, Priority, Status, Ticket
 
 
-def ticket(tid: str, priority: Priority, status: Status, hours: float | None = None,
-           category: str = "billing") -> Ticket:
-    return Ticket(tid, "a@example.com", priority, status, category,
-                  datetime(2026, 10, 1), hours)
+def ticket(tid: str, priority: Priority, status: Status, *, customer: str = "Alice",
+           category: Category = Category.BILLING, day: int = 1,
+           hours: float | None = None, rating: int | None = None) -> Ticket:
+    return Ticket(tid, customer, priority, category, status, "A description",
+                  datetime(2024, 1, day), hours, rating)
 
 
-def test_summary_counts_and_mean() -> None:
-    summary = summarise([
-        ticket("TKT-0001", Priority.HIGH, Status.OPEN),
-        ticket("TKT-0002", Priority.LOW, Status.RESOLVED, 2.0, "technical"),
-        ticket("TKT-0003", Priority.URGENT, Status.CLOSED, 5.0),
-        ticket("TKT-0004", Priority.URGENT, Status.IN_PROGRESS),
-    ])
-    assert summary.total == 4
-    assert summary.by_priority == {"high": 1, "low": 1, "urgent": 2}
-    assert summary.by_status == {"closed": 1, "in_progress": 1, "open": 1, "resolved": 1}
-    assert summary.by_category == {"billing": 3, "technical": 1}
-    assert summary.open_urgent_ids == ("TKT-0001", "TKT-0004")
-    assert summary.mean_resolution_hours == 3.5
+@pytest.fixture
+def tickets() -> list[Ticket]:
+    return [
+        ticket("T01", Priority.HIGH, Status.OPEN, customer="Alice", day=1),
+        ticket("T02", Priority.LOW, Status.CLOSED, customer="Bob", day=2, hours=2, rating=4),
+        ticket("T03", Priority.URGENT, Status.PENDING, customer="Alice", day=2, hours=4),
+        ticket("T04", Priority.MEDIUM, Status.RESOLVED, customer="Carol",
+               category=Category.TECHNICAL, day=3, rating=5),
+        ticket("T05", Priority.HIGH, Status.CLOSED, customer="Bob", day=3),
+    ]
 
 
-def test_empty_input_gives_zero_counts_and_no_mean() -> None:
+def test_counts(tickets: list[Ticket]) -> None:
+    summary = summarise(tickets)
+    assert summary.total == 5
+    assert summary.by_priority == {"high": 2, "low": 1, "medium": 1, "urgent": 1}
+    assert summary.by_status == {"closed": 2, "open": 1, "pending": 1, "resolved": 1}
+    assert summary.by_category == {"billing": 4, "technical": 1}
+
+
+def test_open_and_high_priority_open(tickets: list[Ticket]) -> None:
+    summary = summarise(tickets)
+    assert summary.open_count == 2
+    assert summary.high_priority_open_ids == ("T01", "T03")  # T05 is high but closed
+
+
+def test_daily_volume_is_sorted_by_date(tickets: list[Ticket]) -> None:
+    assert summarise(tickets).daily_volume == {
+        "2024-01-01": 1, "2024-01-02": 2, "2024-01-03": 2,
+    }
+
+
+def test_averages_ignore_missing_values(tickets: list[Ticket]) -> None:
+    summary = summarise(tickets)
+    assert summary.average_resolution_hours == 3.0
+    assert summary.average_rating == 4.5
+
+
+def test_top_customers_breaks_ties_alphabetically(tickets: list[Ticket]) -> None:
+    assert top_customers(tickets) == [("Alice", 2), ("Bob", 2), ("Carol", 1)]
+    assert top_customers(tickets, n=1) == [("Alice", 2)]
+    assert top_customers(tickets, n=0) == []
+
+
+def test_top_customers_rejects_negative_n(tickets: list[Ticket]) -> None:
+    with pytest.raises(ValueError, match="must not be negative"):
+        top_customers(tickets, n=-1)
+
+
+def test_empty_input_gives_zero_counts_and_no_averages() -> None:
     summary = summarise([])
-    assert summary.total == 0
-    assert summary.mean_resolution_hours is None
-    assert "n/a" in format_summary(summary)
-    assert "Open high/urgent       : none" in format_summary(summary)
+    assert (summary.total, summary.open_count) == (0, 0)
+    assert summary.average_resolution_hours is None and summary.average_rating is None
+    text = format_summary(summary)
+    assert "Average resolution time  : n/a" in text
+    assert "High-priority open       : none" in text
 
 
-def test_summary_accepts_a_generator() -> None:
-    tickets = (ticket(f"TKT-000{i}", Priority.LOW, Status.OPEN) for i in range(1, 4))
-    assert summarise(tickets).total == 3
+def test_summary_accepts_a_generator(tickets: list[Ticket]) -> None:
+    assert summarise(t for t in tickets).total == 5

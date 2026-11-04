@@ -1,13 +1,13 @@
 # Test determinism and independence evidence
-# Generated: 2026-11-04 12:41 | Python 3.12.10 | pytest 9.2.0
+# Generated: 2026-11-04 13:01 | Python 3.12.10 | pytest 9.2.0
 
 ## 1. Full suite, three consecutive runs
-run 1: 94 passed in 0.13s
-run 2: 94 passed in 0.13s
-run 3: 94 passed in 0.13s
+run 1: 127 passed in 0.26s
+run 2: 127 passed in 0.26s
+run 3: 127 passed in 0.26s
 
 ## 2. Full suite in reverse collection order (local plugin reversing the item list)
-94 passed in 0.13s
+127 passed in 0.27s
 
 ## 3. Every test run alone in a fresh process
-tests run individually: 94 | passed: 94 | failed: 0
+tests run individually: 127 | passed: 127 | failed: 0

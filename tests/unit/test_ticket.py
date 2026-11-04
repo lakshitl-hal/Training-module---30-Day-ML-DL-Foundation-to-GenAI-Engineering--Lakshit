@@ -8,46 +8,49 @@ from typing import Any
 
 import pytest
 
-from ticket_pipeline.models.ticket import InvalidTicketField, Priority, Status, Ticket
+from ticket_pipeline.models.ticket import Category, InvalidTicketField, Priority, Status, Ticket
 
 
 def make_ticket(**overrides: Any) -> Ticket:
     fields: dict[str, Any] = {
-        "ticket_id": "TKT-0001",
-        "customer_email": "asha@example.com",
+        "ticket_id": "T001",
+        "customer": "Alice Johnson",
         "priority": Priority.HIGH,
+        "category": Category.BILLING,
         "status": Status.OPEN,
-        "category": "billing",
-        "created_at": datetime(2026, 10, 1),
+        "description": "Cannot access invoice",
+        "created_at": datetime(2024, 1, 15),
     }
     fields.update(overrides)
     return Ticket(**fields)
 
 
-def test_valid_ticket_is_created_and_open() -> None:
+def test_valid_ticket_has_expected_derived_state() -> None:
     ticket = make_ticket()
-    assert ticket.is_open
-    assert ticket.resolution_hours is None
+    assert ticket.is_open and ticket.is_high_priority
+    assert ticket.resolution_time_hours is None and ticket.customer_rating is None
 
 
-def test_resolved_ticket_with_hours_is_not_open() -> None:
-    ticket = make_ticket(status=Status.RESOLVED, resolution_hours=2.5)
-    assert not ticket.is_open
+@pytest.mark.parametrize(
+    ("status", "is_open"),
+    [(Status.OPEN, True), (Status.PENDING, True), (Status.RESOLVED, False), (Status.CLOSED, False)],
+)
+def test_open_means_open_or_pending(status: Status, is_open: bool) -> None:
+    assert make_ticket(status=status).is_open is is_open
 
 
 @pytest.mark.parametrize(
     ("field_name", "bad_value"),
     [
-        ("ticket_id", "T1"),
-        ("ticket_id", "tkt-0001"),
-        ("ticket_id", 1),
-        ("customer_email", "no-at-sign"),
-        ("customer_email", "a@b"),
-        ("customer_email", ""),
-        ("priority", "high"),  # a plain str is not a Priority member
-        ("status", None),
-        pytest.param("category", "   ", id="category-whitespace"),
-        ("created_at", "2026-10-01"),
+        pytest.param("ticket_id", "", id="empty-id"),
+        pytest.param("ticket_id", 1, id="non-text-id"),
+        pytest.param("customer", "   ", id="blank-customer"),
+        pytest.param("description", "", id="empty-description"),
+        pytest.param("description", "x" * 501, id="description-501-chars"),
+        pytest.param("priority", "high", id="priority-plain-str"),
+        pytest.param("category", 3, id="category-int"),
+        pytest.param("status", None, id="status-none"),
+        pytest.param("created_at", "2024-01-15", id="created-at-str"),
     ],
 )
 def test_invalid_field_raises_with_field_name(field_name: str, bad_value: object) -> None:
@@ -56,16 +59,28 @@ def test_invalid_field_raises_with_field_name(field_name: str, bad_value: object
     assert info.value.field_name == field_name
 
 
-@pytest.mark.parametrize("hours", [float("inf"), float("-inf"), float("nan"), -1.0, True, "4"])
-def test_invalid_resolution_hours_rejected(hours: object) -> None:
-    with pytest.raises(InvalidTicketField, match="resolution_hours"):
-        make_ticket(status=Status.CLOSED, resolution_hours=hours)
+@pytest.mark.parametrize(
+    "hours",
+    [float("inf"), float("-inf"), float("nan"), -1.0, True, "4"],
+    ids=["inf", "minus-inf", "nan", "negative", "bool", "str"],
+)
+def test_invalid_resolution_time_rejected(hours: object) -> None:
+    with pytest.raises(InvalidTicketField, match="resolution_time_hours"):
+        make_ticket(resolution_time_hours=hours)
 
 
-@pytest.mark.parametrize("status", [Status.OPEN, Status.IN_PROGRESS])
-def test_unfinished_ticket_cannot_have_resolution_hours(status: Status) -> None:
-    with pytest.raises(InvalidTicketField, match="only allowed for resolved or closed"):
-        make_ticket(status=status, resolution_hours=1.0)
+@pytest.mark.parametrize(
+    "rating", [0, 6, 3.5, 4.0, True, "4"],
+    ids=["zero", "six", "fraction", "float-whole", "bool", "str"],
+)
+def test_invalid_rating_rejected(rating: object) -> None:
+    with pytest.raises(InvalidTicketField, match="customer_rating"):
+        make_ticket(customer_rating=rating)
+
+
+def test_valid_optional_values_accepted() -> None:
+    ticket = make_ticket(resolution_time_hours=0, customer_rating=5)
+    assert (ticket.resolution_time_hours, ticket.customer_rating) == (0, 5)
 
 
 def test_ticket_is_immutable() -> None:
@@ -73,13 +88,9 @@ def test_ticket_is_immutable() -> None:
         make_ticket().status = Status.CLOSED  # type: ignore[misc]
 
 
-def test_repr_and_str_do_not_expose_email() -> None:
+def test_repr_and_str_hide_customer_and_description() -> None:
     ticket = make_ticket()
-    assert "asha@example.com" not in repr(ticket)
-    assert "asha@example.com" not in str(ticket)
-
-
-def test_invalid_email_error_does_not_echo_value() -> None:
-    with pytest.raises(InvalidTicketField) as info:
-        make_ticket(customer_email="secret-person.example.com")
-    assert "secret-person" not in str(info.value)
+    for text in (repr(ticket), str(ticket)):
+        assert "Alice Johnson" not in text
+        assert "Cannot access invoice" not in text
+        assert "T001" in text

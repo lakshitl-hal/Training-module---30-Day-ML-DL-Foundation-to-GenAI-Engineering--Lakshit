@@ -5,75 +5,96 @@ from __future__ import annotations
 import pytest
 
 from ticket_pipeline.errors import InvalidRowError
-from ticket_pipeline.models.ticket import InvalidTicketField, Priority, Status
+from ticket_pipeline.models.ticket import Category, Priority, Status
 from ticket_pipeline.processing.loader import RawRow
 from ticket_pipeline.processing.parser import REQUIRED_COLUMNS, parse_row
 
 
 def raw(line: int = 2, /, **overrides: str) -> RawRow:
     values = {
-        "ticket_id": "TKT-0001",
-        "customer_email": "asha@example.com",
+        "id": "T001",
+        "customer": "Alice Johnson",
         "priority": "high",
-        "status": "open",
         "category": "billing",
-        "created_at": "2026-10-01",
-        "resolution_hours": "",
+        "status": "open",
+        "description": "Cannot access invoice",
+        "resolution_time_hours": "",
+        "customer_rating": "",
+        "created_at": "2024-01-15",
     }
     values.update(overrides)
     return RawRow(line=line, values=values)
 
 
 def test_valid_row_becomes_ticket() -> None:
-    ticket = parse_row(raw())
-    assert ticket.ticket_id == "TKT-0001"
+    ticket = parse_row(raw(resolution_time_hours="4.5", customer_rating="4"))
+    assert ticket.ticket_id == "T001"
     assert ticket.priority is Priority.HIGH
-    assert ticket.resolution_hours is None
+    assert (ticket.resolution_time_hours, ticket.customer_rating) == (4.5, 4)
 
 
 def test_values_are_normalised() -> None:
     ticket = parse_row(raw(
-        ticket_id=" tkt-0001 ", customer_email="Asha@Example.COM", priority=" HIGH ",
-        status="In Progress", category="Billing",
+        customer=" alice johnson ", priority=" URGENT ", status="Pending",
+        category="Technical", created_at=" 2024-01-15",
     ))
-    assert ticket.ticket_id == "TKT-0001"
-    assert ticket.customer_email == "asha@example.com"
-    assert ticket.status is Status.IN_PROGRESS
-    assert ticket.category == "billing"
+    assert ticket.customer == "Alice Johnson"
+    assert ticket.priority is Priority.URGENT
+    assert ticket.status is Status.PENDING
+    assert ticket.category is Category.TECHNICAL
 
 
-def test_finished_ticket_hours_are_parsed() -> None:
-    assert parse_row(raw(status="closed", resolution_hours="4.5")).resolution_hours == 4.5
+def test_unrecognised_category_is_represented_as_unknown() -> None:
+    assert parse_row(raw(category="Shipping")).category is Category.UNKNOWN
+
+
+def test_optional_columns_may_be_absent() -> None:
+    row = raw()
+    del row.values["resolution_time_hours"], row.values["customer_rating"]
+    assert parse_row(row).customer_rating is None
 
 
 @pytest.mark.parametrize("column", REQUIRED_COLUMNS)
 def test_each_empty_required_column_is_reported(column: str) -> None:
     with pytest.raises(InvalidRowError) as info:
         parse_row(raw(7, **{column: "  "}))
-    assert (info.value.line, info.value.column) == (7, column)
-    assert "required" in info.value.reason
+    assert info.value.line == 7
+    assert info.value.columns == (column,)
+    assert "required" in info.value.issues[0].reason
 
 
 @pytest.mark.parametrize(
     ("overrides", "column", "reason_part"),
     [
-        ({"priority": "critical"}, "priority", "not one of: low, medium, high, urgent"),
-        ({"status": "done"}, "status", "not one of"),
-        ({"created_at": "2026-13-01"}, "created_at", "ISO 8601"),
-        ({"created_at": "01/10/2026"}, "created_at", "ISO 8601"),
-        ({"status": "closed", "resolution_hours": "abc"}, "resolution_hours", "not a number"),
-        ({"status": "closed", "resolution_hours": "1_5"}, "resolution_hours", "not a number"),
-        ({"status": "closed", "resolution_hours": "inf"}, "resolution_hours", "finite"),
-        ({"status": "closed", "resolution_hours": "nan"}, "resolution_hours", "finite"),
-        ({"status": "closed", "resolution_hours": "-2"}, "resolution_hours", "finite"),
-        ({"status": "open", "resolution_hours": "3"}, "resolution_hours", "resolved or closed"),
-        ({"ticket_id": "12"}, "ticket_id", "TKT-0001"),
-        ({"customer_email": "nope"}, "customer_email", "valid e-mail"),
-    ],
-    ids=[
-        "unknown-priority", "unknown-status", "impossible-date", "non-iso-date",
-        "hours-not-number", "hours-underscore", "hours-inf", "hours-nan", "hours-negative",
-        "hours-on-open-ticket", "bad-ticket-id", "bad-email",
+        pytest.param({"priority": "critical"}, "priority",
+                     "not one of: low, medium, high, urgent", id="unknown-priority"),
+        pytest.param({"status": "done"}, "status", "not one of", id="unknown-status"),
+        pytest.param({"created_at": "2024-13-01"}, "created_at", "ISO 8601", id="impossible-date"),
+        pytest.param({"created_at": "15/01/2024"}, "created_at", "ISO 8601", id="non-iso-date"),
+        pytest.param({"resolution_time_hours": "abc"}, "resolution_time_hours",
+                     "not a number", id="hours-text"),
+        pytest.param({"resolution_time_hours": "2_0"}, "resolution_time_hours",
+                     "not a number", id="hours-underscore"),
+        pytest.param({"resolution_time_hours": "inf"}, "resolution_time_hours",
+                     "value 'inf' must be finite", id="hours-inf"),
+        pytest.param({"resolution_time_hours": "nan"}, "resolution_time_hours",
+                     "value 'nan' must be finite", id="hours-nan"),
+        pytest.param({"resolution_time_hours": "1e400"}, "resolution_time_hours",
+                     "value '1e400' must be finite", id="hours-overflow"),
+        pytest.param({"resolution_time_hours": "-2"}, "resolution_time_hours",
+                     "negative", id="hours-negative"),
+        pytest.param({"customer_rating": "3.5"}, "customer_rating",
+                     "whole number", id="rating-fraction"),
+        pytest.param({"customer_rating": "4.0"}, "customer_rating",
+                     "whole number", id="rating-float-whole"),
+        pytest.param({"customer_rating": "1_0"}, "customer_rating",
+                     "whole number", id="rating-underscore"),
+        pytest.param({"customer_rating": "0"}, "customer_rating",
+                     "between 1 and 5", id="rating-zero"),
+        pytest.param({"customer_rating": "6"}, "customer_rating",
+                     "between 1 and 5", id="rating-six"),
+        pytest.param({"description": "x" * 501}, "description",
+                     "longer than 500", id="description-too-long"),
     ],
 )
 def test_invalid_values_report_column_and_reason(
@@ -81,14 +102,15 @@ def test_invalid_values_report_column_and_reason(
 ) -> None:
     with pytest.raises(InvalidRowError) as info:
         parse_row(raw(**overrides))
-    assert info.value.column == column
-    assert reason_part in info.value.reason
+    assert info.value.columns == (column,)
+    assert reason_part in info.value.issues[0].reason
 
 
-def test_model_error_is_chained_as_cause() -> None:
+def test_all_problems_in_a_row_are_reported_together() -> None:
     with pytest.raises(InvalidRowError) as info:
-        parse_row(raw(customer_email="nope"))
-    assert isinstance(info.value.__cause__, InvalidTicketField)
+        parse_row(raw(customer="", category="", customer_rating="9"))
+    assert info.value.columns == ("customer", "category", "customer_rating")
+    assert str(info.value).startswith("line 2: 'customer' is required but empty;")
 
 
 def test_conversion_error_is_chained_as_cause() -> None:
@@ -97,7 +119,14 @@ def test_conversion_error_is_chained_as_cause() -> None:
     assert isinstance(info.value.__cause__, ValueError)
 
 
-def test_error_message_never_contains_email() -> None:
+def test_error_message_never_contains_customer_or_description() -> None:
+    long_text = "Private details " * 40
     with pytest.raises(InvalidRowError) as info:
-        parse_row(raw(customer_email="private.person@nowhere"))
-    assert "private.person" not in str(info.value)
+        parse_row(raw(customer="Secret Person", description=long_text, priority="bad"))
+    assert "Secret Person" not in str(info.value)
+    assert "Private details" not in str(info.value)
+
+
+def test_invalid_row_error_requires_at_least_one_issue() -> None:
+    with pytest.raises(ValueError, match="at least one issue"):
+        InvalidRowError(2, [])

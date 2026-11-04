@@ -8,8 +8,9 @@ File-level problems raise specific exceptions from ``ticket_pipeline.errors``
 (the original low-level exception is kept as ``__cause__``):
 
     InputPathError       missing path, a directory, wrong extension, no permission
-    MalformedFileError   empty file, bad encoding, duplicate/blank header names,
-                         a row with more fields than the header, unparsable CSV
+    MalformedFileError   empty file, bad encoding, blank header names, header names
+                         duplicated after trimming/lower-casing, a row with more
+                         fields than the header, NUL bytes, unbalanced quotes
     SchemaMismatchError  required columns absent from the header
 """
 
@@ -113,16 +114,30 @@ class CSVLoader:
             )
 
     def _parse(self, handle: TextIO) -> Iterator[RawRow]:
-        reader = csv.reader(handle)
+        # strict=True turns an unterminated quote or a stray quote into
+        # csv.Error instead of silently merging the rest of the file into one cell.
+        reader = csv.reader(handle, strict=True)
+        start_line = 1
         try:
             header = self._read_header(reader)
-            for fields in reader:
-                # reader.line_num is the physical line just read. It stays
-                # correct when blank lines are skipped or a quoted field
-                # spans several lines (enumerate() would drift).
-                line = reader.line_num
-                if not fields:  # blank line
+            while True:
+                # A row starts on the line after the previous row ended.
+                # reader.line_num is the line where a row *ends*, which differs
+                # when a quoted field spans several lines.
+                start_line = reader.line_num + 1
+                fields = next(reader, None)
+                if fields is None:
+                    break
+                line = start_line
+                if not any(cell.strip() for cell in fields):  # blank or whitespace-only
+                    logger.debug("file=%s line=%d skipped=blank", self._path.name, line)
                     continue
+                if any("\x00" in cell for cell in fields):
+                    raise MalformedFileError(
+                        self._path, "Row contains a NUL byte (binary or corrupted content)",
+                        "Re-export the file as plain UTF-8 text.",
+                        line=line,
+                    )
                 if len(fields) > len(header):
                     raise MalformedFileError(
                         self._path,
@@ -138,8 +153,8 @@ class CSVLoader:
         except csv.Error as exc:
             raise MalformedFileError(
                 self._path, f"CSV could not be parsed ({exc})",
-                "Check for unbalanced quotes or binary content.",
-                line=reader.line_num,
+                "Check for an unbalanced or stray double quote, or binary content.",
+                line=start_line,
             ) from exc
 
     def _read_header(self, reader: Iterator[list[str]]) -> list[str]:
@@ -149,6 +164,7 @@ class CSVLoader:
                 self._path, "File is empty",
                 "Add a header row: the first line must list the column names.",
             )
+        # Normalise once, here: every later lookup uses these names.
         header = [name.strip().lower() for name in raw_header]
 
         blanks = [i + 1 for i, name in enumerate(header) if not name]
@@ -159,11 +175,21 @@ class CSVLoader:
                 "Name every column, or remove trailing commas from the header.",
                 line=1,
             )
-        duplicates = sorted({name for name in header if header.count(name) > 1})
+        # Columns that differ only by spaces or case (e.g. 'id' and ' ID ')
+        # would silently overwrite each other in a dict, so reject them.
+        spellings: dict[str, list[str]] = {}
+        for original, name in zip(raw_header, header, strict=True):
+            spellings.setdefault(name, []).append(repr(original))
+        duplicates = {name: found for name, found in spellings.items() if len(found) > 1}
         if duplicates:
+            detail = "; ".join(
+                f"'{name}' appears as {', '.join(found)}"
+                for name, found in sorted(duplicates.items())
+            )
             raise MalformedFileError(
-                self._path, f"Header repeats column(s): {', '.join(duplicates)}",
-                "Each column name must appear once.",
+                self._path,
+                f"Header repeats column(s) after ignoring case and spaces: {detail}",
+                "Keep exactly one column for each name.",
                 line=1,
             )
         missing = self._required_columns.difference(header)
